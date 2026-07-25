@@ -1,33 +1,33 @@
----
-apiVersion: argoproj.io/v1alpha1
-kind: Application
+# ---
+# apiVersion: argoproj.io/v1alpha1
+# kind: Application
 
-metadata:
-  name: calico-crd
-  namespace: argocd
+# metadata:
+#   name: calico-crd
+#   namespace: argocd
 
-spec:
-  project: infrastructure
+# spec:
+#   project: infrastructure
 
-  sources:
-    # Helm chart
-    - repoURL: https://docs.tigera.io/calico/charts
-      chart: projectcalico.org.v3
-      targetRevision: v3.32.1
+#   sources:
+#     # Helm chart
+#     - repoURL: https://docs.tigera.io/calico/charts
+#       chart: projectcalico.org.v3
+#       targetRevision: v3.32.1
 
-  destination:
-    server: https://kubernetes.default.svc
-    namespace: tigera-operator
+#   destination:
+#     server: https://kubernetes.default.svc
+#     namespace: tigera-operator
 
-  syncPolicy:
-    automated:
-      prune: false
-      selfHeal: true
+#   syncPolicy:
+#     automated:
+#       prune: false
+#       selfHeal: true
 
-    syncOptions:
-      - ServerSideApply=true
-      - CreateNamespace=true
-      - RespectIgnoreDifferences=true
+#     syncOptions:
+#       - ServerSideApply=true
+#       - CreateNamespace=true
+#       - RespectIgnoreDifferences=true
 
 ---
 apiVersion: argoproj.io/v1alpha1
