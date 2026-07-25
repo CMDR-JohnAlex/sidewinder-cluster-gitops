@@ -1,0 +1,34 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+
+metadata:
+  name: metallb
+  namespace: argocd
+
+spec:
+  project: infrastructure
+
+  sources:
+    # Helm chart
+    - repoURL: https://metallb.github.io/metallb
+      chart: metallb
+      targetRevision: "*"
+
+    # Resources
+    - repoURL: https://github.com/CMDR-JohnAlex/sidewinder-cluster-gitops.git
+      targetRevision: main
+      path: infrastructure/metallb/resources
+
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: metallb-system
+
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+
+    syncOptions:
+      - ServerSideApply=true
+      - CreateNamespace=true

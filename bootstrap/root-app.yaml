@@ -1,0 +1,19 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: root
+  namespace: argocd
+spec:
+  project: infrastructure
+  source:
+    repoURL: https://github.com/CMDR-JohnAlex/sidewinder-cluster-gitops.git
+    targetRevision: main
+    path: bootstrap/children
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: argocd
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
