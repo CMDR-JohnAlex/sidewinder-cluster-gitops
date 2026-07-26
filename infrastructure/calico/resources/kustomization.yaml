@@ -6,4 +6,5 @@ kind: Kustomization
 # Which is from: https://docs.tigera.io/calico/latest/getting-started/kubernetes/quickstart
 
 resources:
+  - https://raw.githubusercontent.com/projectcalico/calico/v3.32.1/manifests/v3_projectcalico_org.yaml
   - custom-resources.yaml
