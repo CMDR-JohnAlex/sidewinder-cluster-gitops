@@ -9,10 +9,10 @@ spec:
     - '*'
   destinations:
     - server: https://kubernetes.default.svc
-      namespace: dev
+      namespace: '*-dev'
 
     - server: https://kubernetes.default.svc
-      namespace: staging
+      namespace: '*-staging'
 
     - server: https://kubernetes.default.svc
-      namespace: prod
+      namespace: '*-prod'
