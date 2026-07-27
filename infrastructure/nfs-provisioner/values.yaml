@@ -11,7 +11,7 @@
 
 nfs:
   server: 192.168.7.7
-  path: /mnt/9276ecfd-6dd5-4e22-9a91-2afafd0a53a3/sidewinder-nfs
+  path: /mnt/8dafdf36-cb0f-4102-a05e-d69ea5954303/sidewinder-nfs
   mountOptions:
   volumeName: nfs-subdir-external-provisioner-root
   defaultMode: "777"
