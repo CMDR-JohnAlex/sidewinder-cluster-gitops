@@ -10,10 +10,10 @@
 # imagePullSecrets: []
 
 nfs:
-  server:
+  server: 192.168.7.7
   path: /mnt/9276ecfd-6dd5-4e22-9a91-2afafd0a53a3/sidewinder-nfs
   mountOptions:
-  volumeName: nfs-subdir-external-provisioner-root
+  volumeName: sidewinder-usb
   defaultMode: "777"
   defaultUid: "0"
   defaultGid: "0"
