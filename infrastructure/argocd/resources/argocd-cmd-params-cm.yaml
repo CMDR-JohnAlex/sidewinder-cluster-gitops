@@ -1,9 +1,9 @@
 # https://argo-cd.readthedocs.io/en/stable/operator-manual/ingress/#securing-traffic-between-argo-cd-and-the-gateway
 ---
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: argocd-cmd-params-cm
-  namespace: argocd
-data:
-  server.insecure: "true"
+# apiVersion: v1
+# kind: ConfigMap
+# metadata:
+#   name: argocd-cmd-params-cm
+#   namespace: argocd
+# data:
+#   server.insecure: "true"
