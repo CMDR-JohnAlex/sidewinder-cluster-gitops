@@ -1,0 +1,43 @@
+# https://cert-manager.io/docs/configuration/selfsigned/#bootstrapping-ca-issuers
+---
+apiVersion: cert-manager.io/v1
+
+kind: ClusterIssuer
+metadata:
+  name: sidewinder-ca-bootstrap
+  namespace: cert-manager
+
+spec:
+  selfSigned: {}
+
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+
+metadata:
+  name: sidewinder-ca-root
+  namespace: cert-manager
+
+spec:
+  isCA: true
+  commonName: sidewinder-ca-root
+  secretName: sidewinder-ca-root
+  privateKey:
+    algorithm: RSA
+    size: 2048
+  issuerRef:
+    name: sidewinder-ca-bootstrap
+    kind: ClusterIssuer
+    group: cert-manager.io
+
+---
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+
+metadata:
+  name: sidewinder-ca
+  namespace: cert-manager
+
+spec:
+  ca:
+    secretName: sidewinder-ca-root

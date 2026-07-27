@@ -1,5 +1,6 @@
 ---
 # https://github.com/argoproj/argo-helm/blob/main/charts/argo-cd/README.md#gateway-api-httproute
+# https://argo-cd.readthedocs.io/en/stable/operator-manual/ingress/#gateway-api-example
 apiVersion: gateway.networking.k8s.io/v1
 kind: HTTPRoute
 metadata:
@@ -9,7 +10,7 @@ spec:
   parentRefs:
     - name: primary-gateway
       namespace: envoy-gateway-system
-      sectionName: http
+      sectionName: https
 
   hostnames:
     - argocd.sidewinder.lan
@@ -17,12 +18,9 @@ spec:
   rules:
     - backendRefs:
         - name: argocd-server # SVC name (internal IP:PORT).
-          port: 80 # External port through main-gateway.
+          port: 443 # External port through main-gateway.
       matches:
         - path:
             type: PathPrefix
             value: /
 
-# FIXME: Get HTTPS working:
-# https://github.com/argoproj/argo-helm/blob/main/charts/argo-cd/README.md#gateway-api-httproute
-# https://argo-cd.readthedocs.io/en/stable/operator-manual/ingress/#gateway-api-example
