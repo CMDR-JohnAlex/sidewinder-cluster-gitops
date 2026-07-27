@@ -24,9 +24,9 @@ spec:
       ref: values
 
     # Extra resources
-    # - repoURL: https://github.com/CMDR-JohnAlex/sidewinder-cluster-gitops.git
-    #   targetRevision: main
-    #   path: infrastructure/argocd/resources
+    - repoURL: https://github.com/CMDR-JohnAlex/sidewinder-cluster-gitops.git
+      targetRevision: main
+      path: infrastructure/argocd/resources
 
   destination:
     server: https://kubernetes.default.svc
