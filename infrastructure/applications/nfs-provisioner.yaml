@@ -1,0 +1,43 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+
+metadata:
+  name: nfs-provisioner
+  namespace: argocd
+
+spec:
+  project: infrastructure
+
+  sources:
+    # Helm chart
+    # https://github.com/kubernetes-sigs/nfs-subdir-external-provisioner
+    - repoURL: https://kubernetes-sigs.github.io/nfs-subdir-external-provisioner
+      chart: nfs-subdir-external-provisioner
+      targetRevision: 4.0.18
+      helm:
+        valueFiles:
+          - $values/infrastructure/nfs-provisioner/values.yaml
+
+    # Values repository
+    - repoURL: https://github.com/CMDR-JohnAlex/sidewinder-cluster-gitops.git
+      targetRevision: main
+      ref: values
+
+    # Resources
+    # - repoURL: https://github.com/CMDR-JohnAlex/sidewinder-cluster-gitops.git
+    #   targetRevision: main
+    #   path: infrastructure/nfs-provisioner/resources
+
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: nfs-provisioner
+
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+
+    syncOptions:
+      - ServerSideApply=false
+      - CreateNamespace=true
