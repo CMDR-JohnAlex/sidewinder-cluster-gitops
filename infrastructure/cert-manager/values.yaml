@@ -2,14 +2,14 @@
 # Default values for cert-manager.
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
-# global:
+global:
   # Reference to one or more secrets to be used when pulling images.
   # For more information, see [Pull an Image from a Private Registry](https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/).
   #
   # For example:
   #  imagePullSecrets:
   #    - name: "image-pull-secret"
-  # imagePullSecrets: []
+  imagePullSecrets: []
 
   # Global node selector
   #
@@ -19,7 +19,7 @@
   #
   # If a component-specific nodeSelector is also set, it will be merged and take precedence.
   # +docs:property
-  # nodeSelector: {}
+  nodeSelector: {}
 
   # Labels to apply to all resources.
   # These labels are also applied to dynamically-created ACME HTTP01 solver resources
@@ -30,14 +30,14 @@
   # For per-Issuer-specific labels, use the HTTP01 ingress solver podTemplate and
   # ingressTemplate fields for pod/ingress resources, or the gatewayHTTPRoute
   # solver labels field for Gateway API HTTPRoute resources.
-  # commonLabels: {}
+  commonLabels: {}
 
   # The number of old ReplicaSets to retain to allow rollback (if not set, the default Kubernetes value is set to 10).
   # +docs:property
   # revisionHistoryLimit: 1
 
   # The optional priority class to be used for the cert-manager pods.
-  # priorityClassName: ""
+  priorityClassName: ""
 
   # Set all pods to run in a user namespace without host access.
   # Experimental: may be removed once the Kubernetes User Namespaces feature is GA.
@@ -52,26 +52,26 @@
   # +docs:property
   # hostUsers: false
 
-  # rbac:
+  rbac:
     # Create required ClusterRoles and ClusterRoleBindings for cert-manager.
-    # create: true
+    create: true
     # Aggregate ClusterRoles to Kubernetes default user-facing roles. For more information, see [User-facing roles](https://kubernetes.io/docs/reference/access-authn-authz/rbac/#user-facing-roles)
-    # aggregateClusterRoles: true
+    aggregateClusterRoles: true
 
-  # podSecurityPolicy:
+  podSecurityPolicy:
     # Create PodSecurityPolicy for cert-manager.
     #
     # Note that PodSecurityPolicy was deprecated in Kubernetes 1.21 and removed in Kubernetes 1.25.
-    # enabled: false
+    enabled: false
     # Configure the PodSecurityPolicy to use AppArmor.
-    # useAppArmor: true
+    useAppArmor: true
 
   # Set the verbosity of cert-manager. A range of 0 - 6, with 6 being the most verbose.
-  # logLevel: 2
+  logLevel: 2
 
-  # leaderElection:
+  leaderElection:
     # Override the namespace used for the leader election lease.
-    # namespace: "kube-system"
+    namespace: "kube-system"
 
     # The duration that non-leader candidates will wait after observing a
     # leadership renewal until attempting to acquire leadership of a led but
@@ -96,16 +96,16 @@
   # For example:
   #   runtimeClassName: gvisor
   # +docs:property
-  # runtimeClassName: ""
+  runtimeClassName: ""
 
 # This option is equivalent to setting crds.enabled=true and crds.keep=true.
 # Deprecated: use crds.enabled and crds.keep instead.
-# installCRDs: false
+installCRDs: false
 
 crds:
   # This option decides if the CRDs should be installed
   # as part of the Helm installation.
-  enabled: true
+  enabled: false
 
   # This option makes it so that the "helm.sh/resource-policy": keep
   # annotation is added to the CRD. This will prevent Helm from uninstalling
@@ -125,7 +125,7 @@ crds:
 #
 # Note that cert-manager uses leader election to ensure that there can
 # only be a single instance active at a time.
-# replicaCount: 1
+replicaCount: 1
 
 # Deployment update strategy for the cert-manager controller deployment.
 # For more information, see the [Kubernetes documentation](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#strategy).
@@ -136,16 +136,16 @@ crds:
 #    rollingUpdate:
 #      maxSurge: 0
 #      maxUnavailable: 1
-# strategy: {}
+strategy: {}
 
-# podDisruptionBudget:
+podDisruptionBudget:
   # Enable or disable the PodDisruptionBudget resource.
   #
   # This prevents downtime during voluntary disruptions such as during a Node upgrade.
   # For example, the PodDisruptionBudget will block `kubectl drain`
   # if it is used on the Node where the only remaining cert-manager
   # Pod is currently running.
-  # enabled: false
+  enabled: false
 
   # This configures the minimum available pods for disruptions. It can either be set to
   # an integer (e.g., 1) or a percentage value (e.g., 25%).
@@ -170,24 +170,24 @@ crds:
 
 # A comma-separated list of feature gates that should be enabled on the
 # controller pod.
-# featureGates: ""
+featureGates: ""
 
 # The maximum number of challenges that can be scheduled as 'processing' at once.
-# maxConcurrentChallenges: 60
+maxConcurrentChallenges: 60
 
 # The container registry used for all cert-manager images by default.
 # This can include path prefixes (e.g. `artifactory.example.com/docker`).
 # +docs:property
-# imageRegistry: quay.io
+imageRegistry: quay.io
 
 # The repository namespace used for all cert-manager images by default.
 # Examples:
 # - jetstack
 # - cert-manager
 # +docs:property
-# imageNamespace: jetstack
+imageNamespace: jetstack
 
-# image:
+image:
   # Deprecated: per-component registry prefix.
   #
   # If set, this value is *prepended* to the image repository that the chart would otherwise render.
@@ -202,12 +202,12 @@ crds:
   # The image name for the cert-manager controller.
   # This is used (together with `imageRegistry` and `imageNamespace`) to construct the full image reference.
   # +docs:property
-  # name: cert-manager-controller
+  name: cert-manager-controller
 
   # Full repository override (takes precedence over `imageRegistry`, `imageNamespace`, and `image.name`).
   # Example: quay.io/jetstack/cert-manager-controller
   # +docs:property
-  # repository: ""
+  repository: ""
 
   # Override the image tag to deploy by setting this variable.
   # If no value is set, the chart's appVersion is used.
@@ -220,17 +220,17 @@ crds:
   # digest: sha256:0e072dddd1f7f8fc8909a2ca6f65e76c5f0d2fcfb8be47935ae3457e8bbceb20
 
   # Kubernetes imagePullPolicy on Deployment.
-  # pullPolicy: IfNotPresent
+  pullPolicy: IfNotPresent
 
 # Override the namespace used to store DNS provider credentials etc. for ClusterIssuer
 # resources. By default, the same namespace as cert-manager is deployed within is
 # used. This namespace will not be automatically created by the Helm chart.
-# clusterResourceNamespace: ""
+clusterResourceNamespace: ""
 
 # This namespace allows you to define where the services are installed into.
 # If not set then they use the namespace of the release.
 # This is helpful when installing cert manager as a chart dependency (sub chart).
-# namespace: ""
+namespace: ""
 
 # Override the "cert-manager.fullname" value. This value is used as part of
 # most of the names of the resources created by this Helm chart.
@@ -245,9 +245,9 @@ crds:
 # +docs:property
 # nameOverride: "my-cert-manager"
 
-# serviceAccount:
+serviceAccount:
   # Specifies whether a service account should be created.
-  # create: true
+  create: true
 
   # The name of the service account to use.
   # If not set and create is true, a name is generated using the fullname template.
@@ -266,14 +266,14 @@ crds:
   # labels: {}
 
   # Automount API credentials for a Service Account.
-  # automountServiceAccountToken: true
+  automountServiceAccountToken: true
 
 # Automounting API credentials for a particular pod.
 # +docs:property
 # automountServiceAccountToken: true
 
 # When this flag is enabled, secrets will be automatically removed when the certificate resource is deleted.
-# enableCertificateOwnerRef: false
+enableCertificateOwnerRef: false
 
 # This property is used to configure options for the controller pod.
 # This allows setting options that would usually be provided using flags.
@@ -283,9 +283,9 @@ crds:
 # the version by specifying the `apiVersion` yourself.
 #
 # For example:
-config:
-  apiVersion: controller.config.cert-manager.io/v1alpha1
-  kind: ControllerConfiguration
+#  config:
+#    apiVersion: controller.config.cert-manager.io/v1alpha1
+#    kind: ControllerConfiguration
 #    logging:
 #      verbosity: 2
 #      format: text
@@ -294,8 +294,8 @@ config:
 #    kubernetesAPIQPS: 9000
 #    kubernetesAPIBurst: 9000
 #    numberOfConcurrentWorkers: 200
-  gatewayAPI:
-    enable: true
+#    gatewayAPI:
+#      enable: true
 #    # Feature gates as of v1.20.0. Listed with their default values.
 #    # See https://cert-manager.io/docs/cli/controller/
 #    featureGates:
@@ -329,23 +329,25 @@ config:
 #    # Configure certificate request backoff durations
 #    certificateRequestMinimumBackoffDuration: 1h
 #    certificateRequestMaximumBackoffDuration: 32h
-# config: {}
+config:
+  gatewayAPI:
+    enable: true
 
 # Setting Nameservers for DNS01 Self Check.
 # For more information, see the [cert-manager documentation](https://cert-manager.io/docs/configuration/acme/dns01/#setting-nameservers-for-dns01-self-check).
 
 # A comma-separated string with the host and port of the recursive nameservers cert-manager should query.
-# dns01RecursiveNameservers: ""
+dns01RecursiveNameservers: ""
 
 # Forces cert-manager to use only the recursive nameservers for verification.
 # Enabling this option could cause the DNS01 self check to take longer owing to caching performed by the recursive nameservers.
-# dns01RecursiveNameserversOnly: false
+dns01RecursiveNameserversOnly: false
 
 # Option to disable cert-manager's build-in auto-approver. The auto-approver
 # approves all CertificateRequests that reference issuers matching the 'approveSignerNames'
 # option. This 'disableAutoApproval' option is useful when you want to make all approval decisions
 # using a different approver (like approver-policy - https://github.com/cert-manager/approver-policy).
-# disableAutoApproval: false
+disableAutoApproval: false
 
 # List of signer names that cert-manager will approve by default. CertificateRequests
 # referencing these signer names will be auto-approved by cert-manager. Defaults to just
@@ -354,9 +356,9 @@ config:
 # because, e.g., you are using approver-policy, you can enable 'disableAutoApproval'.
 # ref: https://cert-manager.io/docs/concepts/certificaterequest/#approval
 # +docs:property
-# approveSignerNames:
-# - issuers.cert-manager.io/*
-# - clusterissuers.cert-manager.io/*
+approveSignerNames:
+- issuers.cert-manager.io/*
+- clusterissuers.cert-manager.io/*
 
 # Additional command line flags to pass to cert-manager controller binary.
 # To see all available flags run `docker run quay.io/jetstack/cert-manager-controller:<version> --help`.
@@ -366,7 +368,7 @@ config:
 # For example:
 #  extraArgs:
 #    - --controllers=*,-certificaterequests-approver
-# extraArgs: []
+extraArgs: []
 
 # Extra containers to add to the pod spec in the deployment of the cert-manager controller.
 # For example, to deploy the [aws_signing_helper](https://github.com/aws/rolesanywhere-credential-helper) (replacing the ARNs as relevant):
@@ -398,14 +400,14 @@ config:
 #   - name: cert
 #     secret:
 #       secretName: cert
-# extraContainers: []
+extraContainers: []
 
 # Additional environment variables to pass to cert-manager controller binary.
 # For example:
 #  extraEnv:
 #  - name: SOME_VAR
 #    value: 'some value'
-# extraEnv: []
+extraEnv: []
 
 # Resources to provide to the cert-manager controller pod.
 #
@@ -415,31 +417,31 @@ config:
 #    memory: 32Mi
 #
 # For more information, see [Resource Management for Pods and Containers](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/).
-# resources: {}
+resources: {}
 
 # Pod Security Context.
 # For more information, see [Configure a Security Context for a Pod or Container](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/).
 # +docs:property
-# securityContext:
-  # runAsNonRoot: true
-  # seccompProfile:
-    # type: RuntimeDefault
+securityContext:
+  runAsNonRoot: true
+  seccompProfile:
+    type: RuntimeDefault
 
 # Container Security Context to be set on the controller component container.
 # For more information, see [Configure a Security Context for a Pod or Container](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/).
 # +docs:property
-# containerSecurityContext:
-  # allowPrivilegeEscalation: false
-  # capabilities:
-    # drop:
-    # - ALL
-  # readOnlyRootFilesystem: true
+containerSecurityContext:
+  allowPrivilegeEscalation: false
+  capabilities:
+    drop:
+    - ALL
+  readOnlyRootFilesystem: true
 
 # Additional volumes to add to the cert-manager controller pod.
-# volumes: []
+volumes: []
 
 # Additional volume mounts to add to the cert-manager controller container.
-# volumeMounts: []
+volumeMounts: []
 
 # Optional additional annotations to add to the controller Deployment.
 # +docs:property
@@ -450,7 +452,7 @@ config:
 # podAnnotations: {}
 
 # Optional additional labels to add to the controller Pods.
-# podLabels: {}
+podLabels: {}
 
 # Optional annotations to add to the controller Service.
 # +docs:property
@@ -489,7 +491,7 @@ config:
 #     - "8.8.8.8"
 
 # Optional hostAliases for cert-manager-controller pods. May be useful when performing ACME DNS-01 self checks.
-# hostAliases: []
+hostAliases: []
 # - ip: 127.0.0.1
 #   hostnames:
 #   - foo.local
@@ -506,50 +508,50 @@ config:
 # This default ensures that Pods are only scheduled to Linux nodes.
 # It prevents Pods being scheduled to Windows nodes in a mixed OS cluster.
 # +docs:property
-# nodeSelector:
-  # kubernetes.io/os: linux
+nodeSelector:
+  kubernetes.io/os: linux
 
 # Enables default network policies for cert-manager.
 # This provides a way for you to restrict network traffic
 # between cert-manager components and other pods.
 # For more information, see [Network Policies](https://kubernetes.io/docs/concepts/services-networking/network-policies/)
 # NOTE: an incorrect networkPolicy will cause traffic to be dropped
-# networkPolicy:
+networkPolicy:
   # Create network policies for cert-manager.
-  # enabled: false
+  enabled: false
 
   # Ingress rule for the cert-manager network policy.
   # By default all pods are allowed access to:
   #   http-metrics and http-healthz ports
   # +docs:property
-  # ingress:
-  # - ports:
-    # - port: http-metrics
-      # protocol: TCP
-    # - port: http-healthz
-      # protocol: TCP
+  ingress:
+  - ports:
+    - port: http-metrics
+      protocol: TCP
+    - port: http-healthz
+      protocol: TCP
 
 
   # Egress rule for the cert-manager network policy. By default, it allows all
   # outbound traffic to ports 80 and 443, as well as DNS ports.
   # +docs:property
-  # egress:
-  # - ports:
-    # - port: 80
-      # protocol: TCP
-    # - port: 443
-      # protocol: TCP
-    # - port: 53
-      # protocol: TCP
-    # - port: 53
-      # protocol: UDP
+  egress:
+  - ports:
+    - port: 80
+      protocol: TCP
+    - port: 443
+      protocol: TCP
+    - port: 53
+      protocol: TCP
+    - port: 53
+      protocol: UDP
     # On OpenShift and OKD, the Kubernetes API server listens on.
     # port 6443.
-    # - port: 6443
-      # protocol: TCP
+    - port: 6443
+      protocol: TCP
 
 # +docs:ignore
-# ingressShim: {}
+ingressShim: {}
 
   # Optional default issuer to use for ingress resources.
   # +docs:property=ingressShim.defaultIssuerName
@@ -590,14 +592,14 @@ config:
 #            operator: In
 #            values:
 #            - master
-# affinity: {}
+affinity: {}
 
 # A Kubernetes Runtime Class to apply to ACME HTTP01 solver pods, if required. For more information, see [Runtime Class](https://kubernetes.io/docs/concepts/containers/).
 #
 # For example:
 #   runtimeClassName: gvisor
 # +docs:property
-# runtimeClassName: ""
+runtimeClassName: ""
 
 # A list of Kubernetes Tolerations, if required. For more information, see [Toleration v1 core](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.27/#toleration-v1-core).
 #
@@ -607,7 +609,7 @@ config:
 #     operator: Equal
 #     value: master
 #     effect: NoSchedule
-# tolerations: []
+tolerations: []
 
 # A list of Kubernetes TopologySpreadConstraints, if required. For more information, see [Topology spread constraint v1 core](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.27/#topologyspreadconstraint-v1-core
 #
@@ -620,7 +622,7 @@ config:
 #       matchLabels:
 #         app.kubernetes.io/instance: cert-manager
 #         app.kubernetes.io/component: controller
-# topologySpreadConstraints: []
+topologySpreadConstraints: []
 
 # LivenessProbe settings for the controller container of the controller Pod.
 #
@@ -630,22 +632,22 @@ config:
 # controller-manager. For more information see the following on the
 # [Kubernetes GitHub repository](https://github.com/kubernetes/kubernetes/blob/806b30170c61a38fedd54cc9ede4cd6275a1ad3b/cmd/kubeadm/app/util/staticpod/utils.go#L241-L245)
 # +docs:property
-# livenessProbe:
-  # enabled: true
-  # initialDelaySeconds: 10
-  # periodSeconds: 10
-  # timeoutSeconds: 15
-  # successThreshold: 1
-  # failureThreshold: 8
+livenessProbe:
+  enabled: true
+  initialDelaySeconds: 10
+  periodSeconds: 10
+  timeoutSeconds: 15
+  successThreshold: 1
+  failureThreshold: 8
 
 # enableServiceLinks indicates whether information about services should be
 # injected into the pod's environment variables, matching the syntax of Docker
 # links.
-# enableServiceLinks: false
+enableServiceLinks: false
 
 # +docs:section=Prometheus
 
-# prometheus:
+prometheus:
   # Enable Prometheus monitoring for the cert-manager controller and webhook.
   # If you use the Prometheus Operator, set prometheus.podmonitor.enabled or
   # prometheus.servicemonitor.enabled, to create a PodMonitor or a
@@ -654,11 +656,11 @@ config:
   # cert-manager-webhook Deployments.
   # Note that you cannot enable both PodMonitor and ServiceMonitor as they are
   # mutually exclusive. Enabling both will result in an error.
-  # enabled: true
+  enabled: true
 
-  # servicemonitor:
+  servicemonitor:
     # Create a ServiceMonitor to add cert-manager to Prometheus.
-    # enabled: false
+    enabled: false
 
     # The namespace that the service monitor should live in, defaults
     # to the cert-manager namespace.
@@ -668,22 +670,22 @@ config:
     # Specifies the `prometheus` label on the created ServiceMonitor. This is
     # used when different Prometheus instances have label selectors matching
     # different ServiceMonitors.
-    # prometheusInstance: default
+    prometheusInstance: default
 
     # The interval to scrape metrics.
-    # interval: 60s
+    interval: 60s
 
     # The timeout before a metrics scrape fails.
-    # scrapeTimeout: 30s
+    scrapeTimeout: 30s
 
     # Additional labels to add to the ServiceMonitor.
-    # labels: {}
+    labels: {}
 
     # Additional annotations to add to the ServiceMonitor.
-    # annotations: {}
+    annotations: {}
 
     # Keep labels from scraped data, overriding server-side labels.
-    # honorLabels: false
+    honorLabels: false
 
     # EndpointAdditionalProperties allows setting additional properties on the
     # endpoint such as relabelings, metricRelabelings etc.
@@ -697,12 +699,12 @@ config:
     #     targetLabel: instance
     #
     # +docs:property
-    # endpointAdditionalProperties: {}
+    endpointAdditionalProperties: {}
 
   # Note that you cannot enable both PodMonitor and ServiceMonitor as they are mutually exclusive. Enabling both will result in an error.
-  # podmonitor:
+  podmonitor:
     # Create a PodMonitor to add cert-manager to Prometheus.
-    # enabled: false
+    enabled: false
 
     # The namespace that the pod monitor should live in, defaults
     # to the cert-manager namespace.
@@ -712,22 +714,22 @@ config:
     # Specifies the `prometheus` label on the created PodMonitor. This is
     # used when different Prometheus instances have label selectors matching
     # different PodMonitors.
-    # prometheusInstance: default
+    prometheusInstance: default
 
     # The interval to scrape metrics.
-    # interval: 60s
+    interval: 60s
 
     # The timeout before a metrics scrape fails.
-    # scrapeTimeout: 30s
+    scrapeTimeout: 30s
 
     # Additional labels to add to the PodMonitor.
-    # labels: {}
+    labels: {}
 
     # Additional annotations to add to the PodMonitor.
-    # annotations: {}
+    annotations: {}
 
     # Keep labels from scraped data, overriding server-side labels.
-    # honorLabels: false
+    honorLabels: false
 
     # EndpointAdditionalProperties allows setting additional properties on the
     # endpoint such as relabelings, metricRelabelings etc.
@@ -750,18 +752,18 @@ config:
     #         key: "tls.crt"
     #
     # +docs:property
-    # endpointAdditionalProperties: {}
+    endpointAdditionalProperties: {}
 
 # +docs:section=Webhook
 
-# webhook:
+webhook:
   # Number of replicas of the cert-manager webhook to run.
   #
   # The default is 1, but in production set this to 2 or 3 to provide high
   # availability.
   #
   # If `replicas > 1`, consider setting `webhook.podDisruptionBudget.enabled=true`.
-  # replicaCount: 1
+  replicaCount: 1
 
   # The number of seconds the API server should wait for the webhook to respond before treating the call as a failure.
   # The value must be between 1 and 30 seconds. For more information, see
@@ -777,7 +779,7 @@ config:
   # server.
   # By setting this timeout to its maximum value the underlying timeout error
   # message has more chance of being returned to the end user.
-  # timeoutSeconds: 30
+  timeoutSeconds: 30
 
   # This is used to configure options for the webhook pod.
   # This allows setting options that would usually be provided using flags.
@@ -805,7 +807,7 @@ config:
   #      secretName: "cert-manager-metrics-ca"
   #      dnsNames:
   #      - cert-manager-metrics
-  # config: {}
+  config: {}
 
   # The update strategy for the cert-manager webhook deployment.
   # For more information, see the [Kubernetes documentation](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#strategy)
@@ -816,34 +818,34 @@ config:
   #    rollingUpdate:
   #      maxSurge: 0
   #      maxUnavailable: 1
-  # strategy: {}
+  strategy: {}
 
   # Pod Security Context to be set on the webhook component Pod.
   # For more information, see [Configure a Security Context for a Pod or Container](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/).
   # +docs:property
-  # securityContext:
-    # runAsNonRoot: true
-    # seccompProfile:
-      # type: RuntimeDefault
+  securityContext:
+    runAsNonRoot: true
+    seccompProfile:
+      type: RuntimeDefault
 
   # Container Security Context to be set on the webhook component container.
   # For more information, see [Configure a Security Context for a Pod or Container](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/).
   # +docs:property
-  # containerSecurityContext:
-    # allowPrivilegeEscalation: false
-    # capabilities:
-      # drop:
-      # - ALL
-    # readOnlyRootFilesystem: true
+  containerSecurityContext:
+    allowPrivilegeEscalation: false
+    capabilities:
+      drop:
+      - ALL
+    readOnlyRootFilesystem: true
 
-  # podDisruptionBudget:
+  podDisruptionBudget:
     # Enable or disable the PodDisruptionBudget resource.
     #
     # This prevents downtime during voluntary disruptions such as during a Node upgrade.
     # For example, the PodDisruptionBudget will block `kubectl drain`
     # if it is used on the Node where the only remaining cert-manager
     # Pod is currently running.
-    # enabled: false
+    enabled: false
 
     # This property configures the minimum available pods for disruptions. Can either be set to
     # an integer (e.g., 1) or a percentage value (e.g., 25%).
@@ -886,20 +888,20 @@ config:
   # +docs:property
   # validatingWebhookConfigurationAnnotations: {}
 
-  # validatingWebhookConfiguration:
+  validatingWebhookConfiguration:
     # Configure spec.namespaceSelector for validating webhooks.
     # +docs:property
-    # namespaceSelector:
-      # matchExpressions:
-        # - key: "cert-manager.io/disable-validation"
-          # operator: "NotIn"
-          # values:
-            # - "true"
+    namespaceSelector:
+      matchExpressions:
+        - key: "cert-manager.io/disable-validation"
+          operator: "NotIn"
+          values:
+            - "true"
 
-  # mutatingWebhookConfiguration:
+  mutatingWebhookConfiguration:
     # Configure spec.namespaceSelector for mutating webhooks.
     # +docs:property
-    # namespaceSelector: {}
+    namespaceSelector: {}
     #  matchLabels:
     #    key: value
     #  matchExpressions:
@@ -911,7 +913,7 @@ config:
 
   # Additional command line flags to pass to cert-manager webhook binary.
   # To see all available flags run `docker run quay.io/jetstack/cert-manager-webhook:<version> --help`.
-  # extraArgs: []
+  extraArgs: []
   # Path to a file containing a WebhookConfiguration object used to configure the webhook.
   # - --config=<path-to-config-file>
 
@@ -920,11 +922,11 @@ config:
   #  extraEnv:
   #  - name: SOME_VAR
   #    value: 'some value'
-  # extraEnv: []
+  extraEnv: []
 
   # Comma separated list of feature gates that should be enabled on the
   # webhook pod.
-  # featureGates: ""
+  featureGates: ""
 
   # Resources to provide to the cert-manager webhook pod.
   #
@@ -934,29 +936,29 @@ config:
   #    memory: 32Mi
   #
   # For more information, see [Resource Management for Pods and Containers](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/).
-  # resources: {}
+  resources: {}
 
   # Liveness probe values.
   # For more information, see [Container probes](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#container-probes).
   #
   # +docs:property
-  # livenessProbe:
-    # failureThreshold: 3
-    # initialDelaySeconds: 60
-    # periodSeconds: 10
-    # successThreshold: 1
-    # timeoutSeconds: 1
+  livenessProbe:
+    failureThreshold: 3
+    initialDelaySeconds: 60
+    periodSeconds: 10
+    successThreshold: 1
+    timeoutSeconds: 1
 
   # Readiness probe values.
   # For more information, see [Container probes](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#container-probes).
   #
   # +docs:property
-  # readinessProbe:
-    # failureThreshold: 3
-    # initialDelaySeconds: 5
-    # periodSeconds: 5
-    # successThreshold: 1
-    # timeoutSeconds: 1
+  readinessProbe:
+    failureThreshold: 3
+    initialDelaySeconds: 5
+    periodSeconds: 5
+    successThreshold: 1
+    timeoutSeconds: 1
 
   # The nodeSelector on Pods tells Kubernetes to schedule Pods on the nodes with
   # matching labels.
@@ -965,8 +967,8 @@ config:
   # This default ensures that Pods are only scheduled to Linux nodes.
   # It prevents Pods being scheduled to Windows nodes in a mixed OS cluster.
   # +docs:property
-  # nodeSelector:
-    # kubernetes.io/os: linux
+  nodeSelector:
+    kubernetes.io/os: linux
 
   # A Kubernetes Affinity, if required. For more information, see [Affinity v1 core](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.27/#affinity-v1-core).
   #
@@ -980,14 +982,14 @@ config:
   #            operator: In
   #            values:
   #            - master
-  # affinity: {}
+  affinity: {}
 
   # A Kubernetes Runtime Class to apply to ACME HTTP01 solver pods, if required. For more information, see [Runtime Class](https://kubernetes.io/docs/concepts/containers/).
   #
   # For example:
   #   runtimeClassName: gvisor
   # +docs:property
-  # runtimeClassName: ""
+  runtimeClassName: ""
 
   # A list of Kubernetes Tolerations, if required. For more information, see [Toleration v1 core](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.27/#toleration-v1-core).
   #
@@ -997,7 +999,7 @@ config:
   #     operator: Equal
   #     value: master
   #     effect: NoSchedule
-  # tolerations: []
+  tolerations: []
 
   # A list of Kubernetes TopologySpreadConstraints, if required. For more information, see [Topology spread constraint v1 core](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.27/#topologyspreadconstraint-v1-core).
   #
@@ -1010,21 +1012,21 @@ config:
   #       matchLabels:
   #         app.kubernetes.io/instance: cert-manager
   #         app.kubernetes.io/component: controller
-  # topologySpreadConstraints: []
+  topologySpreadConstraints: []
 
   # Optional additional labels to add to the Webhook Pods.
-  # podLabels: {}
+  podLabels: {}
 
   # Optional additional labels to add to the Webhook Service.
-  # serviceLabels: {}
+  serviceLabels: {}
 
   # Optionally set the IP family policy for the controller Service to configure dual-stack; see [Configure dual-stack](https://kubernetes.io/docs/concepts/services-networking/dual-stack/#services).
-  # serviceIPFamilyPolicy: ""
+  serviceIPFamilyPolicy: ""
 
   # Optionally set the IP families for the controller Service that should be supported, in the order in which they should be applied to ClusterIP. Can be IPv4 and/or IPv6.
-  # serviceIPFamilies: []
+  serviceIPFamilies: []
 
-  # image:
+  image:
     # Deprecated: per-component registry prefix.
     #
     # If set, this value is *prepended* to the image repository that the chart would otherwise render.
@@ -1038,11 +1040,11 @@ config:
 
     # The image name for the cert-manager webhook.
     # +docs:property
-    # name: cert-manager-webhook
+    name: cert-manager-webhook
 
     # Full repository override (takes precedence over `imageRegistry`, `imageNamespace`, and `webhook.image.name`).
     # +docs:property
-    # repository: ""
+    repository: ""
 
     # Override the image tag to deploy by setting this variable.
     # If no value is set, the chart's appVersion will be used.
@@ -1055,11 +1057,11 @@ config:
     # digest: sha256:0e072dddd1f7f8fc8909a2ca6f65e76c5f0d2fcfb8be47935ae3457e8bbceb20
 
     # Kubernetes imagePullPolicy on Deployment.
-    # pullPolicy: IfNotPresent
+    pullPolicy: IfNotPresent
 
-  # serviceAccount:
+  serviceAccount:
     # Specifies whether a service account should be created.
-    # create: true
+    create: true
 
     # The name of the service account to use.
     # If not set and create is true, a name is generated using the fullname template.
@@ -1075,7 +1077,7 @@ config:
     # labels: {}
 
     # Automount API credentials for a Service Account.
-    # automountServiceAccountToken: true
+    automountServiceAccountToken: true
 
   # Automounting API credentials for a particular pod.
   # +docs:property
@@ -1086,7 +1088,7 @@ config:
   # talk to the cluster nodes only on 443 and 10250. Configuring
   # securePort: 10250, therefore will work out-of-the-box without needing to add firewall
   # rules or requiring NET_BIND_SERVICE capabilities to bind port numbers <1000.
-  # securePort: 10250
+  securePort: 10250
 
   # Specifies if the webhook should be started in hostNetwork mode.
   #
@@ -1097,12 +1099,12 @@ config:
   # Since the default port for the webhook conflicts with kubelet on the host
   # network, `webhook.securePort` should be changed to an available port if
   # running in hostNetwork mode.
-  # hostNetwork: false
+  hostNetwork: false
 
   # Specifies how the service should be handled. Useful if you want to expose the
   # webhook outside of the cluster. In some cases, the control plane cannot
   # reach internal services.
-  # serviceType: ClusterIP
+  serviceType: ClusterIP
 
   # Specify the load balancer IP for the created service.
   # +docs:property
@@ -1110,7 +1112,7 @@ config:
 
   # Overrides the mutating webhook and validating webhook so they reach the webhook
   # service using the `url` field instead of a service.
-  # url: {}
+  url: {}
     # host:
 
   # Enables default network policies for webhooks.
@@ -1118,66 +1120,66 @@ config:
   # between cert-manager components and other pods.
   # For more information, see [Network Policies](https://kubernetes.io/docs/concepts/services-networking/network-policies/)
   # NOTE: an incorrect networkPolicy will cause traffic to be dropped
-  # networkPolicy:
+  networkPolicy:
     # Create network policies for the webhooks.
-    # enabled: false
+    enabled: false
 
     # Ingress rule for the webhook network policy.
     # By default all pods are allowed access to:
     #   https, http-metrics, and http-healthz ports
     # +docs:property
-    # ingress:
-    # - ports:
-      # - port: https
-        # protocol: TCP
-      # - port: healthcheck
-        # protocol: TCP
-      # - port: http-metrics
-        # protocol: TCP
+    ingress:
+    - ports:
+      - port: https
+        protocol: TCP
+      - port: healthcheck
+        protocol: TCP
+      - port: http-metrics
+        protocol: TCP
 
     # Egress rule for the webhook network policy. By default, it allows all
     # outbound traffic to ports 80 and 443, as well as DNS ports.
     # +docs:property
-    # egress:
-    # - ports:
-      # - port: 80
-        # protocol: TCP
-      # - port: 443
-        # protocol: TCP
-      # - port: 53
-        # protocol: TCP
-      # - port: 53
-        # protocol: UDP
+    egress:
+    - ports:
+      - port: 80
+        protocol: TCP
+      - port: 443
+        protocol: TCP
+      - port: 53
+        protocol: TCP
+      - port: 53
+        protocol: UDP
       # On OpenShift and OKD, the Kubernetes API server listens on.
       # port 6443.
-      # - port: 6443
-        # protocol: TCP
+      - port: 6443
+        protocol: TCP
 
   # Additional volumes to add to the cert-manager controller pod.
-  # volumes: []
+  volumes: []
 
   # Additional volume mounts to add to the cert-manager controller container.
-  # volumeMounts: []
+  volumeMounts: []
 
   # enableServiceLinks indicates whether information about services should be
   # injected into the pod's environment variables, matching the syntax of Docker
   # links.
-  # enableServiceLinks: false
+  enableServiceLinks: false
 
   # enableClientVerification turns on client verification of requests
   # made to the webhook server
-  # enableClientVerification: false
+  enableClientVerification: false
   # the client CA file to be used for verification
-  # clientCAFile: ""
+  clientCAFile: ""
   # Subject names to verify for the client certificate.
   # Multiple values may be supplied as a comma-separated list.
-  # apiserverClientCertSubjects: ""
+  apiserverClientCertSubjects: ""
 
 # +docs:section=CA Injector
 
-# cainjector:
+cainjector:
   # Create the CA Injector deployment
-  # enabled: true
+  enabled: true
 
   # The number of replicas of the cert-manager cainjector to run.
   #
@@ -1188,7 +1190,7 @@ config:
   #
   # Note that cert-manager uses leader election to ensure that there can
   # only be a single instance active at a time.
-  # replicaCount: 1
+  replicaCount: 1
 
   # This is used to configure options for the cainjector pod.
   # It allows setting options that are usually provided via flags.
@@ -1213,7 +1215,7 @@ config:
   #      secretName: "cert-manager-metrics-ca"
   #      dnsNames:
   #      - cert-manager-metrics
-  # config: {}
+  config: {}
 
   # Deployment update strategy for the cert-manager cainjector deployment.
   # For more information, see the [Kubernetes documentation](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#strategy).
@@ -1224,70 +1226,70 @@ config:
   #    rollingUpdate:
   #      maxSurge: 0
   #      maxUnavailable: 1
-  # strategy: {}
+  strategy: {}
 
   # Pod Security Context to be set on the cainjector component Pod
   # For more information, see [Configure a Security Context for a Pod or Container](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/).
   # +docs:property
-  # securityContext:
-    # runAsNonRoot: true
-    # seccompProfile:
-      # type: RuntimeDefault
+  securityContext:
+    runAsNonRoot: true
+    seccompProfile:
+      type: RuntimeDefault
 
   # Container Security Context to be set on the cainjector component container
   # For more information, see [Configure a Security Context for a Pod or Container](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/).
   # +docs:property
-  # containerSecurityContext:
-    # allowPrivilegeEscalation: false
-    # capabilities:
-      # drop:
-      # - ALL
-    # readOnlyRootFilesystem: true
+  containerSecurityContext:
+    allowPrivilegeEscalation: false
+    capabilities:
+      drop:
+      - ALL
+    readOnlyRootFilesystem: true
 
   # Enables default network policies for cainjector.
   # This provides a way for you to restrict network traffic
   # between cert-manager components and other pods.
   # For more information, see [Network Policies](https://kubernetes.io/docs/concepts/services-networking/network-policies/)
   # NOTE: an incorrect networkPolicy will cause traffic to be dropped
-  # networkPolicy:
+  networkPolicy:
     # Create network policies for the cainjector.
-    # enabled: false
+    enabled: false
 
     # Ingress rule for the webhook cainjector policy.
     # By default all pods are allowed access to:
     #   http-metrics port
     # +docs:property
-    # ingress:
-    # - ports:
-      # - port: http-metrics
-        # protocol: TCP
+    ingress:
+    - ports:
+      - port: http-metrics
+        protocol: TCP
 
     # Egress rule for the cainjector network policy. By default, it allows all
     # outbound traffic to ports 80 and 443, as well as DNS ports.
     # +docs:property
-    # egress:
-    # - ports:
-      # - port: 80
-        # protocol: TCP
-      # - port: 443
-        # protocol: TCP
-      # - port: 53
-        # protocol: TCP
-      # - port: 53
-        # protocol: UDP
+    egress:
+    - ports:
+      - port: 80
+        protocol: TCP
+      - port: 443
+        protocol: TCP
+      - port: 53
+        protocol: TCP
+      - port: 53
+        protocol: UDP
       # On OpenShift and OKD, the Kubernetes API server listens on.
       # port 6443.
-      # - port: 6443
-        # protocol: TCP
+      - port: 6443
+        protocol: TCP
 
-  # podDisruptionBudget:
+  podDisruptionBudget:
     # Enable or disable the PodDisruptionBudget resource.
     #
     # This prevents downtime during voluntary disruptions such as during a Node upgrade.
     # For example, the PodDisruptionBudget will block `kubectl drain`
     # if it is used on the Node where the only remaining cert-manager
     # Pod is currently running.
-    # enabled: false
+    enabled: false
 
     # `minAvailable` configures the minimum available pods for disruptions. It can either be set to
     # an integer (e.g., 1) or a percentage value (e.g., 25%).
@@ -1324,7 +1326,7 @@ config:
 
   # Additional command line flags to pass to cert-manager cainjector binary.
   # To see all available flags run `docker run quay.io/jetstack/cert-manager-cainjector:<version> --help`.
-  # extraArgs: []
+  extraArgs: []
   # Enable profiling for cainjector.
   # - --enable-profiling=true
 
@@ -1333,11 +1335,11 @@ config:
   #  extraEnv:
   #  - name: SOME_VAR
   #    value: 'some value'
-  # extraEnv: []
+  extraEnv: []
 
   # Comma separated list of feature gates that should be enabled on the
   # cainjector pod.
-  # featureGates: ""
+  featureGates: ""
 
   # Resources to provide to the cert-manager cainjector pod.
   #
@@ -1347,7 +1349,7 @@ config:
   #    memory: 32Mi
   #
   # For more information, see [Resource Management for Pods and Containers](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/).
-  # resources: {}
+  resources: {}
 
 
   # The nodeSelector on Pods tells Kubernetes to schedule Pods on the nodes with
@@ -1357,8 +1359,8 @@ config:
   # This default ensures that Pods are only scheduled to Linux nodes.
   # It prevents Pods being scheduled to Windows nodes in a mixed OS cluster.
   # +docs:property
-  # nodeSelector:
-    # kubernetes.io/os: linux
+  nodeSelector:
+    kubernetes.io/os: linux
 
   # A Kubernetes Affinity, if required. For more information, see [Affinity v1 core](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.27/#affinity-v1-core).
   #
@@ -1372,14 +1374,14 @@ config:
   #            operator: In
   #            values:
   #            - master
-  # affinity: {}
+  affinity: {}
 
   # A Kubernetes Runtime Class to apply to ACME HTTP01 solver pods, if required. For more information, see [Runtime Class](https://kubernetes.io/docs/concepts/containers/).
   #
   # For example:
   #   runtimeClassName: gvisor
   # +docs:property
-  # runtimeClassName: ""
+  runtimeClassName: ""
 
   # A list of Kubernetes Tolerations, if required. For more information, see [Toleration v1 core](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.27/#toleration-v1-core).
   #
@@ -1389,7 +1391,7 @@ config:
   #     operator: Equal
   #     value: master
   #     effect: NoSchedule
-  # tolerations: []
+  tolerations: []
 
   # A list of Kubernetes TopologySpreadConstraints, if required. For more information, see [Topology spread constraint v1 core](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.27/#topologyspreadconstraint-v1-core).
   #
@@ -1402,15 +1404,15 @@ config:
   #       matchLabels:
   #         app.kubernetes.io/instance: cert-manager
   #         app.kubernetes.io/component: controller
-  # topologySpreadConstraints: []
+  topologySpreadConstraints: []
 
   # Optional additional labels to add to the CA Injector Pods.
-  # podLabels: {}
+  podLabels: {}
 
   # Optional additional labels to add to the CA Injector metrics Service.
-  # serviceLabels: {}
+  serviceLabels: {}
 
-  # image:
+  image:
     # Deprecated: per-component registry prefix.
     #
     # If set, this value is *prepended* to the image repository that the chart would otherwise render.
@@ -1424,11 +1426,11 @@ config:
 
     # The image name for the cert-manager cainjector.
     # +docs:property
-    # name: cert-manager-cainjector
+    name: cert-manager-cainjector
 
     # Full repository override (takes precedence over `imageRegistry`, `imageNamespace`, and `cainjector.image.name`).
     # +docs:property
-    # repository: ""
+    repository: ""
 
     # Override the image tag to deploy by setting this variable.
     # If no value is set, the chart's appVersion will be used.
@@ -1441,11 +1443,11 @@ config:
     # digest: sha256:0e072dddd1f7f8fc8909a2ca6f65e76c5f0d2fcfb8be47935ae3457e8bbceb20
 
     # Kubernetes imagePullPolicy on Deployment.
-    # pullPolicy: IfNotPresent
+    pullPolicy: IfNotPresent
 
-  # serviceAccount:
+  serviceAccount:
     # Specifies whether a service account should be created.
-    # create: true
+    create: true
 
     # The name of the service account to use.
     # If not set and create is true, a name is generated using the fullname template
@@ -1461,27 +1463,27 @@ config:
     # labels: {}
 
     # Automount API credentials for a Service Account.
-    # automountServiceAccountToken: true
+    automountServiceAccountToken: true
 
   # Automounting API credentials for a particular pod.
   # +docs:property
   # automountServiceAccountToken: true
 
   # Additional volumes to add to the cert-manager controller pod.
-  # volumes: []
+  volumes: []
 
   # Additional volume mounts to add to the cert-manager controller container.
-  # volumeMounts: []
+  volumeMounts: []
 
   # enableServiceLinks indicates whether information about services should be
   # injected into the pod's environment variables, matching the syntax of Docker
   # links.
-  # enableServiceLinks: false
+  enableServiceLinks: false
 
 # +docs:section=ACME Solver
 
-# acmesolver:
-  # image:
+acmesolver:
+  image:
     # Deprecated: per-component registry prefix.
     #
     # If set, this value is *prepended* to the image repository that the chart would otherwise render.
@@ -1495,11 +1497,11 @@ config:
 
     # The image name for the cert-manager acmesolver.
     # +docs:property
-    # name: cert-manager-acmesolver
+    name: cert-manager-acmesolver
 
     # Full repository override (takes precedence over `imageRegistry`, `imageNamespace`, and `acmesolver.image.name`).
     # +docs:property
-    # repository: ""
+    repository: ""
 
     # Override the image tag to deploy by setting this variable.
     # If no value is set, the chart's appVersion is used.
@@ -1512,14 +1514,14 @@ config:
     # digest: sha256:0e072dddd1f7f8fc8909a2ca6f65e76c5f0d2fcfb8be47935ae3457e8bbceb20
 
     # Kubernetes imagePullPolicy on Deployment.
-    # pullPolicy: IfNotPresent
+    pullPolicy: IfNotPresent
 
   # A Kubernetes Runtime Class to apply to ACME HTTP01 solver pods, if required. For more information, see [Runtime Class](https://kubernetes.io/docs/concepts/containers/).
   #
   # For example:
   #   runtimeClassName: gvisor
   # +docs:property
-  # runtimeClassName: ""
+  runtimeClassName: ""
 
 # +docs:section=Startup API Check
 # This startupapicheck is a Helm post-install hook that waits for the webhook
@@ -1530,33 +1532,33 @@ config:
 # owing to the Job never being completed because the sidecar proxy does not exit.
 # For more information, see [this note](https://github.com/cert-manager/cert-manager/pull/4414).
 
-# startupapicheck:
+startupapicheck:
   # Enables the startup api check.
-  # enabled: true
+  enabled: true
 
   # Pod Security Context to be set on the startupapicheck component Pod.
   # For more information, see [Configure a Security Context for a Pod or Container](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/).
   # +docs:property
-  # securityContext:
-    # runAsNonRoot: true
-    # seccompProfile:
-      # type: RuntimeDefault
+  securityContext:
+    runAsNonRoot: true
+    seccompProfile:
+      type: RuntimeDefault
 
   # Container Security Context to be set on the controller component container.
   # For more information, see [Configure a Security Context for a Pod or Container](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/).
   # +docs:property
-  # containerSecurityContext:
-    # allowPrivilegeEscalation: false
-    # capabilities:
-      # drop:
-      # - ALL
-    # readOnlyRootFilesystem: true
+  containerSecurityContext:
+    allowPrivilegeEscalation: false
+    capabilities:
+      drop:
+      - ALL
+    readOnlyRootFilesystem: true
 
   # Timeout for 'kubectl check api' command.
-  # timeout: 1m
+  timeout: 1m
 
   # Job backoffLimit
-  # backoffLimit: 4
+  backoffLimit: 4
 
   # Limits the lifetime of a Job that has finished execution (either Complete
   # or Failed). If this field is set, once the Job finishes, it will be
@@ -1571,10 +1573,10 @@ config:
 
   # Optional additional annotations to add to the startupapicheck Job.
   # +docs:property
-  # jobAnnotations:
-    # helm.sh/hook: post-install
-    # helm.sh/hook-weight: "1"
-    # helm.sh/hook-delete-policy: before-hook-creation,hook-succeeded
+  jobAnnotations:
+    helm.sh/hook: post-install
+    helm.sh/hook-weight: "1"
+    helm.sh/hook-delete-policy: before-hook-creation,hook-succeeded
 
   # Optional additional annotations to add to the startupapicheck Pods.
   # +docs:property
@@ -1587,15 +1589,15 @@ config:
   # can know what exactly caused the failure. Verbose logs include details of
   # the webhook URL, IP address and TCP connect errors for example.
   # +docs:property
-  # extraArgs:
-  # - -v
+  extraArgs:
+  - -v
 
   # Additional environment variables to pass to cert-manager startupapicheck binary.
   # For example:
   #  extraEnv:
   #  - name: SOME_VAR
   #    value: 'some value'
-  # extraEnv: []
+  extraEnv: []
 
   # Resources to provide to the cert-manager startupapicheck pod.
   #
@@ -1605,7 +1607,7 @@ config:
   #    memory: 32Mi
   #
   # For more information, see [Resource Management for Pods and Containers](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/).
-  # resources: {}
+  resources: {}
 
 
   # The nodeSelector on Pods tells Kubernetes to schedule Pods on the nodes with
@@ -1615,8 +1617,8 @@ config:
   # This default ensures that Pods are only scheduled to Linux nodes.
   # It prevents Pods being scheduled to Windows nodes in a mixed OS cluster.
   # +docs:property
-  # nodeSelector:
-    # kubernetes.io/os: linux
+  nodeSelector:
+    kubernetes.io/os: linux
 
   # A Kubernetes Affinity, if required. For more information, see [Affinity v1 core](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.27/#affinity-v1-core).
   # For example:
@@ -1629,14 +1631,14 @@ config:
   #            operator: In
   #            values:
   #            - master
-  # affinity: {}
+  affinity: {}
 
   # A Kubernetes Runtime Class to apply to ACME HTTP01 solver pods, if required. For more information, see [Runtime Class](https://kubernetes.io/docs/concepts/containers/).
   #
   # For example:
   #   runtimeClassName: gvisor
   # +docs:property
-  # runtimeClassName: ""
+  runtimeClassName: ""
 
   # A list of Kubernetes Tolerations, if required. For more information, see [Toleration v1 core](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.27/#toleration-v1-core).
   #
@@ -1646,12 +1648,12 @@ config:
   #     operator: Equal
   #     value: master
   #     effect: NoSchedule
-  # tolerations: []
+  tolerations: []
 
   # Optional additional labels to add to the startupapicheck Pods.
-  # podLabels: {}
+  podLabels: {}
 
-  # image:
+  image:
     # Deprecated: per-component registry prefix.
     #
     # If set, this value is *prepended* to the image repository that the chart would otherwise render.
@@ -1665,11 +1667,11 @@ config:
 
     # The image name for the cert-manager startupapicheck.
     # +docs:property
-    # name: cert-manager-startupapicheck
+    name: cert-manager-startupapicheck
 
     # Full repository override (takes precedence over `imageRegistry`, `imageNamespace`, and `startupapicheck.image.name`).
     # +docs:property
-    # repository: ""
+    repository: ""
 
     # Override the image tag to deploy by setting this variable.
     # If no value is set, the chart's appVersion is used.
@@ -1682,23 +1684,23 @@ config:
     # digest: sha256:0e072dddd1f7f8fc8909a2ca6f65e76c5f0d2fcfb8be47935ae3457e8bbceb20
 
     # Kubernetes imagePullPolicy on Deployment.
-    # pullPolicy: IfNotPresent
+    pullPolicy: IfNotPresent
 
-  # rbac:
+  rbac:
     # annotations for the startup API Check job RBAC and PSP resources.
     # +docs:property
-    # annotations:
-      # helm.sh/hook: post-install
-      # helm.sh/hook-weight: "-5"
-      # helm.sh/hook-delete-policy: before-hook-creation,hook-succeeded
+    annotations:
+      helm.sh/hook: post-install
+      helm.sh/hook-weight: "-5"
+      helm.sh/hook-delete-policy: before-hook-creation,hook-succeeded
 
   # Automounting API credentials for a particular pod.
   # +docs:property
   # automountServiceAccountToken: true
 
-  # serviceAccount:
+  serviceAccount:
     # Specifies whether a service account should be created.
-    # create: true
+    create: true
 
     # The name of the service account to use.
     # If not set and create is true, a name is generated using the fullname template.
@@ -1707,29 +1709,29 @@ config:
 
     # Optional additional annotations to add to the Job's Service Account.
     # +docs:property
-    # annotations:
-      # helm.sh/hook: post-install
-      # helm.sh/hook-weight: "-5"
-      # helm.sh/hook-delete-policy: before-hook-creation,hook-succeeded
+    annotations:
+      helm.sh/hook: post-install
+      helm.sh/hook-weight: "-5"
+      helm.sh/hook-delete-policy: before-hook-creation,hook-succeeded
 
     # Automount API credentials for a Service Account.
     # +docs:property
-    # automountServiceAccountToken: true
+    automountServiceAccountToken: true
 
     # Optional additional labels to add to the startupapicheck's Service Account.
     # +docs:property
     # labels: {}
 
   # Additional volumes to add to the cert-manager controller pod.
-  # volumes: []
+  volumes: []
 
   # Additional volume mounts to add to the cert-manager controller container.
-  # volumeMounts: []
+  volumeMounts: []
 
   # enableServiceLinks indicates whether information about services should be
   # injected into pod's environment variables, matching the syntax of Docker
   # links.
-  # enableServiceLinks: false
+  enableServiceLinks: false
 
 # Create dynamic manifests via values.
 #
@@ -1740,13 +1742,13 @@ config:
 #     kind: ConfigMap
 #     metadata:
 #       name: '{{ template "cert-manager.fullname" . }}-extra-configmap'
-# extraObjects: []
+extraObjects: []
 
 # Field used by our release pipeline to produce the static manifests.
 # The field defaults to "helm" but is set to "static" when we render
 # the static YAML manifests.
 # +docs:hidden
-# creator: "helm"
+creator: "helm"
 
 # Field that can be used as a condition when cert-manager is a dependency.
 # This definition is only here as a placeholder such that it is included in
@@ -1754,4 +1756,4 @@ config:
 # See https://helm.sh/docs/chart_best_practices/dependencies/#conditions-and-tags
 # for more info.
 # +docs:hidden
-# enabled: true
+enabled: true
