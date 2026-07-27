@@ -1,8 +1,4 @@
 ---
-Pulled: quay.io/jetstack/charts/cert-manager:v1.21.0
-Digest: sha256:cd55fea42658e54abc25e85a0bc1de229925a5006445f916bfd2c6dc80ac3613
-# +docs:section=Global
-
 # Default values for cert-manager.
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
