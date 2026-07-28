@@ -12,5 +12,10 @@ patches:
   - path: pvc-patch.yaml
   - path: gateway-patch.yaml
 
+configMapGenerator:
+    - name: nginx-config
+      files:
+        - default.conf
+
 commonLabels:
   instance: prod

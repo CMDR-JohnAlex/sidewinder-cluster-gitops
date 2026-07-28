@@ -3,16 +3,16 @@ apiVersion: v1
 kind: Service
 
 metadata:
-  name: nginx
-
-  labels:
-    name: nginx
+  name: nginx-svc
 
 spec:
+  type: ClusterIP
+
   selector:
     name: nginx
 
   ports:
-    - name: http
+    - name: nginx-http
+      protocol: TCP
       port: 80
-      targetPort: 80
+      targetPort: nginx-http
