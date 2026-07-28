@@ -16,7 +16,7 @@ spec:
 
   rules:
     - backendRefs:
-        - name: argocd-server # SVC name (internal IP:PORT).
+        - name: nginx # SVC name (internal IP:PORT).
           port: 80 # External port through main-gateway.
       matches:
         - path:
@@ -41,7 +41,7 @@ spec:
 
   rules:
     - backendRefs:
-        - name: argocd-server # SVC name (internal IP:PORT).
+        - name: nginx # SVC name (internal IP:PORT).
           port: 80 # External port through main-gateway.
       matches:
         - path:
