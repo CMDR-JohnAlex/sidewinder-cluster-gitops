@@ -42,7 +42,7 @@ spec:
   rules:
     - backendRefs:
         - name: nginx-svc # SVC name (internal IP:PORT).
-          port: 80 # External port through main-gateway.
+          port: 443 # External port through main-gateway.
       matches:
         - path:
             type: PathPrefix

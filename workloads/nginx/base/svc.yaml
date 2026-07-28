@@ -9,7 +9,7 @@ spec:
   type: ClusterIP
 
   selector:
-    name: nginx
+    app: nginx
 
   ports:
     - name: nginx-http
