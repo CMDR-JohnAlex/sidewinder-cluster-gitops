@@ -3,22 +3,21 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 
 metadata:
-  name: workload-apps
+  name: nginx-prod
   namespace: argocd
 
 spec:
   project: workloads
 
-  source:
-    repoURL: https://github.com/CMDR-JohnAlex/sidewinder-cluster-gitops.git
-    targetRevision: main
-    path: workloads/applications
-    directory:
-      recurse: true
+  sources:
+    # Kustomize
+    - repoURL: https://github.com/CMDR-JohnAlex/sidewinder-cluster-gitops.git
+      targetRevision: main
+      path: workloads/nginx/overlays/prod
 
   destination:
     server: https://kubernetes.default.svc
-    namespace: argocd
+    namespace: nginx
 
   syncPolicy:
     automated:
@@ -26,5 +25,5 @@ spec:
       selfHeal: true
 
     syncOptions:
-      - ServerSideApply=true
+      - ServerSideApply=false
       - CreateNamespace=true

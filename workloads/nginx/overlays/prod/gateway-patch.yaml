@@ -1,0 +1,21 @@
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+
+metadata:
+  name: nginx-http
+
+spec:
+  hostnames:
+    - nginx.sidewinder.lan
+
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+
+metadata:
+  name: nginx-https
+
+spec:
+  hostnames:
+    - nginx.sidewinder.lan
