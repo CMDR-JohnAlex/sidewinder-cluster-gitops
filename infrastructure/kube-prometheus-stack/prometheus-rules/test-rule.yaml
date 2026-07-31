@@ -15,7 +15,7 @@ spec:
     - name: alertmanager-test
       rules:
         - alert: AlertmanagerTest
-          expr: 1 == 0
+          expr: alertmanager_test_enabled == 1
           for: 1m # Expression must remain active for 1 minute before firing.
           labels:
             severity: warning
