@@ -31,5 +31,41 @@ spec:
             name: alertmanager-discord-webhook
             key: webhook-url
           sendResolved: true
-          # username: "AlertManager - test"
+          username: "sidewinder-cluster (discord1)"
+          # avatarURL: "http://example.com"
+
+---
+# https://prometheus-operator.dev/docs/api-reference/api/#monitoring.coreos.com/v1alpha1.AlertmanagerConfig
+# https://prometheus-operator.dev/docs/developer/alerting/
+apiVersion: monitoring.coreos.com/v1alpha1
+kind: AlertmanagerConfig
+
+metadata:
+  name: discord2
+  namespace: monitoring
+
+spec:
+  route:
+    receiver: discord2
+    # matchers:
+    #   - name: alertname
+    #     matchType: "="
+    #     value: AlertmanagerTest
+
+    groupBy:
+      - alertname
+      - namespace
+
+    groupWait: 10s
+    groupInterval: 1m
+    repeatInterval: 10m
+
+  receivers:
+    - name: discord2
+      discordConfigs:
+        - apiURL:
+            name: alertmanager-discord-webhook
+            key: webhook-url
+          sendResolved: true
+          username: "sidewinder-cluster (discord2)"
           # avatarURL: "http://example.com"
