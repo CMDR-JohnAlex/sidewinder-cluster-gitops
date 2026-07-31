@@ -31,7 +31,7 @@ spec:
     # AlertManager-specific resources
     - repoURL: https://github.com/CMDR-JohnAlex/sidewinder-cluster-gitops.git
       targetRevision: main
-      path: infrastructure/kube-prometheus-stack/alertmanager
+      path: infrastructure/kube-prometheus-stack/alert-manager
 
     # Prometheus rules
     - repoURL: https://github.com/CMDR-JohnAlex/sidewinder-cluster-gitops.git
