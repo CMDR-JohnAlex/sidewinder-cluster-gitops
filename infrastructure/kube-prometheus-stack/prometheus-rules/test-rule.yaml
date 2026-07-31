@@ -7,6 +7,8 @@ kind: PrometheusRule
 metadata:
   name: alertmanager-test
   namespace: monitoring
+  labels: # Prometheus has a "ruleSelector" that "matchLabels" with "release: kube-prometheus-stack".
+    release: kube-prometheus-stack
 
 spec:
   groups:
