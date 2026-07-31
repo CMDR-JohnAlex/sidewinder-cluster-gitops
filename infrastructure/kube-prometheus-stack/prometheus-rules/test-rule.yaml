@@ -19,6 +19,7 @@ spec:
           for: 1m # Expression must remain active for 1 minute before firing.
           labels:
             severity: warning
+            namespace: monitoring
           annotations:
             summary: Alertmanager test
             description: This is a test alert. Be afraid!
