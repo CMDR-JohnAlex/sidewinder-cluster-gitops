@@ -12,7 +12,9 @@ spec:
   route:
     receiver: discord
     matchers:
-      - name: "AlertmanagerTest"
+      - name: alertname
+        matchType: "="
+        value: AlertmanagerTest
 
   receivers:
     - name: discord
