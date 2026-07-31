@@ -1418,7 +1418,6 @@ grafana:
   ##       "timeInterval": "5s"
   ##
 
-  # Provision grafana-dashboards-kubernetes
   dashboardProviders:
     dashboardproviders.yaml:
       apiVersion: 1
@@ -1431,6 +1430,52 @@ grafana:
         editable: true
         options:
           path: /var/lib/grafana/dashboards/grafana-dashboards-kubernetes
+
+      - name: 'grafana-dashboards-envoy'
+        orgId: 1
+        folder: 'Envoy Gateway'
+        type: file
+        disableDeletion: true
+        editable: true
+        options:
+          path: /var/lib/grafana/dashboards/grafana-dashboards-envoy
+
+      - name: 'grafana-dashboards-argocd'
+        orgId: 1
+        folder: 'ArgoCD'
+        type: file
+        disableDeletion: true
+        editable: true
+        options:
+          path: /var/lib/grafana/dashboards/grafana-dashboards-argocd
+
+      - name: 'grafana-dashboards-cert-manager'
+        orgId: 1
+        folder: 'cert-manager'
+        type: file
+        disableDeletion: true
+        editable: true
+        options:
+          path: /var/lib/grafana/dashboards/grafana-dashboards-cert-manager
+
+      - name: 'grafana-dashboards-metallb'
+        orgId: 1
+        folder: 'MetalLB'
+        type: file
+        disableDeletion: true
+        editable: true
+        options:
+          path: /var/lib/grafana/dashboards/grafana-dashboards-metallb
+
+      - name: 'grafana-dashboards-calico'
+        orgId: 1
+        folder: 'Calico'
+        type: file
+        disableDeletion: true
+        editable: true
+        options:
+          path: /var/lib/grafana/dashboards/grafana-dashboards-calico
+
   dashboards:
     grafana-dashboards-kubernetes:
       k8s-system-api-server:
@@ -1451,6 +1496,51 @@ grafana:
       k8s-views-pods:
         url: https://raw.githubusercontent.com/dotdc/grafana-dashboards-kubernetes/master/dashboards/k8s-views-pods.json
         token: ''
+
+    grafana-dashboards-envoy:
+      envoy-overview:
+        gnetId: 24459
+        revision: 3
+        datasource: Prometheus
+
+      envoy-gateway-overview:
+        gnetId: 24460
+        revision: 1
+        datasource: Prometheus
+
+      envoy-upstream:
+        gnetId: 24457
+        revision: 4
+        datasource: Prometheus
+
+      envoy-downstream:
+        gnetId: 24458
+        revision: 3
+        datasource: Prometheus
+
+    grafana-dashboards-argocd:
+      argocd-overview:
+        gnetId: 24192
+        revision: 1
+        datasource: Prometheus
+
+    grafana-dashboards-cert-manager:
+      cert-manager:
+        gnetId: 20340
+        revision: 1
+        datasource: Prometheus
+
+    grafana-dashboards-metallb:
+      metallb:
+        gnetId: 14127
+        revision: 1
+        datasource: Prometheus
+
+    grafana-dashboards-calico:
+      calico-felix:
+        gnetId: 12175
+        revision: 7
+        datasource: Prometheus
 
   operator:
     ## Enable references to ConfigMaps containing dashboards in GrafanaDashboard CRs
