@@ -11,7 +11,7 @@ spec:
 
   sources:
     # Helm chart
-    - repoURL: ghcr.io/prometheus-community/charts/kube-prometheus-stack
+    - repoURL: ghcr.io/prometheus-community/charts
       chart: kube-prometheus-stack
       targetRevision: 88.0.1
       helm:
