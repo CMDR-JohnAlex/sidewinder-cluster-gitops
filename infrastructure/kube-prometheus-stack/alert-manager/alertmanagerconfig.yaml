@@ -11,10 +11,18 @@ metadata:
 spec:
   route:
     receiver: discord
-    matchers:
-      - name: alertname
-        matchType: "="
-        value: AlertmanagerTest
+    # matchers:
+    #   - name: alertname
+    #     matchType: "="
+    #     value: AlertmanagerTest
+
+    groupBy:
+      - alertname
+      - namespace
+
+    groupWait: 30s
+    groupInterval: 5m
+    repeatInterval: 24h
 
   receivers:
     - name: discord
