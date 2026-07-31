@@ -16,10 +16,10 @@ spec:
       rules:
         - alert: AlertmanagerTest
           expr: vector(1) # Makes the alert always fire as it evaluates as 1.
-          for: 1m # Expression must remain active for 1 minute before firing.
+          for: 1m # Expression must remain active/pending for 1 minute before being marked as FIRING.
           labels:
             severity: warning
-            namespace: monitoring
+            namespace: monitoring # NOTE: Must match the namespace of the PrometheusRule. REQUIRED!
           annotations:
             summary: Alertmanager test
             description: This is a test alert. Be afraid!

@@ -5039,7 +5039,7 @@ prometheus:
     ## EnforcedNamespaceLabel enforces adding a namespace label of origin for each alert and metric that is user created.
     ## The label value will always be the namespace of the object that is being created.
     ## Disabled by default
-    enforcedNamespaceLabel: ""
+    enforcedNamespaceLabel: namespace
 
     ## PrometheusRulesExcludedFromEnforce - list of prometheus rules to be excluded from enforcing of adding namespace labels.
     ## Works only if enforcedNamespaceLabel set to true. Make sure both ruleNamespace and ruleName are set for each pair
