@@ -1,0 +1,22 @@
+---
+# https://prometheus-operator.dev/docs/api-reference/api/#monitoring.coreos.com/v1.PrometheusRule
+# https://prometheus.io/docs/prometheus/latest/querying/basics/
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+
+metadata:
+  name: alertmanager-test
+  namespace: monitoring
+
+spec:
+  groups:
+    - name: alertmanager-test
+      rules:
+        - alert: AlertmanagerTest
+          expr: vector(1) # Makes the alert always fire as it evaluates as 1.
+          for: 1m # Expression must remain active for 1 minute before firing.
+          labels:
+            severity: warning
+          annotations:
+            summary: Alertmanager test
+            description: This is a test alert. Be afraid!

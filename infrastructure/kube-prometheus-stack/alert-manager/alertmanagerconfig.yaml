@@ -1,0 +1,25 @@
+---
+# https://prometheus-operator.dev/docs/api-reference/api/#monitoring.coreos.com/v1alpha1.AlertmanagerConfig
+# https://prometheus-operator.dev/docs/developer/alerting/
+apiVersion: monitoring.coreos.com/v1alpha1
+kind: AlertmanagerConfig
+
+metadata:
+  name: discord
+  namespace: monitoring
+
+spec:
+  route:
+    receiver: discord
+    matchers:
+      - name: "AlertmanagerTest"
+
+  receivers:
+    - name: discord
+      discordConfigs:
+        - apiURL:
+            name: alertmanager-discord-webhook
+            key: webhook-url
+          sendResolved: true
+          # username: "AlertManager - test"
+          # avatarURL: "http://example.com"
