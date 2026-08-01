@@ -1476,6 +1476,15 @@ grafana:
         options:
           path: /var/lib/grafana/dashboards/grafana-dashboards-calico
 
+      - name: 'grafana-dashboards-temperature'
+        orgId: 1
+        folder: 'Node Exporter'
+        type: file
+        disableDeletion: true
+        editable: true
+        options:
+          path: /var/lib/grafana/dashboards/grafana-dashboards-temperature
+
   dashboards:
     grafana-dashboards-kubernetes:
       k8s-system-api-server:
@@ -1540,6 +1549,12 @@ grafana:
       calico-felix:
         gnetId: 12175
         revision: 7
+        datasource: Prometheus
+
+    grafana-dashboards-temperature:
+      temperature:
+        gnetId: 15202
+        revision: 1
         datasource: Prometheus
 
   operator:
