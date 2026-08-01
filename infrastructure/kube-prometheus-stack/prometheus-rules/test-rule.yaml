@@ -19,6 +19,7 @@ spec:
           for: 1m # Expression must remain active/pending for 1 minute before being marked as FIRING.
           labels:
             severity: warning
+            namespace: monitoring # NOTE: REQUIRED! Must match the AlertmanagerConfig that will try to get this rule.
           annotations:
             summary: Alertmanager test
             description: This is a test alert. Be afraid!

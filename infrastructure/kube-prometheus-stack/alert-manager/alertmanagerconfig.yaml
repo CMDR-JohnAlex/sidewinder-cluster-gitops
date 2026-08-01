@@ -6,6 +6,42 @@ kind: AlertmanagerConfig
 
 metadata:
   name: discord
+  namespace: kube-system
+
+spec:
+  route:
+    receiver: discord
+    # matchers:
+    #   - name: alertname
+    #     matchType: "="
+    #     value: AlertmanagerTest
+
+    groupBy:
+      - alertname
+      - namespace
+
+    groupWait: 30s
+    groupInterval: 5m
+    repeatInterval: 12h
+
+  receivers:
+    - name: discord
+      discordConfigs:
+        - apiURL:
+            name: alertmanager-discord-webhook
+            key: webhook-url
+          sendResolved: true
+          username: "sidewinder-cluster (kube-system)"
+          # avatarURL: "http://example.com"
+
+---
+# https://prometheus-operator.dev/docs/api-reference/api/#monitoring.coreos.com/v1alpha1.AlertmanagerConfig
+# https://prometheus-operator.dev/docs/developer/alerting/
+apiVersion: monitoring.coreos.com/v1alpha1
+kind: AlertmanagerConfig
+
+metadata:
+  name: discord
   namespace: monitoring
 
 spec:
@@ -22,7 +58,7 @@ spec:
 
     groupWait: 30s
     groupInterval: 5m
-    repeatInterval: 24h
+    repeatInterval: 12h
 
   receivers:
     - name: discord
@@ -31,41 +67,5 @@ spec:
             name: alertmanager-discord-webhook
             key: webhook-url
           sendResolved: true
-          username: "sidewinder-cluster (discord1)"
-          # avatarURL: "http://example.com"
-
----
-# https://prometheus-operator.dev/docs/api-reference/api/#monitoring.coreos.com/v1alpha1.AlertmanagerConfig
-# https://prometheus-operator.dev/docs/developer/alerting/
-apiVersion: monitoring.coreos.com/v1alpha1
-kind: AlertmanagerConfig
-
-metadata:
-  name: discord2
-  namespace: monitoring
-
-spec:
-  route:
-    receiver: discord2
-    # matchers:
-    #   - name: alertname
-    #     matchType: "="
-    #     value: AlertmanagerTest
-
-    groupBy:
-      - alertname
-      - namespace
-
-    groupWait: 10s
-    groupInterval: 1m
-    repeatInterval: 10m
-
-  receivers:
-    - name: discord2
-      discordConfigs:
-        - apiURL:
-            name: alertmanager-discord-webhook
-            key: webhook-url
-          sendResolved: true
-          username: "sidewinder-cluster (discord2)"
+          username: "sidewinder-cluster (monitoring)"
           # avatarURL: "http://example.com"
