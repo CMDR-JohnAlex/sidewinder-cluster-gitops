@@ -1485,6 +1485,15 @@ grafana:
         options:
           path: /var/lib/grafana/dashboards/grafana-dashboards-temperature
 
+      - name: 'grafana-dashboards-node-exporter-full'
+        orgId: 1
+        folder: 'Node Exporter'
+        type: file
+        disableDeletion: true
+        editable: true
+        options:
+          path: /var/lib/grafana/dashboards/grafana-dashboards-node-exporter-full
+
   dashboards:
     grafana-dashboards-kubernetes:
       k8s-system-api-server:
@@ -1555,6 +1564,12 @@ grafana:
       temperature:
         gnetId: 15202
         revision: 1
+        datasource: Prometheus
+
+    grafana-dashboards-node-exporter-full:
+      temperature:
+        gnetId: 1860
+        revision: 45
         datasource: Prometheus
 
   operator:
