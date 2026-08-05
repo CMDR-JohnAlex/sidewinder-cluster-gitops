@@ -38,11 +38,15 @@ spec:
               subPath: server.yml
               name: config-volume # generated via configMapGenerator from kustomization file
             - mountPath: /var/cache/ntfy
-              name: cache-volume # cache volume mounted to persistent volume
+              subPath: cache
+              name: data-volume
+            - mountPath: /var/lib/ntfy
+              subPath: auth
+              name: data-volume
       volumes:
         - name: config-volume
           configMap: # uses configmap generator to parse server.yml to configmap
             name: server-config
-        - name: cache-volume
-          persistentVolumeClaim: # stores /cache/ntfy in defined pv
+        - name: data-volume
+          persistentVolumeClaim:
             claimName: ntfy-pvc
