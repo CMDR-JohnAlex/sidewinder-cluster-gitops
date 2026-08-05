@@ -1,0 +1,175 @@
+---
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+
+metadata:
+  name: alertmanager-test-001
+  namespace: monitoring
+  labels: # Prometheus has a "ruleSelector" that "matchLabels" with "release: kube-prometheus-stack".
+    release: kube-prometheus-stack
+
+spec:
+  groups:
+    - name: alertmanager-test-001
+      rules:
+        - alert: AlertmanagerTest
+          expr: vector(1) # Makes the alert always fire as it evaluates as 1.
+          for: 1m # Expression must remain active/pending for 1 minute before being marked as FIRING.
+          labels:
+            severity: warning
+            namespace: monitoring # NOTE: REQUIRED! Must match the AlertmanagerConfig that will try to get this rule.
+            meow: :3
+            random: '001'
+          annotations:
+            summary: Alertmanager test 001
+            description: This is a test alert. Be afraid!
+---
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+
+metadata:
+  name: alertmanager-test-002
+  namespace: monitoring
+  labels: # Prometheus has a "ruleSelector" that "matchLabels" with "release: kube-prometheus-stack".
+    release: kube-prometheus-stack
+
+spec:
+  groups:
+    - name: alertmanager-test-002
+      rules:
+        - alert: AlertmanagerTest
+          expr: vector(1) # Makes the alert always fire as it evaluates as 1.
+          for: 2m # Expression must remain active/pending for 1 minute before being marked as FIRING.
+          labels:
+            severity: warning
+            namespace: monitoring # NOTE: REQUIRED! Must match the AlertmanagerConfig that will try to get this rule.
+            meow: :3
+            random: '002'
+          annotations:
+            summary: Alertmanager test 002
+            description: This is a test alert. Be afraid!
+---
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+
+metadata:
+  name: alertmanager-test-003
+  namespace: monitoring
+  labels: # Prometheus has a "ruleSelector" that "matchLabels" with "release: kube-prometheus-stack".
+    release: kube-prometheus-stack
+
+spec:
+  groups:
+    - name: alertmanager-test-003
+      rules:
+        - alert: AlertmanagerTest
+          expr: vector(1) # Makes the alert always fire as it evaluates as 1.
+          for: 3m # Expression must remain active/pending for 1 minute before being marked as FIRING.
+          labels:
+            severity: warning
+            namespace: monitoring # NOTE: REQUIRED! Must match the AlertmanagerConfig that will try to get this rule.
+            meow: :3
+            random: '003'
+          annotations:
+            summary: Alertmanager test 003
+            description: This is a test alert. Be afraid!
+---
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+
+metadata:
+  name: alertmanager-test-004
+  namespace: monitoring
+  labels: # Prometheus has a "ruleSelector" that "matchLabels" with "release: kube-prometheus-stack".
+    release: kube-prometheus-stack
+
+spec:
+  groups:
+    - name: alertmanager-test-004
+      rules:
+        - alert: AlertmanagerTest
+          expr: vector(1) # Makes the alert always fire as it evaluates as 1.
+          for: 4m # Expression must remain active/pending for 1 minute before being marked as FIRING.
+          labels:
+            severity: warning
+            namespace: monitoring # NOTE: REQUIRED! Must match the AlertmanagerConfig that will try to get this rule.
+            meow: :3
+            random: '004'
+          annotations:
+            summary: Alertmanager test 004
+            description: This is a test alert. Be afraid!
+---
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+
+metadata:
+  name: alertmanager-test-005
+  namespace: monitoring
+  labels: # Prometheus has a "ruleSelector" that "matchLabels" with "release: kube-prometheus-stack".
+    release: kube-prometheus-stack
+
+spec:
+  groups:
+    - name: alertmanager-test-005
+      rules:
+        - alert: AlertmanagerTest
+          expr: vector(1) # Makes the alert always fire as it evaluates as 1.
+          for: 5m # Expression must remain active/pending for 1 minute before being marked as FIRING.
+          labels:
+            severity: warning
+            namespace: monitoring # NOTE: REQUIRED! Must match the AlertmanagerConfig that will try to get this rule.
+            meow: :3
+            random: '005'
+          annotations:
+            summary: Alertmanager test 005
+            description: This is a test alert. Be afraid!
+---
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+
+metadata:
+  name: alertmanager-test-006
+  namespace: monitoring
+  labels: # Prometheus has a "ruleSelector" that "matchLabels" with "release: kube-prometheus-stack".
+    release: kube-prometheus-stack
+
+spec:
+  groups:
+    - name: alertmanager-test-006
+      rules:
+        - alert: AlertmanagerTest
+          expr: vector(1) # Makes the alert always fire as it evaluates as 1.
+          for: 6m # Expression must remain active/pending for 1 minute before being marked as FIRING.
+          labels:
+            severity: warning
+            namespace: monitoring # NOTE: REQUIRED! Must match the AlertmanagerConfig that will try to get this rule.
+            meow: :3
+            random: '006'
+          annotations:
+            summary: Alertmanager test 006
+            description: This is a test alert. Be afraid!
+---
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+
+metadata:
+  name: alertmanager-test-007
+  namespace: monitoring
+  labels: # Prometheus has a "ruleSelector" that "matchLabels" with "release: kube-prometheus-stack".
+    release: kube-prometheus-stack
+
+spec:
+  groups:
+    - name: alertmanager-test-007
+      rules:
+        - alert: AlertmanagerTest
+          expr: vector(1) # Makes the alert always fire as it evaluates as 1.
+          for: 7m # Expression must remain active/pending for 1 minute before being marked as FIRING.
+          labels:
+            severity: warning
+            namespace: monitoring # NOTE: REQUIRED! Must match the AlertmanagerConfig that will try to get this rule.
+            meow: :3
+            random: '007'
+          annotations:
+            summary: Alertmanager test 007
+            description: This is a test alert. Be afraid!

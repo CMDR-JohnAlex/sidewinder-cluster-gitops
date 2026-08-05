@@ -1,0 +1,59 @@
+---
+apiVersion: monitoring.coreos.com/v1alpha1
+kind: AlertmanagerConfig
+
+metadata:
+  name: testing
+  namespace: kube-system
+
+spec:
+  route:
+    receiver: testing
+    # matchers:
+    #   - name: alertname
+    #     matchType: "="
+    #     value: AlertmanagerTest
+
+    groupBy:
+      - alertname
+      - namespace
+
+    groupWait: 5s
+    groupInterval: 5m
+    repeatInterval: 10m
+
+  receivers:
+    - name: testing
+      webhookConfigs:
+        - url: http://192.168.0.7:8000 # Temporary testing URL!
+          sendResolved: true
+
+---
+apiVersion: monitoring.coreos.com/v1alpha1
+kind: AlertmanagerConfig
+
+metadata:
+  name: testing
+  namespace: monitoring
+
+spec:
+  route:
+    receiver: testing
+    # matchers:
+    #   - name: alertname
+    #     matchType: "="
+    #     value: AlertmanagerTest
+
+    groupBy:
+      - alertname
+      - namespace
+
+    groupWait: 5s
+    groupInterval: 5m
+    repeatInterval: 10m
+
+  receivers:
+    - name: testing
+      webhookConfigs:
+        - url: http://192.168.0.7:8000 # Temporary testing URL!
+          sendResolved: true
