@@ -1,0 +1,25 @@
+# WARN: DO NOT PUT SECRETS HERE!!!
+# Secrets belong in the ntfy-sealedsecret.yaml are applied as env vars.
+---
+# Server
+base-url: "https://ntfy.sidewinder.lan"
+behind-proxy: true
+
+# Access control
+auth-file: "/var/lib/ntfy/auth.db"
+auth-default-access: "deny-all"
+# auth-users: # SECRETS
+# auth-access: # SECRETS
+# auth-tokens: # SECRETS
+enable-login: true
+require-login: true
+
+# Attachments
+attachment-cache-dir: "/var/cache/ntfy/attachments"
+attachment-file-size-limit: "15M"
+attachment-total-size-limit: "5G"
+attachment-expiry-duration: "7d"
+
+# Message cache
+cache-file: "/var/cache/ntfy/cache.db"
+cache-duration: "7d"

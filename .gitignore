@@ -1,1 +1,5 @@
 .vscode/
+
+# Contains information related to any sealedsecrets in the same directory as it.
+# A "just-in-case" I can't unencrypt my sealedsecrets and my cluster is gone.
+*.shh
