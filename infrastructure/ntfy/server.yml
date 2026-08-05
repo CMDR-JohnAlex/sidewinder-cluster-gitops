@@ -18,8 +18,8 @@ require-login: true
 attachment-cache-dir: "/var/cache/ntfy/attachments"
 attachment-file-size-limit: "15M"
 attachment-total-size-limit: "5G"
-attachment-expiry-duration: "168h"
+attachment-expiry-duration: "7d"
 
 # Message cache
 cache-file: "/var/cache/ntfy/cache.db"
-cache-duration: "168h"
+cache-duration: "7d"
