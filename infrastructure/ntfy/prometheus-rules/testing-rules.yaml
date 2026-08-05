@@ -12,7 +12,7 @@ spec:
   groups:
     - name: alertmanager-test-001
       rules:
-        - alert: AlertmanagerTest
+        - alert: AlertmanagerTest-001
           expr: vector(1) # Makes the alert always fire as it evaluates as 1.
           for: 1m # Expression must remain active/pending for 1 minute before being marked as FIRING.
           labels:
@@ -37,7 +37,7 @@ spec:
   groups:
     - name: alertmanager-test-002
       rules:
-        - alert: AlertmanagerTest
+        - alert: AlertmanagerTest-002
           expr: vector(1) # Makes the alert always fire as it evaluates as 1.
           for: 2m # Expression must remain active/pending for 1 minute before being marked as FIRING.
           labels:
@@ -62,7 +62,7 @@ spec:
   groups:
     - name: alertmanager-test-003
       rules:
-        - alert: AlertmanagerTest
+        - alert: AlertmanagerTest-003
           expr: vector(1) # Makes the alert always fire as it evaluates as 1.
           for: 3m # Expression must remain active/pending for 1 minute before being marked as FIRING.
           labels:
@@ -87,7 +87,7 @@ spec:
   groups:
     - name: alertmanager-test-004
       rules:
-        - alert: AlertmanagerTest
+        - alert: AlertmanagerTest-004
           expr: vector(1) # Makes the alert always fire as it evaluates as 1.
           for: 4m # Expression must remain active/pending for 1 minute before being marked as FIRING.
           labels:
@@ -112,7 +112,7 @@ spec:
   groups:
     - name: alertmanager-test-005
       rules:
-        - alert: AlertmanagerTest
+        - alert: AlertmanagerTest-005
           expr: vector(1) # Makes the alert always fire as it evaluates as 1.
           for: 5m # Expression must remain active/pending for 1 minute before being marked as FIRING.
           labels:
@@ -137,7 +137,7 @@ spec:
   groups:
     - name: alertmanager-test-006
       rules:
-        - alert: AlertmanagerTest
+        - alert: AlertmanagerTest-006
           expr: vector(1) # Makes the alert always fire as it evaluates as 1.
           for: 6m # Expression must remain active/pending for 1 minute before being marked as FIRING.
           labels:
@@ -162,7 +162,7 @@ spec:
   groups:
     - name: alertmanager-test-007
       rules:
-        - alert: AlertmanagerTest
+        - alert: AlertmanagerTest-007
           expr: vector(1) # Makes the alert always fire as it evaluates as 1.
           for: 7m # Expression must remain active/pending for 1 minute before being marked as FIRING.
           labels:
