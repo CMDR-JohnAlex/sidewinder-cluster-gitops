@@ -21,7 +21,7 @@ spec:
   receivers:
     - name: alertmanager-webhook-ntfy
       webhookConfigs:
-        - url: http://alertmanager-webhook-ntfy-svc.monitoring.svc.cluster.local:8080/alertmanager
+        - url: http://alertmanager-webhook-ntfy-svc.monitoring.svc.cluster.local:80/alertmanager
           sendResolved: true
 
 ---
@@ -47,5 +47,5 @@ spec:
   receivers:
     - name: alertmanager-webhook-ntfy
       webhookConfigs:
-        - url: http://alertmanager-webhook-ntfy-svc.monitoring.svc.cluster.local:8080/alertmanager
+        - url: http://alertmanager-webhook-ntfy-svc.monitoring.svc.cluster.local:80/alertmanager
           sendResolved: true
