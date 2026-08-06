@@ -18,9 +18,9 @@ spec:
       - alertname
       - namespace
 
-    groupWait: 5s
-    groupInterval: 2m
-    repeatInterval: 5m
+    groupWait: 10s
+    groupInterval: 5m
+    repeatInterval: 12m
 
   receivers:
     - name: testing
@@ -48,9 +48,9 @@ spec:
       - alertname
       - namespace
 
-    groupWait: 5s
-    groupInterval: 2m
-    repeatInterval: 5m
+    groupWait: 10s
+    groupInterval: 5m
+    repeatInterval: 12m
 
   receivers:
     - name: testing
