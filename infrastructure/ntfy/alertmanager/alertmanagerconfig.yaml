@@ -19,8 +19,8 @@ spec:
       - namespace
 
     groupWait: 5s
-    groupInterval: 5m
-    repeatInterval: 10m
+    groupInterval: 2m
+    repeatInterval: 5m
 
   receivers:
     - name: testing
@@ -49,8 +49,8 @@ spec:
       - namespace
 
     groupWait: 5s
-    groupInterval: 5m
-    repeatInterval: 10m
+    groupInterval: 2m
+    repeatInterval: 5m
 
   receivers:
     - name: testing
