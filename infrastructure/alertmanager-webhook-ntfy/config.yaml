@@ -1,3 +1,5 @@
+ntfy-url: "http://ntfy-svc.monitoring.svc.cluster.local"
+insecure: True
 defaults:
   topic: "k8s-general"
   firing:
