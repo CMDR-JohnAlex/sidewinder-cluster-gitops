@@ -10,7 +10,7 @@ resources:
 
   - ntfy-sealedsecret.yaml # Contains secrets that are not present in the config map.
 
-  - prometheus-rules/testing-rules.yaml
+  # - prometheus-rules/testing-rules.yaml
   - alertmanager/alertmanagerconfig.yaml
 
 configMapGenerator:
