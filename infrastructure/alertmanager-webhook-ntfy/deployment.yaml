@@ -1,0 +1,42 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: alertmanager-webhook-ntfy-deployment
+  labels:
+    app: alertmanager-webhook-ntfy-deployment
+spec:
+  revisionHistoryLimit: 1
+  replicas: 1
+  selector:
+    matchLabels:
+      app: alertmanager-webhook-ntfy-pod
+  template:
+    metadata:
+      labels:
+        app: alertmanager-webhook-ntfy-pod
+    spec:
+      containers:
+        - name: alertmanager-webhook-ntfy
+          image: ghcr.io/cmdr-johnalex/alertmanager-webhook-ntfy:latest
+          envFrom:
+            - secretRef:
+                name: alertmanager-webhook-ntfy-env-secrets
+          ports:
+            - containerPort: 8080
+              name: http-webhook
+          # resources:
+          #   limits:
+          #     memory: 300Mi
+          #     cpu:  200m
+          #   requests:
+          #         cpu: 150m
+          #         memory: 150Mi
+          volumeMounts:
+            - mountPath: /usr/src/app/config.yaml
+              subPath: config.yaml
+              name: config-volume
+      volumes:
+        - name: config-volume
+          configMap:
+            name: routing-config

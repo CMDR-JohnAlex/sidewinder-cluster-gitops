@@ -1,0 +1,232 @@
+defaults:
+  topic: "k8s-general"
+  firing:
+    priority: 3
+    emoji: "warning"
+    title: "[FIRING] {commonLabels.alertname}"
+    body: |
+      {commonAnnotations.summary}
+
+      {commonAnnotations.description}
+  resolved:
+    priority: 2
+    emoji: "white_check_mark"
+    title: "[RESOLVED] {commonLabels.alertname}"
+    body: |
+      {commonAnnotations.summary}
+
+      {commonAnnotations.description}
+
+rules:
+  - name: "Display namespace if it exists"
+    match:
+      labels:
+        namespace: "*"
+    apply:
+      bodyAddition:
+        - "Namespace: {commonLabels.namespace}"
+
+  - name: "Display severity if it exists"
+    match:
+      labels:
+        severity: "*"
+    apply:
+      bodyAddition:
+        - "Severity: {commonLabels.severity}"
+
+  - name: "Display notification reason if it exists"
+    match:
+      notificationReason: "*"
+    apply:
+      bodyAddition:
+        - "Notification Reason: {notification_reason}"
+
+  - name: "Display the number if truncated alerts if it exists"
+    match:
+      truncatedAlerts: "*"
+    apply:
+      bodyAddition:
+        - "Truncated Alerts: {truncatedAlerts}"
+
+  - name: "Label matching rule example"
+    match:
+      labels:
+        FMOK: "*"
+    apply:
+      emoji: "corn,evergreen_tree,rice_ball,croissant"
+
+  # ==========================================
+  # 1. k8s-observability
+  # ==========================================
+  - name: "Observability - Alertmanager"
+    match: { alertname: "Alertmanager*" }
+    apply: { topic: "k8s-observability" }
+
+  - name: "Observability - Prometheus"
+    match: { alertname: "Prometheus*" }
+    apply: { topic: "k8s-observability" }
+
+  - name: "Observability - KubeStateMetrics"
+    match: { alertname: "KubeStateMetrics*" }
+    apply: { topic: "k8s-observability" }
+
+  - name: "Observability - Config Reloader"
+    match: { alertname: "ConfigReloader*" }
+    apply: { topic: "k8s-observability" }
+
+  - name: "Observability - TargetDown"
+    match: { alertname: "TargetDown" }
+    apply: { topic: "k8s-observability" }
+
+  - name: "Observability - Watchdog"
+    match: { alertname: "Watchdog" }
+    apply: { topic: "k8s-observability", priority: 1, emoji: "dog" }
+
+  - name: "Observability - InfoInhibitor"
+    match: { alertname: "InfoInhibitor" }
+    apply: { topic: "k8s-observability" }
+
+  # ==========================================
+  # 2. k8s-core
+  # ==========================================
+  - name: "Core - etcd"
+    match: { alertname: "etcd*" }
+    apply: { topic: "k8s-core" }
+
+  - name: "Core - API Server"
+    match: { alertname: "KubeAPI*" }
+    apply: { topic: "k8s-core" }
+
+  - name: "Core - Aggregated API"
+    match: { alertname: "KubeAggregatedAPI*" }
+    apply: { topic: "k8s-core" }
+
+  - name: "Core - Controller Manager"
+    match: { alertname: "KubeControllerManager*" }
+    apply: { topic: "k8s-core" }
+
+  - name: "Core - Scheduler"
+    match: { alertname: "KubeScheduler*" }
+    apply: { topic: "k8s-core" }
+
+  - name: "Core - Proxy"
+    match: { alertname: "KubeProxy*" }
+    apply: { topic: "k8s-core" }
+
+  - name: "Core - Node Status"
+    match: { alertname: "KubeNode*" }
+    apply: { topic: "k8s-core" }
+
+  - name: "Core - Kubelet"
+    match: { alertname: "Kubelet*" }
+    apply: { topic: "k8s-core" }
+
+  - name: "Core - Version Mismatch"
+    match: { alertname: "KubeVersionMismatch" }
+    apply: { topic: "k8s-core" }
+
+  - name: "Core - Client Errors"
+    match: { alertname: "KubeClientErrors" }
+    apply: { topic: "k8s-core" }
+
+  # ==========================================
+  # 3. k8s-metal
+  # ==========================================
+  - name: "Metal - Node Exporter"
+    match: { alertname: "Node*" }
+    apply: { topic: "k8s-metal" }
+
+  # ==========================================
+  # 4. k8s-workloads
+  # ==========================================
+  - name: "Workloads - Pods"
+    match: { alertname: "KubePod*" }
+    apply: { topic: "k8s-workloads" }
+
+  - name: "Workloads - Deployments"
+    match: { alertname: "KubeDeployment*" }
+    apply: { topic: "k8s-workloads" }
+
+  - name: "Workloads - StatefulSets"
+    match: { alertname: "KubeStatefulSet*" }
+    apply: { topic: "k8s-workloads" }
+
+  - name: "Workloads - DaemonSets"
+    match: { alertname: "KubeDaemonSet*" }
+    apply: { topic: "k8s-workloads" }
+
+  - name: "Workloads - Jobs"
+    match: { alertname: "KubeJob*" }
+    apply: { topic: "k8s-workloads" }
+
+  - name: "Workloads - HPA"
+    match: { alertname: "KubeHpa*" }
+    apply: { topic: "k8s-workloads" }
+
+  - name: "Workloads - Container Waiting"
+    match: { alertname: "KubeContainerWaiting" }
+    apply: { topic: "k8s-workloads" }
+
+  - name: "Workloads - PDB"
+    match: { alertname: "KubePdbNotEnoughHealthyPods" }
+    apply: { topic: "k8s-workloads" }
+
+  # ==========================================
+  # 5. k8s-capacity
+  # ==========================================
+  - name: "Capacity - CPU"
+    match: { alertname: "KubeCPU*" }
+    apply: { topic: "k8s-capacity" }
+
+  - name: "Capacity - Memory"
+    match: { alertname: "KubeMemory*" }
+    apply: { topic: "k8s-capacity" }
+
+  - name: "Capacity - Quota"
+    match: { alertname: "KubeQuota*" }
+    apply: { topic: "k8s-capacity" }
+
+  - name: "Capacity - CPU Throttling"
+    match: { alertname: "CPUThrottlingHigh" }
+    apply: { topic: "k8s-capacity" }
+
+  # ==========================================
+  # 6. k8s-storage
+  # ==========================================
+  - name: "Storage - Persistent Volumes"
+    match: { alertname: "KubePersistentVolume*" }
+    apply: { topic: "k8s-storage" }
+
+  # ==========================================
+  # 7. k8s-security
+  # ==========================================
+  # Because this is at the bottom, if a KubeletClientCertificateExpiration
+  # alert fires, it matches rule 2 (k8s-core), but then this rule overwrites
+  # it to k8s-security!
+  - name: "Security - Certificates"
+    match: { alertname: "*Certificate*" }
+    apply:
+      topic: "k8s-security"
+      priority: 4
+      emoji: "lock"
+
+  # ==========================================
+  # Global Severity Overrides
+  # ==========================================
+  - name: "Critical severity bumps priority"
+    match:
+      status: "firing"
+      labels:
+        severity: "critical"
+    apply:
+      priority: 5
+      emoji: "rotating_light,rotating_light,rotating_light"
+
+  - name: "Warning severity bumps priority"
+    match:
+      status: "firing"
+      labels:
+        severity: "warning"
+    apply:
+      priority: 4
+      emoji: "rotating_light,warning"

@@ -3,16 +3,12 @@ apiVersion: monitoring.coreos.com/v1alpha1
 kind: AlertmanagerConfig
 
 metadata:
-  name: testing
+  name: alertmanager-webhook-ntfy
   namespace: kube-system
 
 spec:
   route:
-    receiver: testing
-    # matchers:
-    #   - name: alertname
-    #     matchType: "="
-    #     value: AlertmanagerTest
+    receiver: alertmanager-webhook-ntfy
 
     groupBy:
       - alertname
@@ -23,9 +19,9 @@ spec:
     repeatInterval: 12m
 
   receivers:
-    - name: testing
+    - name: alertmanager-webhook-ntfy
       webhookConfigs:
-        - url: http://192.168.0.7:8000 # Temporary testing URL!
+        - url: http://alertmanager-webhook-ntfy-svc.monitoring.svc.cluster.local:8080/alertmanager
           sendResolved: true
 
 ---
@@ -33,16 +29,12 @@ apiVersion: monitoring.coreos.com/v1alpha1
 kind: AlertmanagerConfig
 
 metadata:
-  name: testing
+  name: alertmanager-webhook-ntfy
   namespace: monitoring
 
 spec:
   route:
-    receiver: testing
-    # matchers:
-    #   - name: alertname
-    #     matchType: "="
-    #     value: AlertmanagerTest
+    receiver: alertmanager-webhook-ntfy
 
     groupBy:
       - alertname
@@ -53,7 +45,7 @@ spec:
     repeatInterval: 12m
 
   receivers:
-    - name: testing
+    - name: alertmanager-webhook-ntfy
       webhookConfigs:
-        - url: http://192.168.0.7:8000 # Temporary testing URL!
+        - url: http://alertmanager-webhook-ntfy-svc.monitoring.svc.cluster.local:8080/alertmanager
           sendResolved: true
