@@ -28,7 +28,7 @@ spec:
 apiVersion: gateway.networking.k8s.io/v1
 kind: HTTPRoute
 metadata:
-  name: ntfy-http-to-https
+  name: ntfy-httproute2
 
 spec:
   parentRefs:
@@ -40,8 +40,32 @@ spec:
     - ntfy.sidewinder.lan
 
   rules:
-    - filters:
-        - type: RequestRedirect
-          requestRedirect:
-            scheme: https
-            statusCode: 301
+    - backendRefs:
+        - name: ntfy-svc # SVC name (internal IP:PORT).
+          port: 80
+      matches:
+        - path:
+            type: PathPrefix
+            value: /
+
+# ---
+# apiVersion: gateway.networking.k8s.io/v1
+# kind: HTTPRoute
+# metadata:
+#   name: ntfy-http-to-https
+#
+# spec:
+#   parentRefs:
+#     - name: primary-gateway
+#       namespace: envoy-gateway-system
+#       sectionName: http
+#
+#   hostnames:
+#     - ntfy.sidewinder.lan
+#
+#   rules:
+#     - filters:
+#         - type: RequestRedirect
+#           requestRedirect:
+#             scheme: https
+#             statusCode: 301
