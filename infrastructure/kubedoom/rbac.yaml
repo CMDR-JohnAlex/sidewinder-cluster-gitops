@@ -2,7 +2,7 @@
 apiVersion: v1
 kind: ServiceAccount
 metadata:
-  name: kubedoom
+  name: kubedoom-rbac
   # namespace: kubedoom
 
 # ---
@@ -54,7 +54,7 @@ metadata:
   namespace: envoy-gateway-system
 subjects:
 - kind: ServiceAccount
-  name: kubedoom
+  name: kubedoom-rbac
   namespace: kubedoom
 roleRef:
   apiGroup: rbac.authorization.k8s.io
@@ -79,7 +79,7 @@ metadata:
   namespace: metallb-system
 subjects:
 - kind: ServiceAccount
-  name: kubedoom
+  name: kubedoom-rbac
   namespace: kubedoom
 roleRef:
   apiGroup: rbac.authorization.k8s.io
@@ -104,7 +104,7 @@ metadata:
   namespace: argocd
 subjects:
 - kind: ServiceAccount
-  name: kubedoom
+  name: kubedoom-rbac
   namespace: kubedoom
 roleRef:
   apiGroup: rbac.authorization.k8s.io
@@ -129,7 +129,7 @@ metadata:
   namespace: monitoring
 subjects:
 - kind: ServiceAccount
-  name: kubedoom
+  name: kubedoom-rbac
   namespace: kubedoom
 roleRef:
   apiGroup: rbac.authorization.k8s.io
@@ -154,7 +154,7 @@ metadata:
   namespace: nginx
 subjects:
 - kind: ServiceAccount
-  name: kubedoom
+  name: kubedoom-rbac
   namespace: kubedoom
 roleRef:
   apiGroup: rbac.authorization.k8s.io
@@ -179,7 +179,7 @@ metadata:
   namespace: nginx-dev
 subjects:
 - kind: ServiceAccount
-  name: kubedoom
+  name: kubedoom-rbac
   namespace: kubedoom
 roleRef:
   apiGroup: rbac.authorization.k8s.io
@@ -204,7 +204,7 @@ metadata:
   namespace: nginx-prod
 subjects:
 - kind: ServiceAccount
-  name: kubedoom
+  name: kubedoom-rbac
   namespace: kubedoom
 roleRef:
   apiGroup: rbac.authorization.k8s.io
@@ -229,7 +229,7 @@ metadata:
   namespace: default
 subjects:
 - kind: ServiceAccount
-  name: kubedoom
+  name: kubedoom-rbac
   namespace: kubedoom
 roleRef:
   apiGroup: rbac.authorization.k8s.io
@@ -254,7 +254,7 @@ metadata:
   namespace: secrets
 subjects:
 - kind: ServiceAccount
-  name: kubedoom
+  name: kubedoom-rbac
   namespace: kubedoom
 roleRef:
   apiGroup: rbac.authorization.k8s.io
