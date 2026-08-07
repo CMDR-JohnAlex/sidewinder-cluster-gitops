@@ -43,3 +43,95 @@ spec:
           requestRedirect:
             scheme: https
             statusCode: 301
+
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: prometheus-httproute
+
+spec:
+  parentRefs:
+    - name: primary-gateway
+      namespace: envoy-gateway-system
+      sectionName: https
+
+  hostnames:
+    - prometheus.sidewinder.lan
+
+  rules:
+    - backendRefs:
+        - name: kube-prometheus-stack-prometheus # SVC name (internal IP:PORT).
+          port: 9090
+      matches:
+        - path:
+            type: PathPrefix
+            value: /
+
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: prometheus-http-to-https
+
+spec:
+  parentRefs:
+    - name: primary-gateway
+      namespace: envoy-gateway-system
+      sectionName: http
+
+  hostnames:
+    - prometheus.sidewinder.lan
+
+  rules:
+    - filters:
+        - type: RequestRedirect
+          requestRedirect:
+            scheme: https
+            statusCode: 301
+
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: alertmanager-httproute
+
+spec:
+  parentRefs:
+    - name: primary-gateway
+      namespace: envoy-gateway-system
+      sectionName: https
+
+  hostnames:
+    - alertmanager.sidewinder.lan
+
+  rules:
+    - backendRefs:
+        - name: kube-prometheus-stack-alertmanager # SVC name (internal IP:PORT).
+          port: 9093
+      matches:
+        - path:
+            type: PathPrefix
+            value: /
+
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: alertmanager-http-to-https
+
+spec:
+  parentRefs:
+    - name: primary-gateway
+      namespace: envoy-gateway-system
+      sectionName: http
+
+  hostnames:
+    - alertmanager.sidewinder.lan
+
+  rules:
+    - filters:
+        - type: RequestRedirect
+          requestRedirect:
+            scheme: https
+            statusCode: 301
