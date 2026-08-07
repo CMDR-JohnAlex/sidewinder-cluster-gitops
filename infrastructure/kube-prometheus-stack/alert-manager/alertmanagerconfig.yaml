@@ -11,10 +11,10 @@ metadata:
 spec:
   route:
     receiver: discord
-    # matchers:
-    #   - name: alertname
-    #     matchType: "="
-    #     value: AlertmanagerTest
+    matchers:
+      - name: alertname
+        matchType: "!="
+        value: InfoInhibitor
 
     groupBy:
       - alertname
@@ -47,10 +47,10 @@ metadata:
 spec:
   route:
     receiver: discord
-    # matchers:
-    #   - name: alertname
-    #     matchType: "="
-    #     value: AlertmanagerTest
+    matchers:
+      - name: alertname
+        matchType: "!="
+        value: InfoInhibitor
 
     groupBy:
       - alertname

@@ -9,6 +9,10 @@ metadata:
 spec:
   route:
     receiver: alertmanager-webhook-ntfy
+    matchers:
+      - name: alertname
+        matchType: "!="
+        value: InfoInhibitor
 
     groupBy:
       - alertname
@@ -35,6 +39,10 @@ metadata:
 spec:
   route:
     receiver: alertmanager-webhook-ntfy
+    matchers:
+      - name: alertname
+        matchType: "!="
+        value: InfoInhibitor
 
     groupBy:
       - alertname
