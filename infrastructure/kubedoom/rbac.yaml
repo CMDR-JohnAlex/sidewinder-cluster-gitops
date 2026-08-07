@@ -260,3 +260,26 @@ roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: Role
   name: kubedoom-pod-killer
+
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: kubedoom-global-viewer
+rules:
+- apiGroups: [""]
+  resources: ["pods"]
+  verbs: ["get", "list", "watch"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: kubedoom-global-viewer-binding
+subjects:
+- kind: ServiceAccount
+  name: kubedoom-rbac
+  namespace: kubedoom
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: kubedoom-global-viewer
