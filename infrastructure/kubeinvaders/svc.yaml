@@ -8,7 +8,7 @@ spec:
   selector:
     app: kubeinvaders-pod
   ports:
-    - name: kubeinvaders-http-out
+    - name: kinv-http-out
       protocol: TCP
       port: 80
-      targetPort:  kubeinvaders-http
+      targetPort:  kinv-http

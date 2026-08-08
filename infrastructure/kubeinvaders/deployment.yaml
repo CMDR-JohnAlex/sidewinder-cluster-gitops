@@ -24,7 +24,7 @@ spec:
               value: "envoy-gateway-system,monitoring,nginx,nginx-dev,nginx-prod,default,secrets"
           ports:
             - containerPort: 8080
-              name: kubeinvaders-http
+              name: kinv-http
           # resources:
           #   limits:
           #     memory: 0Mi
