@@ -1,0 +1,34 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kubeinvaders-deployment
+  labels:
+    app: kubeinvaders-deployment
+spec:
+  revisionHistoryLimit: 1
+  replicas: 1
+  selector:
+    matchLabels:
+      app: kubeinvaders-pod
+  template:
+    metadata:
+      labels:
+        app: kubeinvaders-pod
+    spec:
+      containers:
+        - name: kubeinvaders
+          image: docker.io/luckysideburn/kubeinvaders:latest
+          env:
+            - name: NAMESPACE
+              value: "envoy-gateway-system,monitoring,nginx,nginx-dev,nginx-prod,default,secrets"
+          ports:
+            - containerPort: 8080
+              name: kubeinvaders-http
+          # resources:
+          #   limits:
+          #     memory: 0Mi
+          #     cpu:  0m
+          #   requests:
+          #         cpu: 0m
+          #         memory: 0Mi
