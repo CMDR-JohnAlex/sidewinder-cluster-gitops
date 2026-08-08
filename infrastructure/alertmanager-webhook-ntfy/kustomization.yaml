@@ -6,7 +6,6 @@ resources:
   - deployment.yaml
   - svc.yaml
   - sealedsecret.yaml
-  - alertmanager/alertmanagerconfig.yaml
 
 configMapGenerator:
     - name: routing-config
