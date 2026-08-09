@@ -6,7 +6,7 @@ metadata:
     app: kubedoom-deployment
   name: kubedoom
 spec:
-  replicas: 1
+  replicas: 0
   selector:
     matchLabels:
       app: kubedoom-pod
