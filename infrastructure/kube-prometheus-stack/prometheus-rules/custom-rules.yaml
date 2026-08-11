@@ -19,7 +19,6 @@ spec:
             namespace: monitoring
             severity: critical
             category: observability
-            value: "{{ $value }}"
           annotations:
             summary: "Cluster alert storm detected: {{ $value }} warning alerts are currently firing!"
             description: "There are currently 3 or more warning-level alerts active simultaneously. Check your dashboards!"
