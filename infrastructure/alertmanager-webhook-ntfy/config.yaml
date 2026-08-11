@@ -213,6 +213,45 @@ rules:
       emoji: "lock"
 
   # ==========================================
+  # Requested Category Overrides
+  # ==========================================
+
+  - name: "Category Override - observability"
+    match: { category: "observability" }
+    apply:
+      topic: "k8s-observability"
+
+  - name: "Category Override - core"
+    match: { category: "core" }
+    apply:
+      topic: "k8s-core"
+
+  - name: "Category Override - metal"
+    match: { category: "metal" }
+    apply:
+      topic: "k8s-metal"
+
+  - name: "Category Override - workloads"
+    match: { category: "workloads" }
+    apply:
+      topic: "k8s-workloads"
+
+  - name: "Category Override - capacity"
+    match: { category: "capacity" }
+    apply:
+      topic: "k8s-capacity"
+
+  - name: "Category Override - storage"
+    match: { category: "storage" }
+    apply:
+      topic: "k8s-storage"
+
+  - name: "Category Override - security"
+    match: { category: "security" }
+    apply:
+      topic: "k8s-security"
+
+  # ==========================================
   # Global Severity Overrides
   # ==========================================
   - name: "Critical severity bumps priority"

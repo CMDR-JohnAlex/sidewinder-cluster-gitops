@@ -29,9 +29,9 @@ spec:
       path: infrastructure/kube-prometheus-stack/resources
 
     # Prometheus rules
-    # - repoURL: https://github.com/CMDR-JohnAlex/sidewinder-cluster-gitops.git
-    #   targetRevision: main
-    #   path: infrastructure/kube-prometheus-stack/prometheus-rules
+    - repoURL: https://github.com/CMDR-JohnAlex/sidewinder-cluster-gitops.git
+      targetRevision: main
+      path: infrastructure/kube-prometheus-stack/prometheus-rules
 
   destination:
     server: https://kubernetes.default.svc

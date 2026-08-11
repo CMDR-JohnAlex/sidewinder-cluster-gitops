@@ -1,0 +1,25 @@
+---
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+
+metadata:
+  name: warning-alert-storm-detector
+  namespace: monitoring
+  labels: # Prometheus has a "ruleSelector" that "matchLabels" with "release: kube-prometheus-stack".
+    release: kube-prometheus-stack
+
+spec:
+  groups:
+    - name: custom.rules
+      rules:
+        - alert: TooManyWarningAlerts
+          expr: sum(ALERTS{alertstate="firing", severity="warning"}) >= 3
+          for: 2m
+          labels:
+            namespace: monitoring
+            severity: critical
+            category: observability
+            value: "{{ $value }}"
+          annotations:
+            summary: "Cluster alert storm detected: {{ $value }} warning alerts are currently firing!"
+            description: "There are currently 3 or more warning-level alerts active simultaneously. Check your dashboards!"
