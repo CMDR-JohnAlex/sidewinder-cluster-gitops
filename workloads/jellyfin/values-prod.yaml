@@ -61,3 +61,17 @@ readinessProbe:
   periodSeconds: 30
   failureThreshold: 5
   timeoutSeconds: 10
+
+# TODO: Look into node labels and nodeSelector/nodeAffinity to better tell Kubernetes which node(s) to schedule workloads on.
+# Could have node labels for the device (such as "Rpi4B"/"Rpi5") or certain jobs/roles like "transcoder" if it is good at transcoding on the fly.
+# If I ever get into ML and AI stuff, a node label could be applied to nodes with good GPUs for it.
+affinity:
+  nodeAffinity:
+    preferredDuringSchedulingIgnoredDuringExecution:
+    - weight: 100
+      preference:
+        matchExpressions:
+        - key: kubernetes.io/hostname
+          operator: In
+          values:
+          - sidewinder-08
