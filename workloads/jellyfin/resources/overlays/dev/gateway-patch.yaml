@@ -9,6 +9,17 @@ spec:
   hostnames:
     - jellyfin.dev.sidewinder.lan
 
+# WARN: When updating to 3.3.0, see issue: https://github.com/jellyfin/jellyfin-helm/issues/133
+# TEMP: This is temporary until we update to 3.3.0
+  rules:
+    - backendRefs:
+        - name: jellyfin-dev # SVC name (internal IP:PORT).
+          port: 8096
+      matches:
+        - path:
+            type: PathPrefix
+            value: /
+
 ---
 apiVersion: gateway.networking.k8s.io/v1
 kind: HTTPRoute

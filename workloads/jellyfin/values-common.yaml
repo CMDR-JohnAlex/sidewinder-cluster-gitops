@@ -112,7 +112,7 @@ service:
   port: 8096
   # -- Name of the port in the service.
   # portName: service
-  portName: jellyfin-svc
+  portName: jellyfin-svc # WARN: When updating to 3.3.0, see issue: https://github.com/jellyfin/jellyfin-helm/issues/133
   # -- Annotations for the service.
   annotations: {}
   # -- Labels for the service.
