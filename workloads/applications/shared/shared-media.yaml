@@ -1,0 +1,40 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+
+metadata:
+  name: shared-media-resources
+  namespace: argocd
+
+spec:
+  project: workloads
+
+  sources: # TODO: Probably should be using the overlay things here like we have been elsewhere. To keep things consistent.
+           # I don't know if all this base & overlay work is worth it to be able to spin up a dev and prod instance of an app.
+           # I am at least reconsidering how the files are structured here in git.
+           # But regardless, my hardware won't allow me to run much. I may just be leaving dev instances with zero replicas to
+           # turn them off to save resources. But is it worth keeping this functionality so that I can easily spin up a dev
+           # instance of something, break it as much as I want while trying things out, *and then* moving those changes to prod?
+           # Probably, hopefully.
+    # Kustomize - prod
+    - repoURL: https://github.com/CMDR-JohnAlex/sidewinder-cluster-gitops.git
+      targetRevision: main
+      path: workloads/shared/media/prod
+
+    # Kustomize - dev
+    - repoURL: https://github.com/CMDR-JohnAlex/sidewinder-cluster-gitops.git
+      targetRevision: main
+      path: workloads/shared/media/dev
+
+  destination:
+    server: https://kubernetes.default.svc
+    # namespace: shared
+
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+
+    syncOptions:
+      - ServerSideApply=true
+      - CreateNamespace=true

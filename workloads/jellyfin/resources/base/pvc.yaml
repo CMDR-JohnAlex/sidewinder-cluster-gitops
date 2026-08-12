@@ -1,0 +1,34 @@
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+
+metadata:
+  name: jellyfin-config
+
+spec:
+  accessModes:
+    - ReadWriteOnce
+
+  storageClassName: nfs-client
+
+  resources:
+    requests:
+      storage: 5Mi
+
+# NOTE: Needs to be enabled in helm chart values if we really wanted to persist the cache.
+# ---
+# apiVersion: v1
+# kind: PersistentVolumeClaim
+
+# metadata:
+#   name: jellyfin-cache
+
+# spec:
+#   accessModes:
+#     - ReadWriteOnce
+
+#   storageClassName: nfs-client
+
+#   resources:
+#     requests:
+#       storage: 4Ki
