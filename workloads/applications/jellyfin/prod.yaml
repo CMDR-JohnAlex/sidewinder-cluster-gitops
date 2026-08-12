@@ -13,7 +13,7 @@ spec:
     # Helm chart
     - repoURL: https://jellyfin.github.io/jellyfin-helm
       chart: jellyfin
-      targetRevision: 3.3.0
+      targetRevision: 3.2.0
       helm:
         valueFiles:
           - $values/workloads/jellyfin/values-common.yaml
@@ -31,7 +31,7 @@ spec:
 
   destination:
     server: https://kubernetes.default.svc
-    namespace: jellyfin-prod
+    namespace: media-prod
 
   syncPolicy:
     automated:
