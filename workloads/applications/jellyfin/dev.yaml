@@ -17,7 +17,7 @@ spec:
       helm:
         valueFiles:
           - $values/workloads/jellyfin/values-common.yaml
-          - $values/workloads/jellyfin/values/dev.yaml
+          - $values/workloads/jellyfin/values-dev.yaml
 
     # Values repository
     - repoURL: https://github.com/CMDR-JohnAlex/sidewinder-cluster-gitops.git
