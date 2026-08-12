@@ -9,17 +9,23 @@ resources: {}
   #   cpu: 100m
   #   memory: 128Mi
 
+# ---
+# REF: https://kubernetes.io/docs/concepts/workloads/pods/probes/
+# ---
+
 # -- Configure startup probe for Jellyfin.
 # This probe gives Jellyfin enough time to start, especially with large media libraries.
 # After the startup probe succeeds once, liveness and readiness probes take over.
 startupProbe:
-  tcpSocket:
+  httpGet:
+    path: /health
     port: http
   initialDelaySeconds: 0
   periodSeconds: 10
-  failureThreshold: 30
-  # With these defaults, Jellyfin has up to 5 minutes (30 * 10s) to start.
-  # Adjust failureThreshold if you have very large media libraries or slow storage.
+  failureThreshold: 60
+  timeoutSeconds: 5
+  # 10 minutes (failureThreshold=60 * periodSeconds=10) to start.
+  # 5 seconds to reply.
 
 # -- Configure liveness probe for Jellyfin.
 # This probe is disabled during startup (startup probe handles initial checks).
@@ -29,20 +35,29 @@ livenessProbe:
     path: /health
     port: http
   initialDelaySeconds: 10
-  # successThreshold: 1
-  # failureThreshold: 3
-  # timeoutSeconds: 1
-  # periodSeconds: 10
+  periodSeconds: 30
+  failureThreshold: 5
+  # So if Jellyfin fails to reply to 5 requests in a row, it gets killed.
+  # That means 2.5 minutes (30s * 5s) of appearing dead before it gets restarted.
+  timeoutSeconds: 10
+  # Things are slow with this cluster and when Jellyfin is busy, things get even slower. Thus, timeout is increased.
 
 # -- Configure readiness probe for Jellyfin.
 # This probe is disabled during startup (startup probe handles initial checks).
 # Uses httpGet for compatibility with both IPv4 and IPv6.
+
+# > "To start sending traffic to a Pod only when a probe succeeds, specify a readiness probe.
+# > The readiness probe might be the same as the liveness probe, but the existence of the readiness
+# > probe in the spec means that the Pod will start without receiving any traffic and only start
+# > receiving traffic after the probe starts succeeding."
+
+# I've just set it to be the same as the liveness probe. I don't have and can't have replicas
+# for this deployment, so this doesn't have much of a use. Right?
 readinessProbe:
   httpGet:
     path: /health
     port: http
   initialDelaySeconds: 10
-  # successThreshold: 1
-  # failureThreshold: 3
-  # timeoutSeconds: 1
-  # periodSeconds: 10
+  periodSeconds: 30
+  failureThreshold: 5
+  timeoutSeconds: 10
