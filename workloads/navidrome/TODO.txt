@@ -1,0 +1,4 @@
+* Switch the navidrome.toml file to a yaml file. I like yaml more.
+* Setup the probes: https://kubernetes.io/docs/concepts/workloads/pods/probes/
+* https://www.navidrome.org/docs/usage/integration/monitoring/
+* https://www.navidrome.org/docs/usage/integration/authentication/

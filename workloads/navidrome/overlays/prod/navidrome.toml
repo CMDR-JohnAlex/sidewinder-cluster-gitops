@@ -1,0 +1,16 @@
+# https://www.navidrome.org/docs/usage/configuration/options/
+LogLevel = 'info'
+UIWelcomeMessage = 'meow'
+Scanner.Enabled = true
+Scanner.Schedule = '@every 24h'
+TranscodingCacheSize = '150MiB'
+MusicFolder = '/music'
+DataFolder = '/data'
+CacheFolder = '/cache'
+BaseUrl = 'https://navidrome.sidewinder.lan'
+AutoImportPlaylists = true
+DefaultPlaylistPublicVisibility = false
+DefaultTheme = 'Dark'
+DefaultLanguage = 'en'
+Prometheus.Enabled = false
+Prometheus.MetricsPath = '/metrics'

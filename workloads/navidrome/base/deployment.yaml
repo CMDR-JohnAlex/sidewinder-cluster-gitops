@@ -1,0 +1,82 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: navidrome-deployment
+  labels:
+    app: navidrome-deployment
+
+spec:
+  replicas: 1
+  revisionHistoryLimit: 1
+
+  selector:
+    matchLabels:
+      app: navidrome-pod
+
+  template:
+    metadata:
+      labels:
+        app: navidrome-pod
+
+    spec:
+      containers:
+        - name: navidrome
+          image: deluan/navidrome:latest
+
+          # env:
+          #   - name: KEY
+          #     value: 'VALUE'
+
+          ports:
+            - containerPort: 4533
+              name: navidrome-http
+
+          # resources:
+          #   limits:
+          #     memory: 0Mi
+          #     cpu:  0m
+          #   requests:
+          #         cpu: 0m
+          #         memory: 0Mi
+
+          # startupProbe:
+          #   httpGet:
+          #     path: /healthz
+          #     port: 4533
+          #
+          # livenessProbe:
+          #   httpGet:
+          #     path: /healthz
+          #     port: 4533
+          #
+          # readinessProbe:
+          #   httpGet:
+          #     path: /healthz
+          #     port: 4533
+
+          volumeMounts:
+            - name: navidrome-data
+              mountPath: /data
+
+            - name: navidrome-media
+              mountPath: /media
+
+            - mountPath: /navidrome.toml
+              subPath: navidrome.toml
+              name: config-volume
+
+      volumes:
+        - name: navidrome-data
+          persistentVolumeClaim:
+            claimName: navidrome-data
+
+        - name: navidrome-media
+          persistentVolumeClaim:
+            claimName: media
+            readOnly: true
+
+        - name: config-volume
+          configMap:
+            name: navidrome-toml

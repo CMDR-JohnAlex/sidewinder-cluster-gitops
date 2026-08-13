@@ -1,0 +1,18 @@
+---
+apiVersion: v1
+kind: Service
+
+metadata:
+  name: navidrome-svc
+
+spec:
+  type: ClusterIP
+
+  selector:
+    app: navidrome
+
+  ports:
+    - name: navidrome-http
+      protocol: TCP
+      port: 80
+      targetPort: navidrome-http

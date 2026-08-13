@@ -1,0 +1,10 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: navidrome-deployment
+
+spec:
+  replicas: 1
+  revisionHistoryLimit: 1

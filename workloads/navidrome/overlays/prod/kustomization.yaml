@@ -1,0 +1,22 @@
+---
+# https://kubernetes.io/docs/tasks/manage-kubernetes-objects/kustomization/#bases-and-overlays
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+# namespace: media-prod
+
+resources:
+  - ../../base
+
+patches:
+  - path: deployment-patch.yaml
+  # - path: pvc-patch.yaml
+  - path: gateway-patch.yaml
+
+configMapGenerator:
+    - name: navidrome-toml
+      files:
+        - navidrome.toml
+
+commonLabels:
+  instance: prod

@@ -1,0 +1,21 @@
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+
+metadata:
+  name: navidrome-https
+
+spec:
+  hostnames:
+    - navidrome.dev.sidewinder.lan
+
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+
+metadata:
+  name: navidrome-http
+
+spec:
+  hostnames:
+    - navidrome.dev.sidewinder.lan

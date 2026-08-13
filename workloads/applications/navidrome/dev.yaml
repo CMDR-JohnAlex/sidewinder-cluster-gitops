@@ -1,0 +1,29 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+
+metadata:
+  name: navidrome-dev
+  namespace: argocd
+
+spec:
+  project: workloads
+
+  sources:
+    # Kustomize
+    - repoURL: https://github.com/CMDR-JohnAlex/sidewinder-cluster-gitops.git
+      targetRevision: main
+      path: workloads/navidrome/overlays/dev
+
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: media-dev
+
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+
+    syncOptions:
+      - ServerSideApply=true
+      - CreateNamespace=true
