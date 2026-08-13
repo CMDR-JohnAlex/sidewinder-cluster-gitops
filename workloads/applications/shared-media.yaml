@@ -30,7 +30,7 @@ spec:
         # Kustomize
         - repoURL: https://github.com/CMDR-JohnAlex/sidewinder-cluster-gitops.git
           targetRevision: main
-          path: workloads/shared/media/kustomize/overlays/{{env}}
+          path: workloads/shared/media/kustomize/{{env}}
 
       destination:
         server: https://kubernetes.default.svc
