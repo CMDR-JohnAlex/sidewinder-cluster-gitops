@@ -18,8 +18,8 @@ spec:
       targetRevision: 3.2.0 # WARN: When updating to 3.3.0, see issue: https://github.com/jellyfin/jellyfin-helm/issues/133
       helm:
         valueFiles:
-          - $values/workloads/jellyfin/values-common.yaml
-          - $values/workloads/jellyfin/values-prod.yaml
+          - $values/workloads/jellyfin/helm/values-common.yaml
+          - $values/workloads/jellyfin/helm/values-prod.yaml
 
     # Values repository
     - repoURL: https://github.com/CMDR-JohnAlex/sidewinder-cluster-gitops.git
