@@ -9,7 +9,7 @@ spec:
   type: ClusterIP
 
   selector:
-    app: navidrome
+    app: navidrome-pod
 
   ports:
     - name: navidrome-http
