@@ -17,5 +17,8 @@ configMapGenerator:
       files:
         - default.conf
 
-commonLabels:
-  instance: dev
+labels:
+  - pairs:
+      instance: dev
+    includeSelectors: false
+    includeTemplates: true

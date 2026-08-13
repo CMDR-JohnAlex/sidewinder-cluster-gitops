@@ -11,5 +11,8 @@ patches:
   - path: pvc-patch.yaml
   - path: gateway-patch.yaml
 
-commonLabels:
-  instance: prod
+labels:
+  - pairs:
+      instance: prod
+    includeSelectors: false
+    includeTemplates: true

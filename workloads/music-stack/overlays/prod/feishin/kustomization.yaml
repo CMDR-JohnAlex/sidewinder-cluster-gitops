@@ -5,11 +5,14 @@ kind: Kustomization
 # namespace: media-prod
 
 resources:
-  - ../../base
+  - ../../../base/feishin
 
 patches:
   - path: deployment-patch.yaml
   - path: gateway-patch.yaml
 
-commonLabels:
-  instance: prod
+labels:
+  - pairs:
+      instance: prod
+    includeSelectors: false
+    includeTemplates: true

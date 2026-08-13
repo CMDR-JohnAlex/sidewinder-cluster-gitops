@@ -6,7 +6,7 @@ kind: Kustomization
 # namespace: media-dev
 
 resources:
-  - ../../base
+  - ../../../base/navidrome
 
 patches:
   - path: deployment-patch.yaml
@@ -18,5 +18,8 @@ configMapGenerator:
       files:
         - navidrome.toml
 
-commonLabels:
-  instance: dev
+labels:
+  - pairs:
+      instance: dev
+    includeSelectors: false
+    includeTemplates: true
