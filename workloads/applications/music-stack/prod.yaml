@@ -3,7 +3,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 
 metadata:
-  name: navidrome-dev
+  name: music-stack-prod
   namespace: argocd
 
 spec:
@@ -13,11 +13,11 @@ spec:
     # Kustomize
     - repoURL: https://github.com/CMDR-JohnAlex/sidewinder-cluster-gitops.git
       targetRevision: main
-      path: workloads/navidrome/overlays/dev
+      path: workloads/music-stack/overlays/prod
 
   destination:
     server: https://kubernetes.default.svc
-    namespace: media-dev
+    namespace: media-prod
 
   syncPolicy:
     automated:

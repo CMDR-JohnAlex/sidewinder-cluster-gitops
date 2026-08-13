@@ -1,0 +1,70 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: feishin-deployment
+  labels:
+    app: feishin-deployment
+
+spec:
+  replicas: 1
+  revisionHistoryLimit: 1
+
+  selector:
+    matchLabels:
+      app: feishin-pod
+
+  template:
+    metadata:
+      labels:
+        app: feishin-pod
+
+    spec:
+      containers:
+        - name: feishin
+          image: ghcr.io/jeffvli/feishin:latest
+
+          env:
+            - name: SERVER_NAME
+              value: 'navidrome-base'
+            - name: SERVER_LOCK
+              value: 'false'
+            - name: SERVER_TYPE
+              value: 'navidrome'
+            - name: SERVER_URL
+              value: 'https://navidrome.invalid.example'
+            - name: REMOTE_URL
+              value: 'https://navidrome.invalid.example'
+            - name: LEGACY_AUTHENTICATION
+              value: 'false'
+            - name: ANALYTICS_DISABLED
+              value: 'true'
+            # APPLICATION ENV VARS: https://github.com/jeffvli/feishin/blob/development/docs/ENV_SETTINGS.md
+
+          ports:
+            - containerPort: 9180
+              name: feishin-http
+
+          # resources:
+          #   limits:
+          #     memory: 0Mi
+          #     cpu:  0m
+          #   requests:
+          #         cpu: 0m
+          #         memory: 0Mi
+
+          # startupProbe:
+          #   httpGet:
+          #     path: /healthz
+          #     port: 4533
+          #
+          # livenessProbe:
+          #   httpGet:
+          #     path: /healthz
+          #     port: 4533
+          #
+          # readinessProbe:
+          #   httpGet:
+          #     path: /healthz
+          #     port: 4533

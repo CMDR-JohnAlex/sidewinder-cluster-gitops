@@ -1,0 +1,24 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: feishin-deployment
+
+spec:
+  replicas: 1
+  revisionHistoryLimit: 1
+
+  template:
+    spec:
+      containers:
+        - name: feishin
+
+          env:
+            - name: SERVER_NAME
+              value: 'navidrome-prod'
+            - name: SERVER_URL
+              value: 'https://navidrome.sidewinder.lan'
+            - name: REMOTE_URL
+              value: 'https://navidrome.sidewinder.lan'
+            # APPLICATION ENV VARS: https://github.com/jeffvli/feishin/blob/development/docs/ENV_SETTINGS.md

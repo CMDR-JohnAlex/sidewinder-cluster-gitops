@@ -1,0 +1,18 @@
+---
+apiVersion: v1
+kind: Service
+
+metadata:
+  name: feishin-svc
+
+spec:
+  type: ClusterIP
+
+  selector:
+    app: feishin-pod
+
+  ports:
+    - name: feishin-http
+      protocol: TCP
+      port: 80
+      targetPort: feishin-http
