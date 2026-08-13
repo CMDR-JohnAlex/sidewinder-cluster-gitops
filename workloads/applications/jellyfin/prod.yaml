@@ -29,7 +29,7 @@ spec:
     # Extra resources - Kustomize
     - repoURL: https://github.com/CMDR-JohnAlex/sidewinder-cluster-gitops.git
       targetRevision: main
-      path: workloads/jellyfin/resources/overlays/prod
+      path: workloads/jellyfin/kustomize/overlays/prod
 
   destination:
     server: https://kubernetes.default.svc
