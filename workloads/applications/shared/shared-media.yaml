@@ -21,12 +21,12 @@ spec:
     # Kustomize - prod
     - repoURL: https://github.com/CMDR-JohnAlex/sidewinder-cluster-gitops.git
       targetRevision: main
-      path: workloads/shared/media/prod
+      path: workloads/shared/media/kustomize/prod
 
     # Kustomize - dev
     - repoURL: https://github.com/CMDR-JohnAlex/sidewinder-cluster-gitops.git
       targetRevision: main
-      path: workloads/shared/media/dev
+      path: workloads/shared/media/kustomize/dev
 
   destination:
     server: https://kubernetes.default.svc
