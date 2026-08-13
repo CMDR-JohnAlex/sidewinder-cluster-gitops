@@ -63,7 +63,7 @@ spec:
             - name: navidrome-media
               mountPath: /media
 
-            - mountPath: /navidrome.toml
+            - mountPath: /data/navidrome.toml
               subPath: navidrome.toml
               name: config-volume
 
