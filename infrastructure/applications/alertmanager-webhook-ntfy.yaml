@@ -15,7 +15,7 @@ spec:
     # Kustomize
     - repoURL: https://github.com/CMDR-JohnAlex/sidewinder-cluster-gitops.git
       targetRevision: main
-      path: infrastructure/alertmanager-webhook-ntfy
+      path: infrastructure/alertmanager-webhook-ntfy/kustomize
 
   destination:
     server: https://kubernetes.default.svc

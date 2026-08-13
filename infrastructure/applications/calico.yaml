@@ -18,7 +18,7 @@ spec:
       targetRevision: v3.32.1
       helm:
         valueFiles:
-          - $values/infrastructure/calico/values.yaml
+          - $values/infrastructure/calico/helm/values.yaml
 
     # Values repository
     - repoURL: https://github.com/CMDR-JohnAlex/sidewinder-cluster-gitops.git
@@ -28,7 +28,7 @@ spec:
     # Resources
     - repoURL: https://github.com/CMDR-JohnAlex/sidewinder-cluster-gitops.git
       targetRevision: main
-      path: infrastructure/calico/resources
+      path: infrastructure/calico/kustomize
 
   destination:
     server: https://kubernetes.default.svc

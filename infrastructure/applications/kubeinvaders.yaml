@@ -15,7 +15,7 @@ spec:
     # Kustomize
     - repoURL: https://github.com/CMDR-JohnAlex/sidewinder-cluster-gitops.git
       targetRevision: main
-      path: infrastructure/kubeinvaders
+      path: infrastructure/kubeinvaders/kustomize
 
   destination:
     server: https://kubernetes.default.svc

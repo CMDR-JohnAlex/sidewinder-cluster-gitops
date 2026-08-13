@@ -20,7 +20,7 @@ spec:
     # Resources
     - repoURL: https://github.com/CMDR-JohnAlex/sidewinder-cluster-gitops.git
       targetRevision: main
-      path: infrastructure/gateway/resources
+      path: infrastructure/gateway/kustomize
 
   destination:
     server: https://kubernetes.default.svc

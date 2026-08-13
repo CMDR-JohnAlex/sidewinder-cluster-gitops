@@ -18,7 +18,7 @@ spec:
       targetRevision: 88.0.1
       helm:
         valueFiles:
-          - $values/infrastructure/kube-prometheus-stack/values.yaml
+          - $values/infrastructure/kube-prometheus-stack/helm/values.yaml
 
     # Values repository
     - repoURL: https://github.com/CMDR-JohnAlex/sidewinder-cluster-gitops.git
@@ -28,12 +28,12 @@ spec:
     # Resources
     - repoURL: https://github.com/CMDR-JohnAlex/sidewinder-cluster-gitops.git
       targetRevision: main
-      path: infrastructure/kube-prometheus-stack/resources
+      path: infrastructure/kube-prometheus-stack/kustomize
 
     # Prometheus rules
     - repoURL: https://github.com/CMDR-JohnAlex/sidewinder-cluster-gitops.git
       targetRevision: main
-      path: infrastructure/kube-prometheus-stack/prometheus-rules
+      path: infrastructure/kube-prometheus-stack/kustomize/prometheus-rules
 
   destination:
     server: https://kubernetes.default.svc

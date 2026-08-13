@@ -17,7 +17,7 @@
 #     # Kustomize
 #     - repoURL: https://github.com/CMDR-JohnAlex/sidewinder-cluster-gitops.git
 #       targetRevision: main
-#       path: infrastructure/kubedoom
+#       path: infrastructure/kubedoom/kustomize
 
 #   destination:
 #     server: https://kubernetes.default.svc
