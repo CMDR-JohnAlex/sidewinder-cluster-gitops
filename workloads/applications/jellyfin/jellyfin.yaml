@@ -1,0 +1,62 @@
+---
+# https://argo-cd.readthedocs.io/en/stable/user-guide/application-set/
+# https://argo-cd.readthedocs.io/en/stable/operator-manual/applicationset/
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+
+metadata:
+  name: jellyfin
+  namespace: argocd
+
+spec:
+  generators:
+    - list:
+        elements:
+          - env: dev
+            namespace: media-dev
+            targetRevision: 3.2.0 # WARN: When updating to 3.3.0, see issue: https://github.com/jellyfin/jellyfin-helm/issues/133
+          - env: prod
+            namespace: media-prod
+            targetRevision: 3.2.0 # WARN: When updating to 3.3.0, see issue: https://github.com/jellyfin/jellyfin-helm/issues/133
+
+  template:
+    metadata:
+      name: 'jellyfin-{{env}}'
+      namespace: argocd
+      finalizers:
+        - resources-finalizer.argocd.argoproj.io
+
+    spec:
+      project: workloads
+      sources:
+        # Helm chart
+        - repoURL: https://jellyfin.github.io/jellyfin-helm
+          chart: jellyfin
+          targetRevision: '{{targetRevision}}'
+          helm:
+            valueFiles:
+              - $values/workloads/jellyfin/helm/values-common.yaml
+              - $values/workloads/jellyfin/helm/values-{{env}}.yaml
+
+        # Values repository
+        - repoURL: https://github.com/CMDR-JohnAlex/sidewinder-cluster-gitops.git
+          targetRevision: main
+          ref: values
+
+        # Kustomize
+        - repoURL: https://github.com/CMDR-JohnAlex/sidewinder-cluster-gitops.git
+          targetRevision: main
+          path: workloads/jellyfin/kustomize/overlays/{{env}}
+
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: '{{namespace}}'
+
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+
+        syncOptions:
+          - ServerSideApply=true
+          - CreateNamespace=true
