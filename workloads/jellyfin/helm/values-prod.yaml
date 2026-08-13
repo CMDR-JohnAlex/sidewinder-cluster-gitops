@@ -1,4 +1,6 @@
 ---
+# -- Number of Jellyfin replicas to start. Should be left at 1.
+replicaCount: 0
 
 # -- Resource requests and limits for the Jellyfin container.
 resources: {}
