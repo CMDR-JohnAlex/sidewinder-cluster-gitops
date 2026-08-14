@@ -1,0 +1,18 @@
+---
+apiVersion: v1
+kind: Service
+
+metadata:
+  name: mc-i-36f8a5b8-svc
+
+spec:
+  type: ClusterIP
+
+  selector:
+    app: mc-i_36f8a5b8-pod
+
+  ports:
+    - name: i-36f8a5b8-tcp
+      protocol: TCP
+      port: 25565
+      targetPort: i-36f8a5b8-tcp

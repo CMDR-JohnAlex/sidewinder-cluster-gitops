@@ -1,0 +1,45 @@
+---
+# https://argo-cd.readthedocs.io/en/stable/user-guide/application-set/
+# https://argo-cd.readthedocs.io/en/stable/operator-manual/applicationset/
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+
+metadata:
+  name: minecraft
+  namespace: argocd
+
+spec:
+  generators:
+    - git:
+        repoURL: https://github.com/CMDR-JohnAlex/sidewinder-cluster-gitops.git
+        revision: main
+        directories:
+          - path: workloads/minecraft/kustomize/*
+
+  template:
+    metadata:
+      name: 'minecraft-{{path.basename}}'
+      namespace: argocd
+      finalizers:
+        - resources-finalizer.argocd.argoproj.io
+
+    spec:
+      project: workloads
+      sources:
+        # Kustomize
+        - repoURL: https://github.com/CMDR-JohnAlex/sidewinder-cluster-gitops.git
+          targetRevision: main
+          path: '{{path}}'
+
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: 'minecraft'
+
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+
+        syncOptions:
+          - ServerSideApply=true
+          - CreateNamespace=true

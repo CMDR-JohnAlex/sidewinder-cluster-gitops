@@ -1,0 +1,162 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: mc-i-36f8a5b8-deployment
+  labels:
+    app: mc-i-36f8a5b8-deployment
+
+spec:
+  replicas: 1
+  revisionHistoryLimit: 1
+  # Kubernetes tries to spin up a new pod before terminating the old one.
+  # This will ensure the old pod lets go of the ReadWriteOnce PVC before the new one is created so that the new one can grab the PVC.
+  strategy:
+    type: Recreate
+
+  selector:
+    matchLabels:
+      app: mc-i-36f8a5b8-pod
+
+  template:
+    metadata:
+      labels:
+        app: mc-i-36f8a5b8-pod
+
+    spec:
+      initContainers:
+        - name: init-configs
+          image: busybox:latest
+          command:
+            - sh
+            - -c
+            - |
+              echo "Testing init container."
+              touch /data/test.txt
+
+            # NOTE: Copying the configuration files will be enabled after the files are initially created so that I can have a template to work off of.
+
+            # echo "Copying configuration files."
+            # mkdir -p /data/plugins/AuthMe
+            # mkdir -p /data/plugins/SkinsRestorer
+
+            # # Copy Purpur config to the root of the data folder
+            # cp /tmp/configs/purpur.yml /data/purpur.yml
+
+            # # Copy plugin configs into their respective plugin subdirectories
+            # cp /tmp/configs/authme-config.yml /data/plugins/AuthMe/config.yml
+            # cp /tmp/configs/skinsrestorer-config.yml /data/plugins/SkinsRestorer/config.yml
+
+            # echo "Configs successfully deployed!"
+
+          volumeMounts:
+            - name: mc-i-36f8a5b8-data
+              mountPath: /data
+
+            - name: mc-i-36f8a5b8-configs
+              mountPath: /tmp/configs
+
+      containers:
+        - name: mc-i-36f8a5b8
+          image: itzg/minecraft-server:latest
+
+          env:
+            - name: EULA
+              value: 'TRUE'
+            - name: TYPE
+              value: 'PURPUR'
+            - name: VERSION
+              value: 'LATEST'
+            - name: MEMORY
+              value: '2048M'
+            - name: MAX_PLAYERS
+              value: '7'
+            - name: MOTD
+              value: 'MOTD\\nLine 2'
+            - name: ICON
+              value: 'URL'
+            - name: OVERRIDE_ICON
+              value: 'true'
+            - name: ONLINE_MODE
+              value: 'false'
+            - name: USE_AIKAR_FLAGS
+              value: 'true'
+            - name: USE_SIMD_FLAGS
+              value: 'true'
+            - name: SEED
+              value: 'FMOK'
+            - name: SPAWN_PROTECTION
+              value: '0'
+            - name: ENABLE_WHITELIST
+              value: 'false'
+            - name: MODRINTH_PROJECTS
+              value: |-
+                https://modrinth.com/plugin/skinsrestorer
+                https://modrinth.com/plugin/authmereloaded
+              # https://modrinth.com/resourcepack/faithful-64x/gallery
+              # https://modrinth.com/resourcepack/enhanced-boss-bars
+              # https://modrinth.com/resourcepack/cubic-sun-moon
+              # https://modrinth.com/resourcepack/vvi
+              # https://modrinth.com/resourcepack/clean-connected-glass
+              # https://modrinth.com/resourcepack/glowing-glints
+            - name: MODRINTH_DOWNLOAD_DEPENDENCIES
+              value: 'required'
+            - name: BROADCAST_CONSOLE_TO_OPS
+              value: 'false'
+            - name: BROADCAST_RCON_TO_OPS
+              value: 'false'
+            - name: ANNOUNCE_PLAYER_ACHIEVEMENTS
+              value: 'true'
+            - name: LOG_TIMESTAMP
+              value: 'true'
+            # - name: JVM_XX_OPTS
+            #   value: >-
+            #     -XX:ABC
+
+          ports:
+            - containerPort: 25565
+              name: i-36f8a5b8-tcp
+
+          resources:
+            limits:
+              cpu:  2500m
+              memory: 3000Mi
+            requests:
+              cpu: 1000m
+              memory: 2000Mi
+
+          startupProbe:
+            exec:
+              command:
+                - mc-health
+            initialDelaySeconds: 30
+            periodSeconds: 10
+            failureThreshold: 20
+
+          livenessProbe:
+            exec:
+              command:
+                - mc-health
+            periodSeconds: 20
+            failureThreshold: 3
+
+          readinessProbe:
+            exec:
+              command:
+                - mc-health
+            periodSeconds: 10
+            failureThreshold: 3
+
+          volumeMounts:
+            - name: mc-i-36f8a5b8-data
+              mountPath: /data
+
+      volumes:
+        - name: mc-i-36f8a5b8-data
+          persistentVolumeClaim:
+            claimName: mc-i-36f8a5b8-data
+
+        - name: mc-i-36f8a5b8-configs
+          configMap:
+            name: mc-i-36f8a5b8-configs
