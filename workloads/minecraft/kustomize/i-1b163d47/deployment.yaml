@@ -92,8 +92,8 @@ spec:
               value: 'false'
             - name: MODRINTH_PROJECTS
               value: |-
-                https://modrinth.com/plugin/skinsrestorer
-                https://modrinth.com/plugin/authmereloaded
+                skinsrestorer
+                authmereloaded
               # https://modrinth.com/resourcepack/faithful-64x/gallery
               # https://modrinth.com/resourcepack/enhanced-boss-bars
               # https://modrinth.com/resourcepack/cubic-sun-moon
