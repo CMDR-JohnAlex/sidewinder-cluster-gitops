@@ -75,7 +75,7 @@ spec:
             - name: MOTD
               value: 'MOTD\\nLine 2'
             - name: ICON
-              value: 'URL'
+              value: '/icon/icon.png'
             - name: OVERRIDE_ICON
               value: 'true'
             - name: ONLINE_MODE
@@ -152,6 +152,10 @@ spec:
             - name: mc-i-36f8a5b8-data
               mountPath: /data
 
+            - name: mc-i-36f8a5b8-icon
+              subPath: emoji_u1f359.png
+              mountPath: /icon/icon.png
+
       volumes:
         - name: mc-i-36f8a5b8-data
           persistentVolumeClaim:
@@ -160,3 +164,7 @@ spec:
         - name: mc-i-36f8a5b8-configs
           configMap:
             name: mc-i-36f8a5b8-configs
+
+        - name: mc-i-36f8a5b8-icon
+          configMap:
+            name: mc-i-36f8a5b8-icon

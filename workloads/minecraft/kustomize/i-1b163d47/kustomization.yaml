@@ -15,3 +15,7 @@ configMapGenerator:
         - configs/purpur.yml
         - configs/authme-config.yml
         - configs/skinsrestorer-config.yml
+
+    - name: mc-i-36f8a5b8-icon
+      files:
+        - icon/emoji_u1f359.png
