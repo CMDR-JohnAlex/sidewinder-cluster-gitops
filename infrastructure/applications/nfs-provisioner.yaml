@@ -1,45 +1,59 @@
 ---
+# https://argo-cd.readthedocs.io/en/stable/user-guide/application-set/
+# https://argo-cd.readthedocs.io/en/stable/operator-manual/applicationset/
 apiVersion: argoproj.io/v1alpha1
-kind: Application
+kind: ApplicationSet
 
 metadata:
   name: nfs-provisioner
   namespace: argocd
-  finalizers:
-    - resources-finalizer.argocd.argoproj.io
 
 spec:
-  project: infrastructure
+  generators:
+    - git:
+        repoURL: https://github.com/CMDR-JohnAlex/sidewinder-cluster-gitops.git
+        revision: main
+        directories:
+          - path: infrastructure/nfs-provisioner/*
 
-  sources:
-    # Helm chart
-    # https://github.com/kubernetes-sigs/nfs-subdir-external-provisioner
-    - repoURL: https://kubernetes-sigs.github.io/nfs-subdir-external-provisioner
-      chart: nfs-subdir-external-provisioner
-      targetRevision: 4.0.18
-      helm:
-        valueFiles:
-          - $values/infrastructure/nfs-provisioner/helm/values.yaml
+  template:
+    metadata:
+      name: 'nfs-provisioner-{{path.basename}}'
+      namespace: argocd
+      finalizers:
+        - resources-finalizer.argocd.argoproj.io
 
-    # Values repository
-    - repoURL: https://github.com/CMDR-JohnAlex/sidewinder-cluster-gitops.git
-      targetRevision: main
-      ref: values
+    spec:
+      project: infrastructure
+      sources:
+        # Helm chart
+        # https://github.com/kubernetes-sigs/nfs-subdir-external-provisioner
+        - repoURL: https://kubernetes-sigs.github.io/nfs-subdir-external-provisioner
+          chart: nfs-subdir-external-provisioner
+          targetRevision: 4.0.18
+          helm:
+            valueFiles:
+              - $values/{{path}}/helm/values.yaml
 
-    # Resources
-    # - repoURL: https://github.com/CMDR-JohnAlex/sidewinder-cluster-gitops.git
-    #   targetRevision: main
-    #   path: infrastructure/nfs-provisioner/kustomize
+        # Values repository
+        - repoURL: https://github.com/CMDR-JohnAlex/sidewinder-cluster-gitops.git
+          targetRevision: main
+          ref: values
 
-  destination:
-    server: https://kubernetes.default.svc
-    namespace: nfs-provisioner
+        # Kustomize
+        # - repoURL: https://github.com/CMDR-JohnAlex/sidewinder-cluster-gitops.git
+        #   targetRevision: main
+        #   path: '{{path}}/kustomize'
 
-  syncPolicy:
-    automated:
-      prune: true
-      selfHeal: true
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: 'nfs-provisioner'
 
-    syncOptions:
-      - ServerSideApply=false
-      - CreateNamespace=true
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+
+        syncOptions:
+          - ServerSideApply=true
+          - CreateNamespace=true

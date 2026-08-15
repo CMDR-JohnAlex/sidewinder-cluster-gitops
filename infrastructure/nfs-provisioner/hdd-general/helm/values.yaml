@@ -11,9 +11,10 @@
 
 nfs:
   server: 192.168.7.7
-  path: /mnt/8dafdf36-cb0f-4102-a05e-d69ea5954303/sidewinder-nfs
+  path: /mnt/e9642e46-dd2e-4900-be52-4eb23e67cbf5/sidewinder-nfs
   mountOptions:
-  volumeName: nfs-subdir-external-provisioner-root
+    - nfsvers=4.2
+  volumeName: nfs-provisioner-hdd-general-root
   defaultMode: "777"
   defaultUid: "0"
   defaultGid: "0"
@@ -25,7 +26,7 @@ storageClass:
   create: true
 
   # Set a provisioner name. If unset, a name will be generated.
-  # provisionerName:
+  provisionerName: cluster.local/nfs-provisioner-hdd-general-root
 
   # Set StorageClass as the default StorageClass
   # Ignored if storageClass.create is false
@@ -33,7 +34,7 @@ storageClass:
 
   # Set a StorageClass name
   # Ignored if storageClass.create is false
-  name: nfs-client
+  name: hdd-general
 
   # Allow volume to be expanded dynamically
   # allowVolumeExpansion: true
