@@ -32,23 +32,18 @@ spec:
             - sh
             - -c
             - |
-              echo "Testing init container."
-              touch /data/test.txt
+              echo "Copying configuration files."
+              mkdir -p /data/plugins/AuthMe
+              mkdir -p /data/plugins/SkinsRestorer
 
-            # NOTE: Copying the configuration files will be enabled after the files are initially created so that I can have a template to work off of.
+              cp /tmp/configs/purpur.yml /data/purpur.yml
+              cp /tmp/configs/bukkit.yml /data/bukkit.yml
+              cp /tmp/configs/spigot.yml /data/spigot.yml
 
-            # echo "Copying configuration files."
-            # mkdir -p /data/plugins/AuthMe
-            # mkdir -p /data/plugins/SkinsRestorer
+              cp /tmp/configs/authme-config.yml /data/plugins/AuthMe/config.yml
+              cp /tmp/configs/skinsrestorer-config.yml /data/plugins/SkinsRestorer/config.yml
 
-            # # Copy Purpur config to the root of the data folder
-            # cp /tmp/configs/purpur.yml /data/purpur.yml
-
-            # # Copy plugin configs into their respective plugin subdirectories
-            # cp /tmp/configs/authme-config.yml /data/plugins/AuthMe/config.yml
-            # cp /tmp/configs/skinsrestorer-config.yml /data/plugins/SkinsRestorer/config.yml
-
-            # echo "Configs successfully deployed!"
+              echo "Configs successfully deployed!"
 
           volumeMounts:
             - name: mc-i-36f8a5b8-data
@@ -73,7 +68,7 @@ spec:
             - name: MAX_PLAYERS
               value: '7'
             - name: MOTD
-              value: 'MOTD\\nLine 2'
+              value: 'MOTD\nLine 2'
             - name: ICON
               value: '/icon/icon.png'
             - name: OVERRIDE_ICON
@@ -88,6 +83,11 @@ spec:
               value: 'FMOK'
             - name: SPAWN_PROTECTION
               value: '0'
+            - name: OPS
+              value: |-
+                CMDR_JohnAlex
+            - name: EXISTING_OPS_FILE
+              value: 'MERGE'
             - name: ENABLE_WHITELIST
               value: 'false'
             - name: MODRINTH_PROJECTS
