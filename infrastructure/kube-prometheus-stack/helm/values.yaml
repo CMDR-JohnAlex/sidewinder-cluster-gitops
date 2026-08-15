@@ -589,7 +589,7 @@ alertmanager:
       group_by: ['namespace', 'alertname']
       group_wait: 30s
       group_interval: 5m
-      repeat_interval: 12h
+      repeat_interval: 6h
 
       # Everything goes to this global receiver. Except for those routed elsewhere below.
       receiver: 'global-receivers'
