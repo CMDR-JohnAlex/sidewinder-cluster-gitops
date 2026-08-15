@@ -9,7 +9,7 @@ spec:
   accessModes:
     - ReadWriteMany
 
-  storageClassName: nfs-client
+  storageClassName: hdd-general
 
   resources:
     requests:

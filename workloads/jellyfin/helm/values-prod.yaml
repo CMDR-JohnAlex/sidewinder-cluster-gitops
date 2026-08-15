@@ -1,6 +1,6 @@
 ---
 # -- Number of Jellyfin replicas to start. Should be left at 1.
-replicaCount: 1
+replicaCount: 0 # TMP: replicas: 1
 
 # -- Resource requests and limits for the Jellyfin container.
 resources: {}
