@@ -23,7 +23,7 @@ nfs:
 
 # For creating the StorageClass automatically:
 storageClass:
-  create: true
+  create: false
 
   # Set a provisioner name. If unset, a name will be generated.
   provisionerName: cluster.local/nfs-provisioner-hdd-slow-root
