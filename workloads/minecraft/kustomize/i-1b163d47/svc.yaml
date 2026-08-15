@@ -9,7 +9,7 @@ spec:
   type: ClusterIP
 
   selector:
-    app: mc-i_36f8a5b8-pod
+    app: mc-i-36f8a5b8-pod
 
   ports:
     - name: i-36f8a5b8-tcp
