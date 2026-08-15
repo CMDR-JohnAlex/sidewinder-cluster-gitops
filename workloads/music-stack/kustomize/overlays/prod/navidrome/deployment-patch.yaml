@@ -6,5 +6,5 @@ metadata:
   name: navidrome-deployment
 
 spec:
-  replicas: 0 # TMP: replicas: 1
+  replicas: 1
   revisionHistoryLimit: 1
