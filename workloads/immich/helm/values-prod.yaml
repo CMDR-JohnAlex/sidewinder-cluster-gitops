@@ -1,1 +1,7 @@
 ---
+controllers:
+  main:
+    containers:
+      main:
+        image:
+          tag: v3.1.0

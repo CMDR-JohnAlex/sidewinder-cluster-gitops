@@ -30,7 +30,7 @@ spec:
       project: workloads
       sources:
         # Helm chart
-        - repoURL: ghcr.io/immich-app/immich-chart
+        - repoURL: ghcr.io/immich-app/immich-charts
           chart: immich
           targetRevision: '{{targetRevision}}'
           helm:

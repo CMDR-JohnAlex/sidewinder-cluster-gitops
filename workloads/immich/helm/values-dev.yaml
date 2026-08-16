@@ -2,6 +2,11 @@
 # These entries are shared between all the Immich components
 
 controllers:
+  main:
+    containers:
+      main:
+        image:
+          tag: v3.1.0
 
 immich:
 
