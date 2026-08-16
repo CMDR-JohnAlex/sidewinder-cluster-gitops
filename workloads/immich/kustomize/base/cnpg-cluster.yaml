@@ -8,7 +8,7 @@ metadata:
 spec:
   instances: 1 # NOTE: Not limited to 1! We can increase this for HA!
 
-  imageName: tensorchord/vchord-suite:pg18-latest
+  imageName: ghcr.io/tensorchord/cloudnative-vectorchord:18.4-1.1.1
 
   storage:
     size: 2Gi
@@ -18,11 +18,12 @@ spec:
     initdb:
       owner: immich
       database: immich
+
       postInitTemplateSQL:
         - CREATE EXTENSION IF NOT EXISTS "vchord" CASCADE;
         - CREATE EXTENSION IF NOT EXISTS "cube";
         - CREATE EXTENSION IF NOT EXISTS "earthdistance";
 
   postgresql:
-    parameters:
-      shared_preload_libraries: "vchord.so"
+    shared_preload_libraries:
+      - "vchord.so"

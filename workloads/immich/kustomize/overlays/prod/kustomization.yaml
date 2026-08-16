@@ -6,6 +6,7 @@ resources:
   - ../../base
 
 patches:
+  - path: cnpg-cluster-patch.yaml
   - path: pvc-patch.yaml
   - path: gateway-patch.yaml
 
