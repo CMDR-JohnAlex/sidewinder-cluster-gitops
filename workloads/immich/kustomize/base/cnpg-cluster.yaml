@@ -1,0 +1,28 @@
+---
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+
+metadata:
+  name: immich-postgresql
+
+spec:
+  instances: 1 # NOTE: Not limited to 1! We can increase this for HA!
+
+  imageName: tensorchord/vchord-suite:pg18-latest
+
+  storage:
+    size: 2Gi
+    storageClass: hdd-general
+
+  bootstrap:
+    initdb:
+      owner: immich
+      database: immich
+      postInitTemplateSQL:
+        - CREATE EXTENSION IF NOT EXISTS "vchord" CASCADE;
+        - CREATE EXTENSION IF NOT EXISTS "cube";
+        - CREATE EXTENSION IF NOT EXISTS "earthdistance";
+
+  postgresql:
+    parameters:
+      shared_preload_libraries: "vchord.so"
