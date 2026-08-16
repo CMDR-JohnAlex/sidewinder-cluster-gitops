@@ -1,0 +1,19 @@
+---
+# These entries are shared between all the Immich components
+
+controllers:
+
+immich:
+
+# Dependencies
+
+valkey:
+  enabled: false
+
+# Immich components
+
+server:
+  enabled: false
+
+machine-learning:
+  enabled: false

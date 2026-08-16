@@ -1,0 +1,53 @@
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+
+metadata:
+  name: immich-https
+
+spec:
+  parentRefs:
+    - name: primary-gateway
+      namespace: envoy-gateway-system
+      sectionName: https
+
+  hostnames:
+    - immich.invalid.example
+
+  rules:
+    - backendRefs:
+        - name: immich-server # SVC name (internal IP:PORT).
+          port: 2283
+      timeouts:
+          request: 600s # 10 minute timeout for large files being uploaded to Immich.
+      matches:
+        - path:
+            type: PathPrefix
+            value: /
+
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+
+metadata:
+  name: immich-http
+
+spec:
+  parentRefs:
+    - name: primary-gateway
+      namespace: envoy-gateway-system
+      sectionName: http
+
+  hostnames:
+    - immich.invalid.example
+
+  rules:
+    - backendRefs:
+        - name: immich-server # SVC name (internal IP:PORT).
+          port: 2283
+      timeouts:
+          request: 600s # 10 minute timeout for large files being uploaded to Immich.
+      matches:
+        - path:
+            type: PathPrefix
+            value: /
