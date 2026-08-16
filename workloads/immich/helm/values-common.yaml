@@ -22,7 +22,7 @@ controllers:
           DB_PASSWORD:
             valueFrom:
               secretKeyRef:
-                name: immich-postgresql-superuser # NOTE: https://docs.immich.app/administration/postgres-standalone/#with-superuser-permission
+                name: immich-postgresql-app
                 key: password
 
 immich:

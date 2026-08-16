@@ -19,7 +19,10 @@ spec:
       owner: immich
       database: immich
 
-      postInitTemplateSQL:
+      postInitSQL:
+        - ALTER USER immich WITH SUPERUSER; # NOTE: https://docs.immich.app/administration/postgres-standalone/#with-superuser-permission
+
+      postInitApplicationSQL:
         - CREATE EXTENSION IF NOT EXISTS "vchord" CASCADE;
         - CREATE EXTENSION IF NOT EXISTS "cube";
         - CREATE EXTENSION IF NOT EXISTS "earthdistance";
