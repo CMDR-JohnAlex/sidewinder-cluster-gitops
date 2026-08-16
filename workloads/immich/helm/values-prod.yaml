@@ -5,3 +5,6 @@ controllers:
       main:
         image:
           tag: v3.1.0
+
+machine-learning:
+  enabled: false
