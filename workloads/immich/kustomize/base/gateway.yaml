@@ -16,7 +16,7 @@ spec:
 
   rules:
     - backendRefs:
-        - name: immich-server # SVC name (internal IP:PORT).
+        - name: immich-base-server # SVC name (internal IP:PORT).
           port: 2283
       timeouts:
           request: 600s # 10 minute timeout for large files being uploaded to Immich.
@@ -43,7 +43,7 @@ spec:
 
   rules:
     - backendRefs:
-        - name: immich-server # SVC name (internal IP:PORT).
+        - name: immich-base-server # SVC name (internal IP:PORT).
           port: 2283
       timeouts:
           request: 600s # 10 minute timeout for large files being uploaded to Immich.

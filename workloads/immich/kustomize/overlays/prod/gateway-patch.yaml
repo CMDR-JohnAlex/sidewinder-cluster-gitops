@@ -9,6 +9,11 @@ spec:
   hostnames:
     - immich.sidewinder.lan
 
+  rules:
+    - backendRefs:
+        - name: immich-prod-server # SVC name (internal IP:PORT).
+          port: 2283
+
 ---
 apiVersion: gateway.networking.k8s.io/v1
 kind: HTTPRoute
@@ -19,3 +24,8 @@ metadata:
 spec:
   hostnames:
     - immich.sidewinder.lan
+
+  rules:
+    - backendRefs:
+        - name: immich-prod-server # SVC name (internal IP:PORT).
+          port: 2283
