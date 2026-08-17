@@ -69,8 +69,8 @@ spec:
               value: '7'
             - name: MOTD
               value: |-
-                &9Kubernetes &2Minecraft Server&r!
-                      &dmc.sidewinder.lan
+                  §9Kubernetes §2Minecraft §6Server
+                          §n§dmc.sidewinder.lan§d
             - name: ICON
               value: '/icon/icon.png'
             - name: OVERRIDE_ICON
