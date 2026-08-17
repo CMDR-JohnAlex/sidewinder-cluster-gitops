@@ -16,7 +16,7 @@ spec:
 
   bootstrap:
     initdb:
-      owner: immich-redis-postgres
+      owner: immich
       database: immich
 
       postInitApplicationSQL:

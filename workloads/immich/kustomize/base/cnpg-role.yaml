@@ -3,11 +3,11 @@
 apiVersion: postgresql.cnpg.io/v1
 kind: DatabaseRole
 metadata:
-  name: immich-redis-postgres-role
+  name: immich-role
 spec:
   cluster:
     name: immich-postgresql
-  name: immich-redis-postgres
+  name: immich
   comment: "immich super-user"
   login: true
   superuser: true
