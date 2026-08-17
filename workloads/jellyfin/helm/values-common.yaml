@@ -233,7 +233,7 @@ readinessProbe:
 
 # -- Additional volumes to mount in the Jellyfin pod.
 volumes: # []
-  - name: media
+  - name: media-pvc
     persistentVolumeClaim:
       claimName: media
 # - name: foo
@@ -243,7 +243,7 @@ volumes: # []
 
 # -- Additional volume mounts for the Jellyfin container.
 volumeMounts: # []
-  - name: media
+  - name: media-pvc
     mountPath: /mnt/media
     readOnly: true
 # - name: foo
