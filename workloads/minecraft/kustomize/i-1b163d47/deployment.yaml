@@ -68,7 +68,9 @@ spec:
             - name: MAX_PLAYERS
               value: '7'
             - name: MOTD
-              value: 'MOTD\nLine 2'
+              value: |-
+                &9Kubernetes &2Minecraft Server&r!
+                      &dmc.sidewinder.lan
             - name: ICON
               value: '/icon/icon.png'
             - name: OVERRIDE_ICON
@@ -80,7 +82,7 @@ spec:
             - name: USE_SIMD_FLAGS
               value: 'true'
             - name: SEED
-              value: 'FMOK'
+              value: 'KubernetesMC'
             - name: SPAWN_PROTECTION
               value: '0'
             - name: OPS
