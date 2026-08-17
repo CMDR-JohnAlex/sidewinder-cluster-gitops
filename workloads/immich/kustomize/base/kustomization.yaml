@@ -5,5 +5,6 @@ kind: Kustomization
 
 resources:
   - cnpg-cluster.yaml
+  - cnpg-role.yaml
   - pvc.yaml
   - gateway.yaml
