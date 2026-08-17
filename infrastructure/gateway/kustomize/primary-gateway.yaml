@@ -74,6 +74,15 @@ spec:
         kinds:
           - kind: HTTPRoute
 
+    - name: jellyfin
+      protocol: HTTP
+      port: 8096
+      allowedRoutes:
+        namespaces:
+          from: All
+        kinds:
+          - kind: HTTPRoute
+
     - name: minecraft
       protocol: TCP
       port: 25565
