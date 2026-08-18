@@ -1,0 +1,55 @@
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+
+metadata:
+  name: homepage-https
+
+spec:
+  parentRefs:
+    - name: primary-gateway
+      namespace: envoy-gateway-system
+      sectionName: https
+
+  hostnames:
+    - homepage.sidewinder.lan
+    - sidewinder.lan
+
+  rules:
+    - backendRefs:
+        - name: homepage # SVC name (internal IP:PORT).
+          port: 3000
+      matches:
+        - path:
+            type: PathPrefix
+            value: /
+      sessionPersistence: # https://gethomepage.dev/installation/k8s/#multiple-replicas
+        type: Cookie
+        sessionName: Homepage-Session-ID
+        absoluteTimeout: 7h
+        cookieConfig:
+          lifetimeType: Session
+
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+
+metadata:
+  name: homepage-http
+
+spec:
+  parentRefs:
+    - name: primary-gateway
+      namespace: envoy-gateway-system
+      sectionName: http
+
+  hostnames:
+    - homepage.sidewinder.lan
+    - sidewinder.lan
+
+  rules:
+    - filters:
+        - type: RequestRedirect
+          requestRedirect:
+            scheme: https
+            statusCode: 301
