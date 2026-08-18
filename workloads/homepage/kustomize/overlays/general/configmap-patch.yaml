@@ -69,3 +69,4 @@ data:
         target: _blank
 
   docker.yaml: ""
+  proxmox.yaml: ""
