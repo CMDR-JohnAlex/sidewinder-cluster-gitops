@@ -64,44 +64,36 @@ data:
         - Cluster Documentation:
             icon: nginx.svg
             href: https://docs.sidewinder.lan
-            siteMonitor: https://docs.sidewinder.lan
             description: "Read me first! Guides & Info."
         - Grafana:
             icon: grafana.svg
             href: https://grafana.sidewinder.lan
-            siteMonitor: https://grafana.sidewinder.lan
             description: "Monitor the Kubernetes cluster."
         - Ntfy:
             icon: ntfy.svg
             href: https://ntfy.sidewinder.lan
-            siteMonitor: https://ntfy.sidewinder.lan
             description: "Cluster announcements and alerts."
 
     - Media & Entertainment:
         - Jellyfin:
             icon: jellyfin.svg
             href: https://jellyfin.sidewinder.lan
-            siteMonitor: https://jellyfin.sidewinder.lan
             description: "Watch movies and TV shows."
         - Navidrome:
             icon: navidrome.svg
             href: https://navidrome.sidewinder.lan
-            siteMonitor: https://navidrome.sidewinder.lan
             description: "Listen to our music library."
         - Feishin:
             icon: feishin.svg
             href: https://feishin.sidewinder.lan
-            siteMonitor: https://feishin.sidewinder.lan
             description: "Beautiful Web UI for Navidrome."
         - Immich:
             icon: immich.svg
             href: https://immich.sidewinder.lan
-            siteMonitor: https://immich.sidewinder.lan
             description: "Family photo and video backups."
         - Minecraft Server:
             icon: minecraft.svg
             href: https://mc.sidewinder.lan
-            ping: mc.sidewinder.lan:25565
             description: "Family Minecraft Server."
 
     - Arr Stack:
