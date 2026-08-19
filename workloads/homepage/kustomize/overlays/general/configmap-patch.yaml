@@ -9,8 +9,7 @@ metadata:
     app.kubernetes.io/name: homepage
 
 data:
-  kubernetes.yaml: |
-    mode: cluster
+  kubernetes.yaml: ""
 
   settings.yaml: |
     title: Sidewinder Cluster
@@ -73,8 +72,8 @@ data:
         description: "Monitor the Kubernetes cluster."
       - Ntfy:
         icon: ntfy.svg
-        href: https://grafana.sidewinder.lan/
-        siteMonitor: https://grafana.sidewinder.lan/
+        href: https://ntfy.sidewinder.lan/
+        siteMonitor: https://ntfy.sidewinder.lan/
         description: "Cluster announcements and alerts."
 
     - Media & Entertainment:
@@ -106,21 +105,33 @@ data:
 
     - Arr Stack:
       #
+      - EMPTY:
+        href: https://homepage.sidewinder.lan/
+        description: "Placeholder."
 
     - Productivity:
       # Vikunja
       # Forgejo
       # SFTPGo
+      - EMPTY:
+        href: https://homepage.sidewinder.lan/
+        description: "Placeholder."
 
     - Home & Network:
       # Home Assistant
       # Pi-Hole
       # AdGuard Home
       # Technitium
+      - EMPTY:
+        href: https://homepage.sidewinder.lan/
+        description: "Placeholder."
 
     - Social:
       # Matrix
       # Mastodon
+      - EMPTY:
+        href: https://homepage.sidewinder.lan/
+        description: "Placeholder."
 
   widgets.yaml: |
     - logo:
