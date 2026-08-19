@@ -29,7 +29,7 @@ data:
         columns: 3
       Media & Entertainment:
         style: row
-        columns: 4
+        columns: 2
       Arr Stack:
         style: row
         columns: 4
@@ -50,14 +50,30 @@ data:
     - Useful Links:
       - Kubernetes Docs:
         - abbr: K8s
+          icon: kubernetes.svg
           href: https://kubernetes.io/docs/home
+          description: Kubernetes Documentation
+      - Kubernetes Concepts:
+        - abbr: K8s
+          icon: kubernetes.svg
+          href: https://kubernetes.io/docs/concepts
+          description: Kubernetes Concepts
+      - Kubernetes Reference:
+        - abbr: K8s
+          icon: kubernetes.svg
+          href: https://kubernetes.io/docs/reference
+          description: Kubernetes Reference
       - Arch Linux Wiki:
         - abbr: Arch
+          icon: arch-linux.svg
           href: https://wiki.archlinux.org
-    - Developer:
-      - Github:
-        - abbr: GH
-          href: https://github.com
+          description: Linux issues? Look here!
+    - Other Links:
+      - selfhost:
+        - abbr sh
+          icon: selfh-st.svg
+          href: https://selfh.st/apps
+          description: List of self-hosted apps. Find something you like? Request it!
 
   services.yaml: |
     - Cluster & Docs:
@@ -71,7 +87,7 @@ data:
             description: "Monitor the Kubernetes cluster."
         - Ntfy:
             icon: ntfy.svg
-            href: https://ntfy.sidewinder.lan
+            href: https://ntfy.sidewinder.lan/home-announcements
             description: "Cluster announcements and alerts."
 
     - Media & Entertainment:
