@@ -9,7 +9,8 @@ metadata:
     app.kubernetes.io/name: homepage
 
 data:
-  kubernetes.yaml: ""
+  kubernetes.yaml: |
+    mode: disabled
 
   settings.yaml: |
     title: Sidewinder Cluster
@@ -105,7 +106,7 @@ data:
 
     - Arr Stack:
       #
-      - EMPTY:
+      - EMPTY 1:
         href: https://homepage.sidewinder.lan/
         description: "Placeholder."
 
@@ -113,7 +114,7 @@ data:
       # Vikunja
       # Forgejo
       # SFTPGo
-      - EMPTY:
+      - EMPTY 2:
         href: https://homepage.sidewinder.lan/
         description: "Placeholder."
 
@@ -122,14 +123,14 @@ data:
       # Pi-Hole
       # AdGuard Home
       # Technitium
-      - EMPTY:
+      - EMPTY 3:
         href: https://homepage.sidewinder.lan/
         description: "Placeholder."
 
     - Social:
       # Matrix
       # Mastodon
-      - EMPTY:
+      - EMPTY 4:
         href: https://homepage.sidewinder.lan/
         description: "Placeholder."
 
