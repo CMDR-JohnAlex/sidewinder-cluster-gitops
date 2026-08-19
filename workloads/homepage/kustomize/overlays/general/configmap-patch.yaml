@@ -50,64 +50,64 @@ data:
     - Useful Links:
       - Kubernetes Docs:
         - abbr: K8s
-          href: https://kubernetes.io/docs/home/
+          href: https://kubernetes.io/docs/home
       - Arch Linux Wiki:
         - abbr: Arch
-          href: https://wiki.archlinux.org/
+          href: https://wiki.archlinux.org
     - Developer:
       - Github:
         - abbr: GH
-          href: https://github.com/
+          href: https://github.com
 
   services.yaml: |
     - Cluster & Docs:
       - Cluster Documentation:
         icon: nginx.svg
-        href: https://docs.sidewinder.lan/
-        siteMonitor: https://docs.sidewinder.lan/
+        href: https://docs.sidewinder.lan
+        siteMonitor: https://docs.sidewinder.lan
         description: "Read me first! Guides & Info."
       - Grafana:
         icon: grafana.svg
-        href: https://grafana.sidewinder.lan/
-        siteMonitor: https://grafana.sidewinder.lan/
+        href: https://grafana.sidewinder.lan
+        siteMonitor: https://grafana.sidewinder.lan
         description: "Monitor the Kubernetes cluster."
       - Ntfy:
         icon: ntfy.svg
-        href: https://ntfy.sidewinder.lan/
-        siteMonitor: https://ntfy.sidewinder.lan/
+        href: https://ntfy.sidewinder.lan
+        siteMonitor: https://ntfy.sidewinder.lan
         description: "Cluster announcements and alerts."
 
     - Media & Entertainment:
       - Jellyfin:
         icon: jellyfin.svg
-        href: https://jellyfin.sidewinder.lan/
-        siteMonitor: https://jellyfin.sidewinder.lan/
+        href: https://jellyfin.sidewinder.lan
+        siteMonitor: https://jellyfin.sidewinder.lan
         description: "Watch movies and TV shows."
       - Navidrome:
         icon: navidrome.svg
-        href: https://navidrome.sidewinder.lan/
-        siteMonitor: https://navidrome.sidewinder.lan/
+        href: https://navidrome.sidewinder.lan
+        siteMonitor: https://navidrome.sidewinder.lan
         description: "Listen to our music library."
       - Feishin:
         icon: feishin.svg
-        href: https://feishin.sidewinder.lan/
-        siteMonitor: https://feishin.sidewinder.lan/
+        href: https://feishin.sidewinder.lan
+        siteMonitor: https://feishin.sidewinder.lan
         description: "Beautiful Web UI for Navidrome."
       - Immich:
         icon: immich.svg
-        href: https://immich.sidewinder.lan/
-        siteMonitor: https://immich.sidewinder.lan/
+        href: https://immich.sidewinder.lan
+        siteMonitor: https://immich.sidewinder.lan
         description: "Family photo and video backups."
       - Minecraft Server:
         icon: minecraft.svg
-        href: https://mc.sidewinder.lan/
+        href: https://mc.sidewinder.lan
         ping: mc.sidewinder.lan:25565
         description: "Family Minecraft Server."
 
     - Arr Stack:
       #
       - EMPTY 1:
-        href: https://homepage.sidewinder.lan/
+        href: https://homepage.sidewinder.lan
         description: "Placeholder."
 
     - Productivity:
@@ -115,7 +115,7 @@ data:
       # Forgejo
       # SFTPGo
       - EMPTY 2:
-        href: https://homepage.sidewinder.lan/
+        href: https://homepage.sidewinder.lan
         description: "Placeholder."
 
     - Home & Network:
@@ -124,14 +124,14 @@ data:
       # AdGuard Home
       # Technitium
       - EMPTY 3:
-        href: https://homepage.sidewinder.lan/
+        href: https://homepage.sidewinder.lan
         description: "Placeholder."
 
     - Social:
       # Matrix
       # Mastodon
       - EMPTY 4:
-        href: https://homepage.sidewinder.lan/
+        href: https://homepage.sidewinder.lan
         description: "Placeholder."
 
   widgets.yaml: |
