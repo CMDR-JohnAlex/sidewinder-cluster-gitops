@@ -68,9 +68,10 @@ data:
           icon: arch-linux.svg
           href: https://wiki.archlinux.org
           description: Linux issues? Look here!
+
     - Other Links:
       - selfhost:
-        - abbr sh
+        - abbr: sh
           icon: selfh-st.svg
           href: https://selfh.st/apps
           description: List of self-hosted apps. Find something you like? Request it!
