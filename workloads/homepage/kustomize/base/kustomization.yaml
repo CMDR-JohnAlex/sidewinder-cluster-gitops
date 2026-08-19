@@ -8,4 +8,3 @@ resources:
   - configmap.yaml
   - svc.yaml
   - gateway.yaml
-  - rbac.yaml

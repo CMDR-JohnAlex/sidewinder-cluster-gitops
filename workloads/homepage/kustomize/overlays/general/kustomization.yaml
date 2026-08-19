@@ -9,7 +9,6 @@ patches:
   - path: deployment-patch.yaml
   - path: configmap-patch.yaml
   - path: gateway-patch.yaml
-  - path: rbac-patch.yaml
 
 labels:
   - pairs:
