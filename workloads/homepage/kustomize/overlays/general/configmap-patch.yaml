@@ -23,6 +23,7 @@ data:
 
     # TODO: https://gethomepage.dev/configs/settings/#progressive-web-app-pwa
 
+    maxGroupColumns: 3 # default is 4 for services, 6 for bookmarks, max 8
     layout:
       Cluster & Docs:
         style: column
@@ -30,18 +31,21 @@ data:
       Media & Entertainment:
         style: column
         columns: 2
+      Useful Links:
+        style: column
+        columns: 1
       Arr Stack:
-        style: row
-        columns: 4
+        style: column
+        columns: 1
       Productivity:
-        style: row
-        columns: 3
+        style: column
+        columns: 1
       Home & Network:
-        style: row
-        columns: 4
+        style: column
+        columns: 1
       Social:
-        style: row
-        columns: 2
+        style: column
+        columns: 1
 
   custom.css: ""
   custom.js: ""
