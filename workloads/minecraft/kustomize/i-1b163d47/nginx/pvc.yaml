@@ -9,7 +9,7 @@ spec:
   accessModes:
     - ReadWriteOnce
 
-  storageClassName: hdd-general
+  storageClassName: usb-flash
 
   resources:
     requests:
