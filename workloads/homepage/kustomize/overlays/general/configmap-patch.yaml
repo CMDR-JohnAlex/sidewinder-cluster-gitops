@@ -25,10 +25,10 @@ data:
 
     layout:
       Cluster & Docs:
-        style: row
-        columns: 3
+        style: column
+        columns: 1
       Media & Entertainment:
-        style: row
+        style: column
         columns: 2
       Arr Stack:
         style: row
