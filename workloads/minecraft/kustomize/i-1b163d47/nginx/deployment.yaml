@@ -1,0 +1,46 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: nginx-i-36f8a5b8-deployment
+  labels:
+    app: nginx-i-36f8a5b8-deployment
+
+spec:
+  replicas: 1
+
+  selector:
+    matchLabels:
+      app: nginx-i-36f8a5b8-pod
+
+  template:
+    metadata:
+      labels:
+        app: nginx-i-36f8a5b8-pod
+
+    spec:
+      containers:
+        - name: nginx
+          image: nginx:alpine
+
+          ports:
+            - containerPort: 80
+              name: nginx-http
+
+          volumeMounts:
+            - name: html
+              mountPath: /usr/share/nginx/html
+
+            - name: nginx-config
+              mountPath: /etc/nginx/conf.d/default.conf
+              subPath: default.conf
+
+      volumes:
+        - name: html
+          persistentVolumeClaim:
+            claimName: nginx-i-36f8a5b8-data
+
+        - name: nginx-config
+          configMap:
+            name: nginx-config

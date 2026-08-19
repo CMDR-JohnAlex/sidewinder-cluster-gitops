@@ -23,7 +23,6 @@ data:
 
     # TODO: https://gethomepage.dev/configs/settings/#progressive-web-app-pwa
 
-    maxGroupColumns: 3 # default is 4 for services, 6 for bookmarks, max 8
     layout:
       Cluster & Docs:
         style: column

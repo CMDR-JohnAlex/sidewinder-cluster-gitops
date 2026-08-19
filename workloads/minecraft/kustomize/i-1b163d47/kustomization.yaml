@@ -9,6 +9,8 @@ resources:
   - svc.yaml
   - gateway.yaml
 
+  - nginx
+
 configMapGenerator:
     - name: mc-i-36f8a5b8-configs
       files:

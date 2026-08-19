@@ -1,0 +1,49 @@
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+
+metadata:
+  name: nginx-i-36f8a5b8-http
+
+spec:
+  parentRefs:
+    - name: primary-gateway
+      namespace: envoy-gateway-system
+      sectionName: http
+
+  hostnames:
+    - mc.sidewinder.lan
+
+  rules:
+    - backendRefs:
+        - name: nginx-i-36f8a5b8-svc # SVC name (internal IP:PORT).
+          port: 80
+      matches:
+        - path:
+            type: PathPrefix
+            value: /
+
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+
+metadata:
+  name: nginx-i-36f8a5b8-https
+
+spec:
+  parentRefs:
+    - name: primary-gateway
+      namespace: envoy-gateway-system
+      sectionName: https
+
+  hostnames:
+    - mc.sidewinder.lan
+
+  rules:
+    - backendRefs:
+        - name: nginx-i-36f8a5b8-svc # SVC name (internal IP:PORT).
+          port: 80
+      matches:
+        - path:
+            type: PathPrefix
+            value: /

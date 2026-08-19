@@ -1,0 +1,16 @@
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+
+metadata:
+  name: nginx-i-36f8a5b8-data
+
+spec:
+  accessModes:
+    - ReadWriteOnce
+
+  storageClassName: hdd-general
+
+  resources:
+    requests:
+      storage: 1Mi
