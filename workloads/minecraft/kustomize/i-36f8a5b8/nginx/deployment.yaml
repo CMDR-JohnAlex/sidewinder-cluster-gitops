@@ -8,7 +8,7 @@ metadata:
     app: nginx-i-36f8a5b8-deployment
 
 spec:
-  replicas: 0
+  replicas: 1
 
   selector:
     matchLabels:
