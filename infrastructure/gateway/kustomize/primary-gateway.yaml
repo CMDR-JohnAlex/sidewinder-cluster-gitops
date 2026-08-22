@@ -88,3 +88,21 @@ spec:
           from: All
         kinds:
           - kind: TCPRoute
+
+    - name: minecraft-vc
+      protocol: UDP
+      port: 24454
+      allowedRoutes:
+        namespaces:
+          from: All
+        kinds:
+          - kind: UDPRoute
+
+    - name: minecraft-02
+      protocol: TCP
+      port: 25566
+      allowedRoutes:
+        namespaces:
+          from: All
+        kinds:
+          - kind: TCPRoute

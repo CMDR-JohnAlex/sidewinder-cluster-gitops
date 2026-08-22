@@ -3,7 +3,7 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 
 metadata:
-  name: nginx-i-1b163d47-data
+  name: nginx-i-36f8a5b8-data
 
 spec:
   accessModes:

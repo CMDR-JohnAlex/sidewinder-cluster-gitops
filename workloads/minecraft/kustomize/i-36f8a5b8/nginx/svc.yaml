@@ -3,13 +3,13 @@ apiVersion: v1
 kind: Service
 
 metadata:
-  name: nginx-i-1b163d47-svc
+  name: nginx-i-36f8a5b8-svc
 
 spec:
   type: ClusterIP
 
   selector:
-    app: nginx-i-1b163d47-pod
+    app: nginx-i-36f8a5b8-pod
 
   ports:
     - name: nginx-http

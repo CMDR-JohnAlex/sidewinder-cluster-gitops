@@ -3,9 +3,9 @@ apiVersion: apps/v1
 kind: Deployment
 
 metadata:
-  name: mc-i-1b163d47-deployment
+  name: mc-i-36f8a5b8-deployment
   labels:
-    app: mc-i-1b163d47-deployment
+    app: mc-i-36f8a5b8-deployment
 
 spec:
   replicas: 0
@@ -17,12 +17,12 @@ spec:
 
   selector:
     matchLabels:
-      app: mc-i-1b163d47-pod
+      app: mc-i-36f8a5b8-pod
 
   template:
     metadata:
       labels:
-        app: mc-i-1b163d47-pod
+        app: mc-i-36f8a5b8-pod
 
     spec:
       initContainers:
@@ -46,21 +46,21 @@ spec:
               echo "Configs successfully deployed!"
 
           volumeMounts:
-            - name: mc-i-1b163d47-data
+            - name: mc-i-36f8a5b8-data
               mountPath: /data
 
-            - name: mc-i-1b163d47-configs
+            - name: mc-i-36f8a5b8-configs
               mountPath: /tmp/configs
 
       containers:
-        - name: mc-i-1b163d47
+        - name: mc-i-36f8a5b8
           image: itzg/minecraft-server:latest
 
           env:
             - name: EULA
               value: 'TRUE'
             - name: TYPE
-              value: 'PAPER'
+              value: 'PURPUR'
             - name: VERSION
               value: 'LATEST'
             - name: MEMORY
@@ -70,7 +70,7 @@ spec:
             - name: MOTD
               value: |-
                   §9Kubernetes §2Minecraft §6Server
-                          §n§dmc.sidewinder.lan§d
+                         §n§dmc1.sidewinder.lan§d
             - name: ICON
               value: '/icon/icon.png'
             - name: OVERRIDE_ICON
@@ -79,9 +79,8 @@ spec:
               value: 'false'
             - name: USE_AIKAR_FLAGS
               value: 'true'
-            # Purpur only
-            # - name: USE_SIMD_FLAGS
-            #   value: 'true'
+            - name: USE_SIMD_FLAGS
+              value: 'true'
             - name: SEED
               value: 'KubernetesMC'
             - name: SPAWN_PROTECTION
@@ -97,23 +96,7 @@ spec:
               value: |-
                 skinsrestorer
                 authmereloaded
-                sodium
-                entityculling
-                ferrite-core
-                lithium
-                xaeros-minimap
-                xaeros-world-map
-                simple-voice-chat
-                sound-physics-remastered
-                chat-heads
-                carry-on
-                netherportalfix
-                imblocker-original
-                do-a-barrel-roll
-                farmers-delight-refabricated
-                more-delight
-                appleskin
-                jei
+              # https://modrinth.com/resourcepack/faithful-64x/gallery
               # https://modrinth.com/resourcepack/enhanced-boss-bars
               # https://modrinth.com/resourcepack/cubic-sun-moon
               # https://modrinth.com/resourcepack/vvi
@@ -135,9 +118,7 @@ spec:
 
           ports:
             - containerPort: 25565
-              name: i-1b163d47-tcp
-            - containerPort: 24454
-              name: i-1b163d47-udp
+              name: i-36f8a5b8-tcp
 
           resources:
             limits:
@@ -178,22 +159,22 @@ spec:
             timeoutSeconds: 5
 
           volumeMounts:
-            - name: mc-i-1b163d47-data
+            - name: mc-i-36f8a5b8-data
               mountPath: /data
 
-            - name: mc-i-1b163d47-icon
+            - name: mc-i-36f8a5b8-icon
               subPath: emoji_u1f359.png
               mountPath: /icon/icon.png
 
       volumes:
-        - name: mc-i-1b163d47-data
+        - name: mc-i-36f8a5b8-data
           persistentVolumeClaim:
-            claimName: mc-i-1b163d47-data
+            claimName: mc-i-36f8a5b8-data
 
-        - name: mc-i-1b163d47-configs
+        - name: mc-i-36f8a5b8-configs
           configMap:
-            name: mc-i-1b163d47-configs
+            name: mc-i-36f8a5b8-configs
 
-        - name: mc-i-1b163d47-icon
+        - name: mc-i-36f8a5b8-icon
           configMap:
-            name: mc-i-1b163d47-icon
+            name: mc-i-36f8a5b8-icon

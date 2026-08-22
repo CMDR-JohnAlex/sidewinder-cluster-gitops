@@ -12,7 +12,7 @@ resources:
   - nginx
 
 configMapGenerator:
-    - name: mc-i-1b163d47-configs
+    - name: mc-i-36f8a5b8-configs
       files:
         - configs/purpur.yml
         - configs/bukkit.yml
@@ -20,6 +20,6 @@ configMapGenerator:
         - configs/authme-config.yml
         - configs/skinsrestorer-config.yml
 
-    - name: mc-i-1b163d47-icon
+    - name: mc-i-36f8a5b8-icon
       files:
         - icon/emoji_u1f359.png

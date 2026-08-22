@@ -3,7 +3,7 @@ apiVersion: gateway.networking.k8s.io/v1alpha2
 kind: TCPRoute
 
 metadata:
-  name: mc-i-36f8a5b8-tcproute
+  name: mc-i-1b163d47-tcproute
 
 spec:
   parentRefs:
@@ -15,5 +15,23 @@ spec:
 
   rules:
     - backendRefs:
-        - name: mc-i-36f8a5b8-svc # SVC name (internal IP:PORT).
+        - name: mc-i-1b163d47-svc # SVC name (internal IP:PORT).
           port: 25565
+
+---
+apiVersion: gateway.networking.k8s.io/v1alpha2
+kind: UDPRoute
+
+metadata:
+  name: mc-i-1b163d47-udproute
+
+spec:
+  parentRefs:
+    - name: primary-gateway
+      namespace: envoy-gateway-system
+      sectionName: minecraft-vc
+
+  rules:
+    - backendRefs:
+        - name: mc-i-1b163d47-svc # SVC name (internal IP:PORT).
+          port: 24454
