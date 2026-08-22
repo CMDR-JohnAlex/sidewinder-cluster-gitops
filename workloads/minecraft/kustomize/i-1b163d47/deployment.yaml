@@ -96,7 +96,7 @@ spec:
             - name: MODRINTH_PROJECTS
               value: |-
                 skinsrestorer
-                authmereloaded
+                easyauth
                 sodium
                 entityculling
                 ferrite-core
