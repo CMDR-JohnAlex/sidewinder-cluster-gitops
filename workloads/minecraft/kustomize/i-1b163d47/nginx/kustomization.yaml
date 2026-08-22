@@ -9,6 +9,6 @@ resources:
   - gateway.yaml
 
 configMapGenerator:
-    - name: nginx-config
+    - name: nginx-config-i-1b163d47
       files:
         - default.conf
