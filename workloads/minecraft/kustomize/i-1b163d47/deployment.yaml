@@ -95,6 +95,7 @@ spec:
               value: 'false'
             - name: MODRINTH_PROJECTS
               value: |-
+                fabric-api
                 skinsrestorer
                 easyauth
                 sodium
