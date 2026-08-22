@@ -60,7 +60,7 @@ spec:
             - name: EULA
               value: 'TRUE'
             - name: TYPE
-              value: 'PAPER'
+              value: 'FABRIC'
             - name: VERSION
               value: 'LATEST'
             - name: MEMORY
