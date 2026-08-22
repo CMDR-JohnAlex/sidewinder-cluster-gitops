@@ -121,6 +121,8 @@ spec:
               # https://modrinth.com/resourcepack/glowing-glints
             - name: MODRINTH_DOWNLOAD_DEPENDENCIES
               value: 'required'
+            - name: MODRINTH_ALLOWED_VERSION_TYPE
+              value: 'beta'
             - name: BROADCAST_CONSOLE_TO_OPS
               value: 'false'
             - name: BROADCAST_RCON_TO_OPS
