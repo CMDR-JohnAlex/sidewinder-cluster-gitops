@@ -116,10 +116,10 @@ spec:
               readOnly: true
 
             - name: adguard-home-data
-              subPath: /work
+              subPath: work/
               mountPath: /opt/adguardhome/work
             - name: adguard-home-data
-              subPath: /conf
+              subPath: conf/
               mountPath: /opt/adguardhome/conf
 
       volumes:
