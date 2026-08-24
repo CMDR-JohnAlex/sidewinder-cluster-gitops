@@ -1,0 +1,31 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+
+metadata:
+  name: adguard-home
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+
+spec:
+  project: project
+
+  sources:
+    # Kustomize
+    - repoURL: https://github.com/CMDR-JohnAlex/sidewinder-cluster-gitops.git
+      targetRevision: main
+      path: workloads/adguard-home/kustomize
+
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: dns
+
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+
+    syncOptions:
+      - ServerSideApply=true
+      - CreateNamespace=true

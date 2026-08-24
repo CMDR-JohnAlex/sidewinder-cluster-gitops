@@ -1,0 +1,16 @@
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+
+metadata:
+  name: adguard-home-data
+
+spec:
+  accessModes:
+    - ReadWriteOnce
+
+  storageClassName: usb-flash
+
+  resources:
+    requests:
+      storage: 5Mi

@@ -1,0 +1,156 @@
+---
+apiVersion: gateway.envoyproxy.io/v1alpha1
+kind: EnvoyProxy
+
+metadata:
+  name: dns-gateway-proxy
+  namespace: envoy-gateway-system
+
+spec:
+  provider:
+    type: Kubernetes
+
+    kubernetes:
+      envoyService:
+        type: LoadBalancer
+        loadBalancerIP: 192.168.7.101
+
+        annotations:
+          metallb.io/address-pool: "dns-pool"
+
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: Gateway
+
+metadata:
+  name: dns-gateway
+  namespace: envoy-gateway-system
+
+  annotations:
+    cert-manager.io/cluster-issuer: sidewinder-ca
+
+spec:
+  gatewayClassName: envoy-gateway
+
+  infrastructure:
+    parametersRef:
+      group: gateway.envoyproxy.io
+      kind: EnvoyProxy
+      name: dns-gateway-proxy
+
+  listeners:
+    # Required for plain DNS.
+    - name: dns-tcp
+      protocol: TCP
+      port: 53
+      allowedRoutes:
+        namespaces:
+          from: All
+        kinds:
+          - kind: TCPRoute
+    - name: dns-udp
+      protocol: UDP
+      port: 53
+      allowedRoutes:
+        namespaces:
+          from: All
+        kinds:
+          - kind: UDPRoute
+
+    # Required for running a DHCP server.
+    - name: dhcp-udp
+      protocol: UDP
+      port: 67
+      allowedRoutes:
+        namespaces:
+          from: All
+        kinds:
+          - kind: UDPRoute
+    - name: dhcp-tcp
+      protocol: TCP
+      port: 68
+      allowedRoutes:
+        namespaces:
+          from: All
+        kinds:
+          - kind: TCPRoute
+    - name: dhcp-udp2
+      protocol: UDP
+      port: 68
+      allowedRoutes:
+        namespaces:
+          from: All
+        kinds:
+          - kind: UDPRoute
+
+    # Required for the admin panel and for running a HTTPS/DNS-over-HTTPS server.
+    - name: http-tcp
+      protocol: TCP
+      port: 80
+      allowedRoutes:
+        namespaces:
+          from: All
+        kinds:
+          - kind: TCPRoute
+    - name: https-tcp
+      protocol: TCP
+      port: 443
+      allowedRoutes:
+        namespaces:
+          from: All
+        kinds:
+          - kind: TCPRoute
+    - name: https-udp
+      protocol: UDP
+      port: 443
+      allowedRoutes:
+        namespaces:
+          from: All
+        kinds:
+          - kind: UDPRoute
+    - name: https-tcp2
+      protocol: TCP
+      port: 3000
+      allowedRoutes:
+        namespaces:
+          from: All
+        kinds:
+          - kind: TCPRoute
+
+    # Required for running a DNS-over-TLS server.
+    - name: tls-tcp
+      protocol: TCP
+      port: 853
+      allowedRoutes:
+        namespaces:
+          from: All
+        kinds:
+          - kind: TCPRoute
+
+    # Required for running a DNS-over-QUIC server.
+    - name: quic-udp
+      protocol: UDP
+      port: 853
+      allowedRoutes:
+        namespaces:
+          from: All
+        kinds:
+          - kind: UDPRoute
+
+    # Required for running a DNSCrypt server.
+    - name: dnscrypt-tcp
+      protocol: TCP
+      port: 5443
+      allowedRoutes:
+        namespaces:
+          from: All
+        kinds:
+          - kind: TCPRoute
+    - name: dnscrypt-udp
+      protocol: UDP
+      port: 5443
+      allowedRoutes:
+        namespaces:
+          from: All
+        kinds:
+          - kind: UDPRoute

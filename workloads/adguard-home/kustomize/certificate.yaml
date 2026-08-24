@@ -1,0 +1,22 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+
+metadata:
+  name: sidewinder-lan-tls
+
+spec:
+  isCA: false
+  privateKey:
+    algorithm: RSA
+    encoding: PKCS1
+    size: 2048
+  dnsNames:
+    - '*.sidewinder.lan'
+  issuerRef:
+    group: cert-manager.io
+    kind: ClusterIssuer
+    name: sidewinder-ca
+  secretName: sidewinder-lan-tls
+  usages:
+  - digital signature
+  - key encipherment

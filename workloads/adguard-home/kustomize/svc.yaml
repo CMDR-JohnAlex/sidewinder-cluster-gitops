@@ -1,0 +1,80 @@
+---
+apiVersion: v1
+kind: Service
+
+metadata:
+  name: adguard-home
+
+  labels:
+    app.kubernetes.io/name: adguard-home
+
+spec:
+  type: ClusterIP
+
+  selector:
+    app.kubernetes.io/name: adguard-home
+
+  ports:
+    # Required for plain DNS.
+    - name: dns-tcp
+      port: 53
+      protocol: TCP
+      targetPort: dns-tcp
+    - name: dns-udp
+      port: 53
+      protocol: UDP
+      targetPort: dns-udp
+
+    # Required for running a DHCP server.
+    - name: dhcp-udp
+      port: 67
+      protocol: UDP
+      targetPort: dhcp-udp
+    - name: dhcp-tcp
+      port: 68
+      protocol: TCP
+      targetPort: dns-tcp
+    - name: dhcp-udp2
+      port: 68
+      protocol: UDP
+      targetPort: dhcp-udp2
+
+    # Required for the admin panel and for running a HTTPS/DNS-over-HTTPS server.
+    - name: http-tcp
+      port: 80
+      protocol: TCP
+      targetPort: http-tcp
+    - name: https-tcp
+      port: 443
+      protocol: TCP
+      targetPort: https-tcp
+    - name: https-udp
+      port: 443
+      protocol: UDP
+      targetPort: https-udp
+    - name: https-tcp2
+      port: 3000
+      protocol: TCP
+      targetPort: https-tcp2
+
+    # Required for running a DNS-over-TLS server.
+    - name: tls-tcp
+      port: 853
+      protocol: TCP
+      targetPort: tls-tcp
+
+    # Required for running a DNS-over-QUIC server.
+    - name: quic-udp
+      port: 853
+      protocol: UDP
+      targetPort: quic-udp
+
+    # Required for running a DNSCrypt server.
+    - name: dnscrypt-tcp
+      port: 5443
+      protocol: TCP
+      targetPort: dnscrypt-tcp
+    - name: dnscrypt-udp
+      port: 5443
+      protocol: UDP
+      targetPort: dnscrypt-udp
