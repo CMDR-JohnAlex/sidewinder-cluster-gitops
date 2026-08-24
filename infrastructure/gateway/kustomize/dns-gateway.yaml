@@ -26,9 +26,6 @@ metadata:
   name: dns-gateway
   namespace: envoy-gateway-system
 
-  annotations:
-    cert-manager.io/cluster-issuer: sidewinder-ca
-
 spec:
   gatewayClassName: envoy-gateway
 
