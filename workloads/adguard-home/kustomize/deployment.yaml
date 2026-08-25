@@ -96,14 +96,14 @@ spec:
           #
           # Aka, add the pod or service CIDR to the AdGuardHome.yaml file, or in the web UI?
 
-          # TODO: Resources. At the very least, requests.
-          # resources:
-          #   limits:
-          #     cpu:  0m
-          #     memory: 0Mi
-          #   requests:
-          #     cpu: 0m
-          #     memory: 0Mi
+          # TODO: Vertical Pod Autoscaler (VPA) in "Off" mode with Goldilocks
+          resources:
+            limits:
+            #   cpu:  0m
+              memory: 512Mi # Possibly a low value? Requires monitoring.
+            requests:
+              cpu: 20m # Average peak as of 2026-08-24 testing
+              memory: 200Mi # Average peak as of 2026-08-24 testing
 
           # TODO: Probes
           # NOTE: https://adguard-dns.io/kb/adguard-home/docker/#health-check
