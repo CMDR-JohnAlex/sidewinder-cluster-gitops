@@ -15,9 +15,9 @@ spec:
     - name: i-1b163d47-tcp
       protocol: TCP
       port: 25565
-      targetPort: i-1b163d47-tcp
+      targetPort: 25565
 
     - name: i-1b163d47-udp
       protocol: UDP
       port: 24454
-      targetPort: i-1b163d47-udp
+      targetPort: 24454
