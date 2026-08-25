@@ -4,3 +4,8 @@ kind: L2Advertisement
 metadata:
   name: home
   namespace: metallb-system
+spec:
+  ipAddressPools:
+    - gateway-pool
+    - dns-pool
+    - service-pool
