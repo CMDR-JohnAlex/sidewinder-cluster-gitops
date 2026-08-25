@@ -139,8 +139,10 @@ spec:
           ports:
             - containerPort: 25565
               name: i-1b163d47-tcp
+              protocol: TCP
             - containerPort: 24454
               name: i-1b163d47-udp
+              protocol: UDP
 
           resources:
             limits:
