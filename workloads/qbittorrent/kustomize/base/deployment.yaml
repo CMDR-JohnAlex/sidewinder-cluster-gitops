@@ -60,6 +60,10 @@ spec:
             - name: DNS_REBINDING_PROTECTION_EXEMPT_HOSTNAMES
               value: "*.sidewinder.lan"
 
+          envFrom:
+            - secretRef:
+                name: wireguard-secrets
+
           ports:
             - name: http-proxy
               containerPort: 8888
@@ -79,10 +83,6 @@ spec:
       containers:
         - name: qbittorrent
           image: lscr.io/linuxserver/qbittorrent:latest
-
-          envFrom:
-            - secretRef:
-                name: wireguard-secret
 
           ports:
             - name: qb-webui
