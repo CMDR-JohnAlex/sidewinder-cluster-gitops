@@ -42,8 +42,15 @@ spec:
     - qb.invalid.example
 
   rules:
-    - filters:
-        - type: RequestRedirect
-          requestRedirect:
-            scheme: https
-            statusCode: 301
+    - backendRefs:
+        - name: qbittorrent # SVC name (internal IP:PORT).
+          port: 8080
+      matches:
+        - path:
+            type: PathPrefix
+            value: /
+    # - filters:
+    #     - type: RequestRedirect
+    #       requestRedirect:
+    #         scheme: https
+    #         statusCode: 301

@@ -85,6 +85,7 @@ spec:
           image: lscr.io/linuxserver/qbittorrent:latest
 
           ports:
+            # NOTE: You need to set "bypass_local_auth":true. Either in the WebUI and then restart the pod, or in the config file and then restart the pod.
             - name: qb-webui
               containerPort: 8080
               protocol: TCP
