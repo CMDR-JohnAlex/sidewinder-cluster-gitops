@@ -118,6 +118,10 @@ data:
             icon: minecraft.svg
             href: https://mc.sidewinder.lan
             description: "Family Minecraft Server."
+        - qBittorrent:
+            icon: qbittorrent.svg
+            href: https://qbittorrent.sidewinder.lan
+            description: "Download new Linux distributions efficiently."
 
     - Arr Stack:
         - EMPTY 1:
@@ -137,9 +141,10 @@ data:
         # Pi-Hole
         # AdGuard Home
         # Technitium
-        - EMPTY 3:
-            href: https://homepage.sidewinder.lan
-            description: "Placeholder."
+        - AdGuard Home:
+            icon: adguard-home.svg
+            href: https://192.168.7.101
+            description: "Secure home DNS server. Blocks ads, trackers, malware, and more."
 
     - Social:
         # Matrix
