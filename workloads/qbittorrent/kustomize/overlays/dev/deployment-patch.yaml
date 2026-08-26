@@ -1,0 +1,32 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: qbittorrent
+  labels:
+    app.kubernetes.io/name: qbittorrent
+
+spec:
+  replicas: 0
+  revisionHistoryLimit: 1
+
+  template:
+    spec:
+      initContainers:
+        - name: gluetun
+          image: qmcgaw/gluetun:latest
+
+      containers:
+        - name: qbittorrent
+          image: lscr.io/linuxserver/qbittorrent:latest
+
+          # resources:
+          #   limits:
+          #     cpu:  0m
+          #     memory: 0Mi
+          #   requests:
+          #     cpu: 0m
+          #     memory: 0Mi
+
+          # TODO: Probes

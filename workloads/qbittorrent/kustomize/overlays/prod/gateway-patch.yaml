@@ -1,0 +1,23 @@
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+
+metadata:
+  name: qbittorrent-https
+
+spec:
+  hostnames:
+    - qbittorrent.sidewinder.lan
+    - qb.sidewinder.lan
+
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+
+metadata:
+  name: qbittorrent-http
+
+spec:
+  hostnames:
+    - qbittorrent.sidewinder.lan
+    - qb.sidewinder.lan

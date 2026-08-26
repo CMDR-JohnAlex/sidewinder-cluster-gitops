@@ -1,0 +1,16 @@
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+
+metadata:
+  name: qbittorrent-data
+
+spec:
+  accessModes:
+    - ReadWriteOnce
+
+  storageClassName: hdd-general
+
+  resources:
+    requests:
+      storage: 1Gi

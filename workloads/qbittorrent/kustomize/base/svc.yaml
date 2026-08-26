@@ -1,0 +1,21 @@
+---
+apiVersion: v1
+kind: Service
+
+metadata:
+  name: qbittorrent
+
+  labels:
+    app.kubernetes.io/name: qbittorrent
+
+spec:
+  type: ClusterIP
+
+  ports:
+    - name: qb-webui
+      port: 8080
+      protocol: TCP
+      targetPort: qb-webui
+
+  selector:
+    app.kubernetes.io/name: qbittorrent

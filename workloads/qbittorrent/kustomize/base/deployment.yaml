@@ -1,0 +1,114 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: qbittorrent
+  labels:
+    app.kubernetes.io/name: qbittorrent
+
+spec:
+  replicas: 1
+  revisionHistoryLimit: 3
+
+  strategy:
+    type: Recreate # To prevent PVC lockups.
+
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: qbittorrent
+
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: qbittorrent
+
+    spec:
+      initContainers:
+        - name: gluetun
+          image: qmcgaw/gluetun:latest
+
+          # Setting `restartPolicy: Always` makes this a sidecar container.
+          #
+          # REF: https://kubernetes.io/docs/concepts/workloads/pods/sidecar-containers/
+          # > "[...] the sidecar container is intentionally defined under initContainers with
+          # > restartPolicy: Always. Kubernetes treats such containers as sidecars that continue
+          # > running for the lifetime of the Pod."
+          #
+          # > "If a readinessProbe is specified for this init container, its result will be used
+          # > to determine the ready state of the Pod."
+          restartPolicy: Always
+
+          securityContext:
+            capabilities:
+              add:
+                - NET_ADMIN
+
+          env:
+            # REF:
+            #   - https://github.com/qdm12/gluetun-wiki/blob/main/setup/connect-a-lan-device-to-gluetun.md#access-your-lan-through-gluetun
+            #   - https://github.com/qdm12/gluetun-wiki/blob/main/setup/options/firewall.md#environment-variables
+            #   - https://github.com/qdm12/gluetun-wiki/blob/main/setup/advanced/kubernetes.md#networking-for-reverse-proxies-running-on-the-local-network-when-using-gluetuns-dns
+
+            # All incoming and outgoing traffic to eth0 is blocked, forcing outgoing packets to go through tun0 (the VPN).
+            # This allows traffic from port 8080 to pass through eth0.
+            - name: FIREWALL_INPUT_PORTS
+              value: "8080"
+            # Allows traffic to be sent back to the LAN subnets, pod CIDR, and service CIDR.
+            - name: FIREWALL_OUTBOUND_SUBNETS
+              value: "192.168.0.0/16,10.244.0.0/16,10.96.0.0/12"
+            - name: DNS_REBINDING_PROTECTION_EXEMPT_HOSTNAMES
+              value: "*.sidewinder.lan"
+
+          ports:
+            - name: http-proxy
+              containerPort: 8888
+              protocol: TCP
+            - name: shadowsocks-tcp
+              containerPort: 8388
+              protocol: TCP
+            - name: shadowsocks-udp
+              containerPort: 8388
+              protocol: UDP
+
+          volumeMounts:
+            - name: qbittorrent-data
+              subPath: gluetun/
+              mountPath: /gluetun
+
+      containers:
+        - name: qbittorrent
+          image: lscr.io/linuxserver/qbittorrent:latest
+
+          envFrom:
+            - secretRef:
+                name: wireguard-secret
+
+          ports:
+            - name: qb-webui
+              containerPort: 8080
+              protocol: TCP
+            # All other qB ports are unspecified to prevent me from mistakenly making services to route to them.
+
+          # resources:
+          #   limits:
+          #     cpu:  0m
+          #     memory: 0Mi
+          #   requests:
+          #     cpu: 0m
+          #     memory: 0Mi
+
+          # TODO: Probes
+
+          volumeMounts:
+            - name: qbittorrent-data
+              subPath: config/
+              mountPath: /config
+            - name: qbittorrent-data
+              subPath: downloads/
+              mountPath: /downloads
+
+      volumes:
+        - name: qbittorrent-data
+          persistentVolumeClaim:
+            claimName: qbittorrent-data
