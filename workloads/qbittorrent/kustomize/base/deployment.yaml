@@ -103,13 +103,16 @@ spec:
 
           volumeMounts:
             - name: qbittorrent-data
-              subPath: config/
+              subPath: qB-config/
               mountPath: /config
-            - name: qbittorrent-data
-              subPath: downloads/
+            - name: qbittorrent-downloads
+              subPath: qB-downloads/
               mountPath: /downloads
 
       volumes:
         - name: qbittorrent-data
           persistentVolumeClaim:
             claimName: qbittorrent-data
+        - name: qbittorrent-downloads
+          persistentVolumeClaim:
+            claimName: media
