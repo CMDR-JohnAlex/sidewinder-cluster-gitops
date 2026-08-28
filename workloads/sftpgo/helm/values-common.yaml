@@ -74,29 +74,11 @@ config: {}
 
 # -- Additional storage [volumes](https://kubernetes.io/docs/concepts/storage/volumes/).
 # See the [API reference](https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-v1/#volumes-1) for details.
-volumes: # []
-  - name: nfs-direct-mount
-    nfs:
-      server: 192.168.7.7
-      path: /mnt/nfs
-
-  - name: sftpgo-data
-    persistentVolumeClaim:
-      claimName: sftpgo-data-pvc
+volumes: []
 
 # -- Additional [volume mounts](https://kubernetes.io/docs/tasks/configure-pod-container/configure-volume-storage/).
 # See the [API reference](https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-v1/#volumes-1) for details.
-volumeMounts: # []
-  - name: nfs-direct-mount
-    mountPath: /srv/nfs
-
-  - name: sftpgo-data
-    subPath: srv/sftpgo/
-    mountPath: /srv/sftpgo
-
-  - name: sftpgo-data
-    subPath: var/lib/sftpgo/
-    mountPath: /var/lib/sftpgo
+volumeMounts: []
 
 # -- Additional environment variables mounted from [secrets](https://kubernetes.io/docs/concepts/configuration/secret/#using-secrets-as-environment-variables) or [config maps](https://kubernetes.io/docs/tasks/configure-pod-container/configure-pod-configmap/#configure-all-key-value-pairs-in-a-configmap-as-container-environment-variables).
 # See the [API reference](https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-v1/#environment-variables) for details.

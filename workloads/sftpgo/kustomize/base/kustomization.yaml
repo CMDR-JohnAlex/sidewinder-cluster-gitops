@@ -5,4 +5,4 @@ kind: Kustomization
 
 resources:
   - pvc.yaml
-  # - gateway.yaml
+  - gateway.yaml

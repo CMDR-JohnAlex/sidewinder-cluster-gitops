@@ -1,0 +1,30 @@
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+
+metadata:
+  name: sftpgo-https
+
+spec:
+  hostnames:
+    - sftpgo.dev.sidewinder.lan
+
+  rules:
+    - backendRefs:
+        - name: sftpgo-dev # SVC name (internal IP:PORT).
+          port: 80
+      matches:
+        - path:
+            type: PathPrefix
+            value: /
+
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+
+metadata:
+  name: sftpgo-http
+
+spec:
+  hostnames:
+    - sftpgo.dev.sidewinder.lan

@@ -4,3 +4,29 @@ replicaCount: 0
 
 # -- Number of old ReplicaSets to retain to allow rollback.
 revisionHistoryLimit: 3
+
+# -- Additional storage [volumes](https://kubernetes.io/docs/concepts/storage/volumes/).
+# See the [API reference](https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-v1/#volumes-1) for details.
+volumes: # []
+  - name: nfs-direct-mount
+    nfs:
+      server: 192.168.7.7
+      path: /mnt/nfs
+
+  - name: sftpgo-data
+    persistentVolumeClaim:
+      claimName: sftpgo-data-pvc
+
+# -- Additional [volume mounts](https://kubernetes.io/docs/tasks/configure-pod-container/configure-volume-storage/).
+# See the [API reference](https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-v1/#volumes-1) for details.
+volumeMounts: # []
+  - name: nfs-direct-mount
+    mountPath: /srv/nfs
+
+  - name: sftpgo-data
+    subPath: srv/sftpgo/
+    mountPath: /srv/sftpgo
+
+  - name: sftpgo-data
+    subPath: var/lib/sftpgo/
+    mountPath: /var/lib/sftpgo
