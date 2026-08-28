@@ -8,10 +8,15 @@ revisionHistoryLimit: 3
 # -- Additional storage [volumes](https://kubernetes.io/docs/concepts/storage/volumes/).
 # See the [API reference](https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-v1/#volumes-1) for details.
 volumes: # []
-  - name: nfs-direct-mount
+  - name: nfs-8dafdf36-cb0f-4102-a05e-d69ea5954303
     nfs:
       server: 192.168.7.7
-      path: /mnt/nfs
+      path: /mnt/nfs/8dafdf36-cb0f-4102-a05e-d69ea5954303
+
+  - name: nfs-e9642e46-dd2e-4900-be52-4eb23e67cbf5
+    nfs:
+      server: 192.168.7.7
+      path: /mnt/nfs/e9642e46-dd2e-4900-be52-4eb23e67cbf5
 
   - name: sftpgo-data
     persistentVolumeClaim:
@@ -20,8 +25,11 @@ volumes: # []
 # -- Additional [volume mounts](https://kubernetes.io/docs/tasks/configure-pod-container/configure-volume-storage/).
 # See the [API reference](https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-v1/#volumes-1) for details.
 volumeMounts: # []
-  - name: nfs-direct-mount
-    mountPath: /srv/nfs
+  - name: nfs-8dafdf36-cb0f-4102-a05e-d69ea5954303
+    mountPath: /srv/nfs-8dafdf36-cb0f-4102-a05e-d69ea5954303
+
+  - name: e9642e46-dd2e-4900-be52-4eb23e67cbf5
+    mountPath: /srv/e9642e46-dd2e-4900-be52-4eb23e67cbf5
 
   - name: sftpgo-data
     subPath: srv/sftpgo/
