@@ -1,0 +1,6 @@
+---
+# -- Number of replicas (pods) to launch.
+replicaCount: 0
+
+# -- Number of old ReplicaSets to retain to allow rollback.
+revisionHistoryLimit: 3

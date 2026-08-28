@@ -1,0 +1,19 @@
+---
+# -- Number of replicas (pods) to launch.
+replicaCount: 1
+
+# -- Number of old ReplicaSets to retain to allow rollback.
+revisionHistoryLimit: 10
+
+# -- Additional storage [volumes](https://kubernetes.io/docs/concepts/storage/volumes/).
+# See the [API reference](https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-v1/#volumes-1) for details.
+volumes: # []
+  - name: sftpgo-users
+    persistentVolumeClaim:
+      claimName: sftpgo-users-pvc
+
+# -- Additional [volume mounts](https://kubernetes.io/docs/tasks/configure-pod-container/configure-volume-storage/).
+# See the [API reference](https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-v1/#volumes-1) for details.
+volumeMounts: # []
+  - name: sftpgo-users
+    mountPath: /srv/sftpgo-users-pvc

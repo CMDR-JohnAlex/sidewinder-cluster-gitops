@@ -1,0 +1,62 @@
+---
+# https://argo-cd.readthedocs.io/en/stable/user-guide/application-set/
+# https://argo-cd.readthedocs.io/en/stable/operator-manual/applicationset/
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+
+metadata:
+  name: sftpgo
+  namespace: argocd
+
+spec:
+  generators:
+    - list:
+        elements:
+          - env: dev
+            namespace: sftpgo-dev
+            targetRevision: 0.47.0
+          - env: prod
+            namespace: sftpgo-prod
+            targetRevision: 0.47.0
+
+  template:
+    metadata:
+      name: sftpgo
+      namespace: argocd
+      finalizers:
+        - resources-finalizer.argocd.argoproj.io
+
+    spec:
+      project: workloads
+      sources:
+        # Helm chart
+        - repoURL: ghcr.io/sftpgo/helm-charts
+          chart: sftpgo
+          targetRevision: '{{targetRevision}}'
+          helm:
+            valueFiles:
+              - $values/workloads/sftpgo/helm/values-common.yaml
+              - $values/workloads/sftpgo/helm/values-{{env}}.yaml
+
+        # Values repository
+        - repoURL: https://github.com/CMDR-JohnAlex/sidewinder-cluster-gitops.git
+          targetRevision: main
+          ref: values
+
+        # Kustomize
+        - repoURL: https://github.com/CMDR-JohnAlex/sidewinder-cluster-gitops.git
+          targetRevision: main
+          path: workloads/sftpgo/kustomize/overlays/{{env}}
+
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: '{{namespace}}'
+
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+
+        syncOptions:
+          - ServerSideApply=true
+          - CreateNamespace=true
