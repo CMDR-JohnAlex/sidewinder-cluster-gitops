@@ -18,6 +18,9 @@ spec:
     - backendRefs:
         - name: feishin-svc # SVC name (internal IP:PORT).
           port: 80
+      timeouts:
+          request: 60s
+          backendRequest: 60s
       matches:
         - path:
             type: PathPrefix
@@ -43,6 +46,9 @@ spec:
     - backendRefs:
         - name: feishin-svc # SVC name (internal IP:PORT).
           port: 80
+      timeouts:
+          request: 60s
+          backendRequest: 60s
       matches:
         - path:
             type: PathPrefix
