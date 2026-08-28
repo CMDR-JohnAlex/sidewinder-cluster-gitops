@@ -1,6 +1,6 @@
 # https://www.navidrome.org/docs/usage/configuration/options/
 LogLevel = 'info'
-UIWelcomeMessage = 'meow'
+UIWelcomeMessage = '=^._.^='
 Scanner.Enabled = true
 Scanner.Schedule = '@every 24h'
 TranscodingCacheSize = '150MiB'
