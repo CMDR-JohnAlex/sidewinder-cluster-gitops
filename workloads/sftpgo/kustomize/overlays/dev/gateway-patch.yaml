@@ -13,6 +13,9 @@ spec:
     - backendRefs:
         - name: sftpgo-dev # SVC name (internal IP:PORT).
           port: 80
+      timeouts:
+          request: 600s # 10 minute timeout for large files being uploaded.
+          backendRequest: 600s # 10 minute timeout for large files being uploaded.
       matches:
         - path:
             type: PathPrefix
