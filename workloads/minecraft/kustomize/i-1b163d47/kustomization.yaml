@@ -14,10 +14,6 @@ resources:
 configMapGenerator:
     - name: mc-i-1b163d47-configs
       files:
-        - configs/purpur.yml
-        - configs/bukkit.yml
-        - configs/spigot.yml
-        - configs/authme-config.yml
         - configs/skinsrestorer-config.yml
 
     - name: mc-i-1b163d47-icon

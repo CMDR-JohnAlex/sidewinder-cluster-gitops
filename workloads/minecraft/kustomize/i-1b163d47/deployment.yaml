@@ -33,14 +33,8 @@ spec:
             - -c
             - |
               echo "Copying configuration files."
-              mkdir -p /data/plugins/AuthMe
               mkdir -p /data/plugins/SkinsRestorer
 
-              cp /tmp/configs/purpur.yml /data/purpur.yml
-              cp /tmp/configs/bukkit.yml /data/bukkit.yml
-              cp /tmp/configs/spigot.yml /data/spigot.yml
-
-              cp /tmp/configs/authme-config.yml /data/plugins/AuthMe/config.yml
               cp /tmp/configs/skinsrestorer-config.yml /data/plugins/SkinsRestorer/config.yml
 
               echo "Configs successfully deployed!"
