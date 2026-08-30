@@ -132,6 +132,7 @@ data:
         # Vikunja
         # Forgejo
         - SFTPGo:
+            icon: sftpgo.svg
             href: https://sftpgo.sidewinder.lan
             description: "Backup files and manage your data."
 
