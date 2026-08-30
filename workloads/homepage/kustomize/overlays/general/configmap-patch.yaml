@@ -131,15 +131,13 @@ data:
     - Productivity:
         # Vikunja
         # Forgejo
-        # SFTPGo
-        - EMPTY 2:
-            href: https://homepage.sidewinder.lan
-            description: "Placeholder."
+        - SFTPGo:
+            href: https://sftpgo.sidewinder.lan
+            description: "Backup files and manage your data."
 
     - Home & Network:
         # Home Assistant
         # Pi-Hole
-        # AdGuard Home
         # Technitium
         - AdGuard Home:
             icon: adguard-home.svg
