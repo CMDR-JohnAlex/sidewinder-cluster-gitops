@@ -4856,7 +4856,7 @@ prometheus:
          accessModes: ["ReadWriteOnce"]
          resources:
            requests:
-             storage: 50Gi
+             storage: 5Gi # 50Gi
          selector: {}
 
     ## Using tmpfs volume
