@@ -11,4 +11,4 @@ vikunja:
        secretKeyRef:
          name: vikunja-secrets
          key: database-password
-    VIKUNJA_SERVICE_PUBLICURL: "vikunja.sidewinder.lan"
+    VIKUNJA_SERVICE_PUBLICURL: "https://vikunja.sidewinder.lan"

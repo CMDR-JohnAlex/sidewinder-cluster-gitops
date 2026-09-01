@@ -51,6 +51,6 @@ vikunja:
        secretKeyRef:
          name: vikunja-secrets
          key: database-password
-    VIKUNJA_SERVICE_PUBLICURL: "vikunja.invalid.example"
+    VIKUNJA_SERVICE_PUBLICURL: "https://vikunja.invalid.example"
 
 additionalObjects: []
