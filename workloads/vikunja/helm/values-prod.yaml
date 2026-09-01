@@ -2,7 +2,7 @@
 vikunja:
   env:
     # https://vikunja.io/docs/config-options
-    VIKUNJA_DATABASE_TYPE: "postgresql"
+    VIKUNJA_DATABASE_TYPE: "postgres"
     VIKUNJA_DATABASE_HOST: "vikunja-postgresql-rw.vikunja-prod.svc.cluster.local:5432"
     VIKUNJA_DATABASE_DATABASE: "vikunja"
     VIKUNJA_DATABASE_USER: "vikunja"

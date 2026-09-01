@@ -42,7 +42,7 @@ vikunja:
     # To utilize a secret in the environment variables, you can do something like the following: https://github.com/bjw-s/helm-charts/blob/a081de53024d8328d1ae9ff7e4f6bc500b0f3a29/charts/library/common/values.yaml#L141-L145
     # You can use PostgreSQL, MySQL, or SQLite. SQLite is the default for simplicity.
     # https://vikunja.io/docs/config-options
-    VIKUNJA_DATABASE_TYPE: "postgresql"
+    VIKUNJA_DATABASE_TYPE: "postgres"
     VIKUNJA_DATABASE_HOST: "vikunja-postgresql-rw.vikunja-env.svc.cluster.local:5432"
     VIKUNJA_DATABASE_DATABASE: "vikunja"
     VIKUNJA_DATABASE_USER: "vikunja"
