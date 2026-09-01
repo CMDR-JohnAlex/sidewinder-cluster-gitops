@@ -84,6 +84,12 @@ spec:
         - name: qbittorrent
           image: lscr.io/linuxserver/qbittorrent:latest
 
+          env:
+            - name: PUID
+              value: '1000'
+            - name: PGID
+              value: '1000'
+
           ports:
             # NOTE: You need to set "bypass_local_auth":true. Either in the WebUI and then restart the pod, or in the config file and then restart the pod.
             - name: qb-webui
