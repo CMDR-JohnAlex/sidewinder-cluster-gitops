@@ -1,0 +1,57 @@
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+
+metadata:
+  name: vikunja-https
+
+spec:
+  parentRefs:
+    - name: primary-gateway
+      namespace: envoy-gateway-system
+      sectionName: https
+
+  hostnames:
+    - vikunja.invalid.example
+
+  rules:
+    - backendRefs:
+        - name: vikunja-env # SVC name (internal IP:PORT).
+          port: 3456
+      timeouts:
+          request: 300s # 5 minute timeout for large files being uploaded.
+          backendRequest: 300s # 5 minute timeout for large files being uploaded.
+      matches:
+        - path:
+            type: PathPrefix
+            value: /
+
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+
+metadata:
+  name: vikunja-http
+
+spec:
+  parentRefs:
+    - name: primary-gateway
+      namespace: envoy-gateway-system
+      sectionName: http
+
+  hostnames:
+    - vikunja.invalid.example
+
+  rules:
+    # - backendRefs:
+    #     - name: vikunja-env # SVC name (internal IP:PORT).
+    #       port: 3456
+    #   matches:
+    #     - path:
+    #         type: PathPrefix
+    #         value: /
+    - filters:
+        - type: RequestRedirect
+          requestRedirect:
+            scheme: https
+            statusCode: 301

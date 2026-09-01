@@ -1,0 +1,9 @@
+---
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+
+metadata:
+  name: vikunja-postgresql
+
+spec:
+  instances: 1 # NOTE: Not limited to 1! We can increase this for HA!

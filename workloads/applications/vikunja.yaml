@@ -1,0 +1,62 @@
+---
+# https://argo-cd.readthedocs.io/en/stable/user-guide/application-set/
+# https://argo-cd.readthedocs.io/en/stable/operator-manual/applicationset/
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+
+metadata:
+  name: vikunja
+  namespace: argocd
+
+spec:
+  generators:
+    - list:
+        elements:
+          # - env: dev
+          #   namespace: vikunja-dev
+          #   targetRevision: 2.3.0
+          - env: prod
+            namespace: vikunja-prod
+            targetRevision: 2.3.0
+
+  template:
+    metadata:
+      name: 'vikunja-{{env}}'
+      namespace: argocd
+      finalizers:
+        - resources-finalizer.argocd.argoproj.io
+
+    spec:
+      project: workloads
+      sources:
+        # Helm chart
+        - repoURL: ghcr.io/go-vikunja/helm-chart
+          chart: vikunja
+          targetRevision: '{{targetRevision}}'
+          helm:
+            valueFiles:
+              - $values/workloads/vikunja/helm/values-common.yaml
+              - $values/workloads/vikunja/helm/values-{{env}}.yaml
+
+        # Values repository
+        - repoURL: https://github.com/CMDR-JohnAlex/sidewinder-cluster-gitops.git
+          targetRevision: main
+          ref: values
+
+        # Kustomize
+        - repoURL: https://github.com/CMDR-JohnAlex/sidewinder-cluster-gitops.git
+          targetRevision: main
+          path: workloads/vikunja/kustomize/overlays/{{env}}
+
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: '{{namespace}}'
+
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+
+        syncOptions:
+          - ServerSideApply=true
+          - CreateNamespace=true

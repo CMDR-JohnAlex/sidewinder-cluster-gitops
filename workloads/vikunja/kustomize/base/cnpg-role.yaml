@@ -1,0 +1,15 @@
+---
+# REF: https://cloudnative-pg.io/docs/1.30/declarative_role_management
+apiVersion: postgresql.cnpg.io/v1
+kind: DatabaseRole
+metadata:
+  name: vikunja-role
+spec:
+  cluster:
+    name: vikunja-postgresql
+  name: vikunja
+  comment: "vikunja user"
+  login: true
+  superuser: false
+  createdb: true
+  databaseRoleReclaimPolicy: retain
