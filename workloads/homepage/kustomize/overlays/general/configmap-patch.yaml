@@ -129,12 +129,15 @@ data:
             description: "Placeholder."
 
     - Productivity:
-        # Vikunja
         # Forgejo
         - SFTPGo:
             icon: sftpgo.png
             href: https://sftpgo.sidewinder.lan
             description: "Backup files and manage your data."
+        - Vikunja:
+            icon: vikunja.svg
+            href: https://vikunja.sidewinder.lan
+            description: "Task manager with lists, Kanban, Gantt, and more."
 
     - Home & Network:
         # Home Assistant
