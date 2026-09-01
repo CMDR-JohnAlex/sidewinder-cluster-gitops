@@ -4,6 +4,6 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
 resources:
-  - cpng-cluster.yaml
-  - cpng-role.yaml
+  - cnpg-cluster.yaml
+  - cnpg-role.yaml
   - gateway.yaml
