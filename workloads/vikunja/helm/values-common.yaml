@@ -50,7 +50,7 @@ vikunja:
       valueFrom:
        secretKeyRef:
          name: vikunja-secrets
-         key: database-password
+         key: password
     VIKUNJA_SERVICE_PUBLICURL: "https://vikunja.invalid.example"
 
 additionalObjects: []

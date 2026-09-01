@@ -13,3 +13,5 @@ spec:
   superuser: false
   createdb: true
   databaseRoleReclaimPolicy: retain
+  passwordSecret:
+    name: vikunja-secrets
