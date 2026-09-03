@@ -14,3 +14,4 @@ DefaultTheme = 'Dark'
 DefaultLanguage = 'en'
 Prometheus.Enabled = false
 Prometheus.MetricsPath = '/metrics'
+Agents = "listenbrainz,deezer,lastfm"
