@@ -1,0 +1,10 @@
+---
+# https://kubernetes.io/docs/tasks/manage-kubernetes-objects/kustomization/#bases-and-overlays
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+  - deployment.yaml
+  - pvc.yaml
+  - svc.yaml
+  - gateway.yaml

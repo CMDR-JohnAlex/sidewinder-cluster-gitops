@@ -1,0 +1,27 @@
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+
+metadata:
+  name: wireguard-admin-https
+
+spec:
+  parentRefs:
+    - name: primary-gateway
+      namespace: envoy-gateway-system
+      sectionName: https
+
+  hostnames:
+    - wireguard.sidewinder.lan
+
+  rules:
+    - backendRefs:
+        - name: wireguard-admin-svc # SVC name (internal IP:PORT).
+          port: 51821
+      # timeouts:
+      #     request: 10s
+      #     backendRequest: 10s
+      matches:
+        - path:
+            type: PathPrefix
+            value: /

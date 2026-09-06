@@ -1,0 +1,17 @@
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: UDPRoute
+
+metadata:
+  name: wireguard-admin
+
+spec:
+  parentRefs:
+    - name: primary-gateway
+      namespace: envoy-gateway-system
+      sectionName: wireguard
+
+  rules:
+    - backendRefs:
+        - name: wireguard-admin-svc # SVC name (internal IP:PORT).
+          port: 51820

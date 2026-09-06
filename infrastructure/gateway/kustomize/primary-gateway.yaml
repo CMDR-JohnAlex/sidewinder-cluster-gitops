@@ -106,3 +106,12 @@ spec:
           from: All
         kinds:
           - kind: TCPRoute
+
+    - name: wireguard
+      protocol: UDP
+      port: 51820
+      allowedRoutes:
+        namespaces:
+          from: All
+        kinds:
+          - kind: UDPRoute

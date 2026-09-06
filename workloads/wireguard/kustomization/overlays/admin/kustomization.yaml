@@ -1,0 +1,55 @@
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+  - ../../base
+
+patches:
+  - target:
+      kind: Deployment
+      name: wireguard-deployment
+    options:
+      allowNameChange: true
+    path: deployment-patch.yaml
+
+  - target:
+      kind: PersistentVolumeClaim
+      name: wireguard-pvc
+    options:
+      allowNameChange: true
+    path: pvc-patch.yaml
+
+  - target:
+      kind: Service
+      name: wireguard-svc
+    options:
+      allowNameChange: true
+    path: svc-patch.yaml
+
+  - target:
+      kind: UDPRoute
+      name: wireguard
+    options:
+      allowNameChange: true
+    path: gateway-udproute-patch.yaml
+
+  - target:
+      kind: HTTPRoute
+      name: wireguard-https
+    options:
+      allowNameChange: true
+    path: gateway-httpsroute-patch.yaml
+
+  - target:
+      kind: HTTPRoute
+      name: wireguard-http
+    options:
+      allowNameChange: true
+    path: gateway-httproute-patch.yaml
+
+labels:
+  - pairs:
+      instance: admin
+    includeSelectors: false
+    includeTemplates: true
