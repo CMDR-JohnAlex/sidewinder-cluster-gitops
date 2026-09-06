@@ -28,6 +28,8 @@ patches:
     path: svc-patch.yaml
 
   - target:
+      group: gateway.networking.k8s.io
+      version: v1
       kind: UDPRoute
       name: wireguard
     options:
