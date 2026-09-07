@@ -14,7 +14,7 @@ spec:
         repoURL: https://github.com/CMDR-JohnAlex/sidewinder-cluster-gitops.git
         revision: main
         directories:
-          - path: workloads/wireguard/kustomize/overlays/*
+          - path: workloads/wireguard/kustomize/*
 
   template:
     metadata:
@@ -41,5 +41,5 @@ spec:
           selfHeal: true
 
         syncOptions:
-          # - ServerSideApply=true
+          - ServerSideApply=true
           - CreateNamespace=true
