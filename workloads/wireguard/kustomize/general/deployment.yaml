@@ -29,10 +29,6 @@ spec:
         - name: wireguard
           image: ghcr.io/wg-easy/wg-easy:15
 
-          env:
-            - name: HOST
-              value: 'wireguard.sidewinder.lan'
-
           ports:
             - name: wg
               containerPort: 51820
