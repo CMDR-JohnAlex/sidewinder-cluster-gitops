@@ -25,19 +25,14 @@ spec:
         app.kubernetes.io/name: wireguard-pod
 
     spec:
-      # WORKAROUND: https://github.com/wg-easy/wg-easy/discussions/1435#discussioncomment-10763584
-      securityContext:
-        sysctls:
-          - name: net.ipv4.ip_forward
-            value: "1"
-          - name: net.ipv4.conf.all.forwarding
-            value: "1"
-          - name: net.ipv4.conf.all.src_valid_mark
-            value: "1"
-
       containers:
         - name: wireguard
           image: ghcr.io/wg-easy/wg-easy:15
+
+          env:
+            # WORKAROUND: https://github.com/wg-easy/wg-easy/discussions/1435#discussioncomment-10791325
+            - name: WG_POST_UP
+              value: 'sysctl -w net.ipv4.ip_forward=1; sysctl -w net.ipv4.conf.all.forwarding=1; sysctl -w net.ipv4.conf.all.src_valid_mark=1;'
 
           ports:
             - name: wg
