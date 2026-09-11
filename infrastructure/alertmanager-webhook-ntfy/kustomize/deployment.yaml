@@ -25,13 +25,13 @@ spec:
           ports:
             - containerPort: 8080
               name: http-webhook
-          # resources:
-          #   limits:
-          #     memory: 300Mi
-          #     cpu:  200m
-          #   requests:
-          #         cpu: 150m
-          #         memory: 150Mi
+          resources:
+            limits:
+              cpu:  5.5m
+              memory: 100Mi
+            requests:
+                cpu: 4.5m
+                memory: 95Mi
           volumeMounts:
             - mountPath: /usr/src/app/config.yaml
               subPath: config.yaml
