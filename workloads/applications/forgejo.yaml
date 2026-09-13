@@ -4,7 +4,7 @@ kind: Application
 
 metadata:
   name: forgejo
-  namespace: git
+  namespace: argocd
   finalizers:
     - resources-finalizer.argocd.argoproj.io
 
