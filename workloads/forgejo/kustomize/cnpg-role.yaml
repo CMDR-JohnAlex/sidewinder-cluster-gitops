@@ -1,0 +1,20 @@
+---
+# REF: https://cloudnative-pg.io/docs/1.30/declarative_role_management
+apiVersion: postgresql.cnpg.io/v1
+kind: DatabaseRole
+
+metadata:
+  name: forgejo-role
+
+spec:
+  cluster:
+    name: forgejo-postgresql
+
+  name: forgejo
+  comment: "forgejo user"
+  login: true
+  superuser: false
+  createdb: true
+  databaseRoleReclaimPolicy: retain
+  passwordSecret:
+    name: forgejo-db-secrets

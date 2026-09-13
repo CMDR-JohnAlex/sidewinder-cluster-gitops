@@ -39,6 +39,15 @@ spec:
       name: primary-gateway-proxy
 
   listeners:
+    - name: git-ssh
+      protocol: TCP
+      port: 22
+      allowedRoutes:
+        namespaces:
+          from: All
+        kinds:
+          - kind: TCPRoute
+
     - name: http
       protocol: HTTP
       port: 80
