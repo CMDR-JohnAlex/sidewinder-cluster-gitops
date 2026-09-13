@@ -4,7 +4,7 @@ kind: Kustomization
 
 resources:
   - forgejo-db-secrets.yaml
-  - forgejo-admin-secrets.yaml
+  - gitea-config-secrets.yaml
   - cnpg-cluster.yaml
   - cnpg-role.yaml
   # - gateway.yaml
