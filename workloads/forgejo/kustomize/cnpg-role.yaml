@@ -17,4 +17,4 @@ spec:
   createdb: true
   databaseRoleReclaimPolicy: retain
   passwordSecret:
-    name: forgejo-db-secrets
+    name: cnpg-db-secrets
