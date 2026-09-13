@@ -223,7 +223,7 @@ httpRoute:
   #     set:
   #       - name: X-Forwarded-Proto
   #         value: https
-  port: 443
+  port: 3000
   terminate: true
 
 # Enables Gateway API TCPRoute for SSH traffic
