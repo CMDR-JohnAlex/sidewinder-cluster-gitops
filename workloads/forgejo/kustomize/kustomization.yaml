@@ -5,6 +5,7 @@ kind: Kustomization
 resources:
   - cnpg-db-secrets.yaml
   - gitea-config-secrets.yaml
+  - gitea-admin-secrets.yaml
   - cnpg-cluster.yaml
   - cnpg-role.yaml
   # - gateway.yaml
