@@ -8,4 +8,4 @@ resources:
   - gitea-admin-secrets.yaml
   - cnpg-cluster.yaml
   - cnpg-role.yaml
-  # - gateway.yaml
+  - gateway.yaml
