@@ -129,7 +129,6 @@ data:
             description: "Placeholder."
 
     - Productivity:
-        # Forgejo
         - SFTPGo:
             icon: sftpgo.png
             href: https://sftpgo.sidewinder.lan
@@ -138,6 +137,10 @@ data:
             icon: vikunja.svg
             href: https://vikunja.sidewinder.lan
             description: "Task manager with lists, Kanban, Gantt, and more."
+        - Forgejo:
+            icon: forgejo.svg
+            href: https://forgejo.sidewinder.lan
+            description: "Git server. Share projects, track issues, collaborate with others, and improve open source software."
 
     - Home & Network:
         # Home Assistant
