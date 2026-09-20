@@ -8,7 +8,7 @@ metadata:
     app: mc-i-1b163d47-deployment
 
 spec:
-  replicas: 0
+  replicas: 1
   revisionHistoryLimit: 1
   # Kubernetes tries to spin up a new pod before terminating the old one.
   # This will ensure the old pod lets go of the ReadWriteOnce PVC before the new one is created so that the new one can grab the PVC.
