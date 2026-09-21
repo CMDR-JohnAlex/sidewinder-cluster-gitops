@@ -45,8 +45,8 @@ apiService:
   # Annotations to add to the API service
   annotations: {}
   # Specifies whether to skip TLS verification
-  # insecureSkipTLSVerify: true
-  insecureSkipTLSVerify: false
+  # TODO: Set this to false, and work things out.
+  insecureSkipTLSVerify: true
   # The PEM encoded CA bundle for TLS verification
   caBundle: ""
 
