@@ -2,7 +2,7 @@
 apiVersion: autoscaling.k8s.io/v1
 kind: verticalPodAutoscaler
 
-metedata:
+metadata:
   name: alertmanager-webhook-ntfy-vpa
 
 spec:
