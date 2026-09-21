@@ -9,3 +9,5 @@ resources:
   - cnpg-cluster.yaml
   - cnpg-role.yaml
   - gateway.yaml
+  - vpa.yaml
+
