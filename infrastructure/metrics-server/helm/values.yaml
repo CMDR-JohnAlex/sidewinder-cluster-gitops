@@ -80,7 +80,7 @@ hostNetwork:
   # if you use Weave network on EKS
   enabled: false
 
-replicas: 1
+replicas: 1 # NOTE: Can be increased for HA!
 
 revisionHistoryLimit:
 
