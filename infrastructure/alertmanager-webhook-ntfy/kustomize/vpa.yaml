@@ -1,0 +1,15 @@
+---
+apiVersion: autoscaling.k8s.io/v1
+kind: verticalPodAutoscaler
+
+metedata:
+  name: alertmanager-webhook-ntfy-vpa
+
+spec:
+  targetRef:
+    apiVersion: "apps/v1"
+    kind: Deployment
+    name: alertmanager-webhook-ntfy-deployment
+
+  updatePolicy:
+    updateMode: "Off"

@@ -6,6 +6,7 @@ resources:
   - deployment.yaml
   - svc.yaml
   - sealedsecret.yaml
+  - vpa.yaml
 
 configMapGenerator:
     - name: routing-config
