@@ -5,6 +5,8 @@ kind: Kustomization
 resources:
   - ../../base
 
+  - vpa.yaml
+
 patches:
   - path: cnpg-cluster-patch.yaml
   - path: pvc-patch.yaml
