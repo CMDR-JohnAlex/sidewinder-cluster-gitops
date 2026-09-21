@@ -3,7 +3,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 
 metadata:
-  name: metrics-server
+  name: kubelet-csr-approver
   namespace: argocd
   finalizers:
     - resources-finalizer.argocd.argoproj.io
@@ -13,12 +13,12 @@ spec:
 
   sources:
     # Helm chart
-    - repoURL: https://kubernetes-sigs.github.io/metrics-server
-      chart: metrics-server
-      targetRevision: '3.14.0'
+    - repoURL: https://postfinance.github.io/kubelet-csr-approver
+      chart: kubelet-csr-approver
+      targetRevision: '1.2.15'
       helm:
         valueFiles:
-          - $values/infrastructure/metrics-server/helm/values.yaml
+          - $values/infrastructure/kubelet-csr-approver/helm/values.yaml
 
     # Values repository
     - repoURL: https://github.com/CMDR-JohnAlex/sidewinder-cluster-gitops.git
@@ -28,7 +28,7 @@ spec:
     # Kustomize
     # - repoURL: https://github.com/CMDR-JohnAlex/sidewinder-cluster-gitops.git
     #   targetRevision: main
-    #   path: infrastructure/metrics-server/kustomize
+    #   path: infrastructure/kubelet-csr-approver/kustomize
 
   destination:
     server: https://kubernetes.default.svc
