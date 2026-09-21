@@ -1,0 +1,15 @@
+---
+apiVersion: autoscaling.k8s.io/v1
+kind: VerticalPodAutoscaler
+
+metadata:
+  name: mc-i-1b163d47
+
+spec:
+  targetRef:
+    apiVersion: "apps/v1"
+    kind: Deployment
+    name: mc-i-1b163d47-deployment
+
+  updatePolicy:
+    updateMode: "Off"
