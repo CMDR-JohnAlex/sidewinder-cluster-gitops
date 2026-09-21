@@ -6,6 +6,7 @@ resources:
   - ../../base
 
   - sealed-secret.yaml
+  - vpa.yaml
 
 patches:
   - path: cnpg-cluster-patch.yaml
