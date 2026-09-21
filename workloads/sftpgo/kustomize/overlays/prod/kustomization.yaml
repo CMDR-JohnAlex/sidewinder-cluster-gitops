@@ -6,6 +6,7 @@ resources:
   - ../../base
 
   - user-pvc.yaml
+  - vpa.yaml
 
 patches:
   - path: pvc-patch.yaml
