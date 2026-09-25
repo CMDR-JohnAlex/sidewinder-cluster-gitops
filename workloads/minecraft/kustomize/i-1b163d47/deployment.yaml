@@ -87,10 +87,13 @@ spec:
               value: 'MERGE'
             - name: ENABLE_WHITELIST
               value: 'false'
+            - name: MODS
+              value: |-
+                https://github.com/SkinsRestorer/SkinsRestorer/releases/download/15.12.4/SkinsRestorer-Mod-Fabric-15.12.4.jar
             - name: MODRINTH_PROJECTS
               value: |-
                 fabric-api
-                skinsrestorer:15.12.4-fabric
+                # skinsrestorer
                 easyauth
                 sodium
                 entityculling
