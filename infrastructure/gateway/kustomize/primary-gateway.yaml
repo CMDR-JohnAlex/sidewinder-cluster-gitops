@@ -118,7 +118,7 @@ spec:
 
     - name: minecraft-i-2t6sqrjy
       protocol: TCP
-      port: 25567
+      port: 25568
       allowedRoutes:
         namespaces:
           from: All
