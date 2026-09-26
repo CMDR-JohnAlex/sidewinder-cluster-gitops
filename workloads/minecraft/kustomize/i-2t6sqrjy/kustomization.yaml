@@ -1,0 +1,22 @@
+---
+# https://kubernetes.io/docs/tasks/manage-kubernetes-objects/kustomization/#bases-and-overlays
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+  - deployment.yaml
+  - pvc.yaml
+  - svc.yaml
+  - gateway.yaml
+  - vpa.yaml
+
+  - nginx
+
+configMapGenerator:
+    - name: mc-i-2t6sqrjy-configs
+      files:
+        - configs/skinsrestorer-config.yml
+
+    - name: mc-i-2t6sqrjy-icon
+      files:
+        - icon/emoji_u1f359.png

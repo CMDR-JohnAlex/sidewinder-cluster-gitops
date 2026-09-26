@@ -1,0 +1,188 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: mc-i-2t6sqrjy-deployment
+  labels:
+    app: mc-i-2t6sqrjy-deployment
+
+spec:
+  replicas: 1
+  revisionHistoryLimit: 1
+  # Kubernetes tries to spin up a new pod before terminating the old one.
+  # This will ensure the old pod lets go of the ReadWriteOnce PVC before the new one is created so that the new one can grab the PVC.
+  strategy:
+    type: Recreate
+
+  selector:
+    matchLabels:
+      app: mc-i-2t6sqrjy-pod
+
+  template:
+    metadata:
+      labels:
+        app: mc-i-2t6sqrjy-pod
+
+    spec:
+      initContainers:
+        - name: init-configs
+          image: busybox:latest
+          command:
+            - sh
+            - -c
+            - |
+              echo "Copying configuration files."
+              mkdir -p /data/plugins/SkinsRestorer
+
+              cp /tmp/configs/skinsrestorer-config.yml /data/plugins/SkinsRestorer/config.yml
+
+              echo "Configs successfully deployed!"
+
+          volumeMounts:
+            - name: mc-i-2t6sqrjy-data
+              mountPath: /data
+
+            - name: mc-i-2t6sqrjy-configs
+              mountPath: /tmp/configs
+
+      containers:
+        - name: mc-i-2t6sqrjy
+          image: itzg/minecraft-server:latest
+
+          env:
+            - name: EULA
+              value: 'TRUE'
+            - name: TYPE
+              value: 'FABRIC'
+            - name: VERSION
+              value: '26.2'
+            - name: MEMORY
+              value: '2048M'
+            - name: MAX_PLAYERS
+              value: '7'
+            - name: MOTD
+              value: |-
+                  §9Kubernetes §2Minecraft §6Server
+                  §n§dmc-i-2t6sqrjy.sidewinder.lan§d
+            - name: ICON
+              value: '/icon/icon.png'
+            - name: OVERRIDE_ICON
+              value: 'true'
+            - name: ONLINE_MODE
+              value: 'false'
+            - name: USE_AIKAR_FLAGS
+              value: 'true'
+            # Purpur only
+            # - name: USE_SIMD_FLAGS
+            #   value: 'true'
+            - name: SEED
+              value: 'KubernetesMC_FMOK'
+            - name: SPAWN_PROTECTION
+              value: '0'
+            - name: OPS
+              value: |-
+                CMDR_JohnAlex
+            - name: EXISTING_OPS_FILE
+              value: 'MERGE'
+            - name: ENABLE_WHITELIST
+              value: 'false'
+            - name: MODS
+              value: |-
+                https://github.com/SkinsRestorer/SkinsRestorer/releases/download/15.12.4/SkinsRestorer-Mod-Fabric-15.12.4.jar
+            - name: MODRINTH_PROJECTS
+              value: |-
+                fabric-api
+                # skinsrestorer
+                easyauth
+                sodium
+                entityculling
+                ferrite-core
+                lithium
+                xaeros-minimap
+                xaeros-world-map
+                sound-physics-remastered
+                chat-heads
+                carry-on
+                farmers-delight-refabricated
+                more-delight
+                appleskin
+                jei
+            - name: MODRINTH_DOWNLOAD_DEPENDENCIES
+              value: 'required'
+            - name: MODRINTH_ALLOWED_VERSION_TYPE
+              value: 'beta'
+            - name: BROADCAST_CONSOLE_TO_OPS
+              value: 'false'
+            - name: BROADCAST_RCON_TO_OPS
+              value: 'false'
+            - name: ANNOUNCE_PLAYER_ACHIEVEMENTS
+              value: 'true'
+            - name: LOG_TIMESTAMP
+              value: 'true'
+            # - name: JVM_XX_OPTS
+            #   value: >-
+            #     -XX:ABC
+
+          ports:
+            - containerPort: 25565
+              name: i-2t6sqrjy-tcp
+              protocol: TCP
+
+          resources:
+            limits:
+              cpu:  2500m
+              memory: 3000Mi
+            requests:
+              cpu: 1000m
+              memory: 2000Mi
+
+          startupProbe:
+            exec:
+              command:
+                - mc-health
+            initialDelaySeconds: 0
+            # 5 minutes to start up:
+            periodSeconds: 10
+            failureThreshold: 30
+            # 5 seconds to reply:
+            timeoutSeconds: 5
+
+          livenessProbe:
+            exec:
+              command:
+                - mc-health
+            # 2.5 minutes (5 missed messages) before death:
+            periodSeconds: 30
+            failureThreshold: 5
+            # 5 seconds to reply:
+            timeoutSeconds: 5
+
+          readinessProbe:
+            exec:
+              command:
+                - mc-health
+            periodSeconds: 30
+            failureThreshold: 5
+            timeoutSeconds: 5
+
+          volumeMounts:
+            - name: mc-i-2t6sqrjy-data
+              mountPath: /data
+
+            - name: mc-i-2t6sqrjy-icon
+              subPath: emoji_u1f359.png
+              mountPath: /icon/icon.png
+
+      volumes:
+        - name: mc-i-2t6sqrjy-data
+          persistentVolumeClaim:
+            claimName: mc-i-2t6sqrjy-data
+
+        - name: mc-i-2t6sqrjy-configs
+          configMap:
+            name: mc-i-2t6sqrjy-configs
+
+        - name: mc-i-2t6sqrjy-icon
+          configMap:
+            name: mc-i-2t6sqrjy-icon

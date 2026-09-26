@@ -1,0 +1,20 @@
+---
+apiVersion: gateway.networking.k8s.io/v1alpha2
+kind: TCPRoute
+
+metadata:
+  name: mc-i-2t6sqrjy-tcproute
+
+spec:
+  parentRefs:
+    - name: primary-gateway
+      namespace: envoy-gateway-system
+      sectionName: minecraft-i-2t6sqrjy
+
+  # TODO: Look into DNS SRV records for MC servers.
+
+  rules:
+    - backendRefs:
+        - name: mc-i-2t6sqrjy-svc # SVC name (internal IP:PORT).
+          port: 25565
+

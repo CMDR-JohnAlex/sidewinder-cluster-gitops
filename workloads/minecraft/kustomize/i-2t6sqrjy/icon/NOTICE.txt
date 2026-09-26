@@ -1,0 +1,12 @@
+Noto Emoji
+
+Copyright 2013 Google Inc.
+
+The emoji image used is derived from Google's Noto Emoji
+project and is licensed under the Apache License, Version 2.0.
+
+The original SVG asset was converted to a 64×64 PNG.
+
+https://github.com/googlefonts/noto-emoji
+https://www.apache.org/licenses/LICENSE-2.0
+https://github.com/googlefonts/noto-emoji/blob/main/LICENSE

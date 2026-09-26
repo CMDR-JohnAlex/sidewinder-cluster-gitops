@@ -1,0 +1,18 @@
+---
+apiVersion: v1
+kind: Service
+
+metadata:
+  name: mc-i-2t6sqrjy-svc
+
+spec:
+  type: ClusterIP
+
+  selector:
+    app: mc-i-2t6sqrjy-pod
+
+  ports:
+    - name: i-2t6sqrjy-tcp
+      protocol: TCP
+      port: 25565
+      targetPort: 25565

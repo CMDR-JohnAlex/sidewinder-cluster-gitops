@@ -116,6 +116,15 @@ spec:
         kinds:
           - kind: TCPRoute
 
+    - name: minecraft-i-2t6sqrjy
+      protocol: TCP
+      port: 25567
+      allowedRoutes:
+        namespaces:
+          from: All
+        kinds:
+          - kind: TCPRoute
+
     - name: wireguard
       protocol: UDP
       port: 51820
