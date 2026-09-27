@@ -58,7 +58,8 @@ spec:
             - name: VERSION
               value: '26.2'
             - name: MEMORY
-              value: '2048M'
+              value: '1024M'
+              # value: '2048M'
             - name: MAX_PLAYERS
               value: '7'
             - name: MOTD
@@ -131,8 +132,8 @@ spec:
 
           resources:
             limits:
-              cpu:  2500m
-              memory: 3000Mi
+              cpu:  1000m
+              memory: 2000Mi
             requests:
               cpu: 1000m
               memory: 2000Mi
