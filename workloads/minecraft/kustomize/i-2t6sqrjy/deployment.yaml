@@ -138,34 +138,34 @@ spec:
               cpu: 1000m
               memory: 2000Mi
 
-          startupProbe:
-            exec:
-              command:
-                - mc-health
-            initialDelaySeconds: 0
-            # 10 minutes to start up:
-            periodSeconds: 10
-            failureThreshold: 60
-            # 5 seconds to reply:
-            timeoutSeconds: 5
+          # startupProbe:
+          #   exec:
+          #     command:
+          #       - mc-health
+          #   initialDelaySeconds: 0
+          #   # 10 minutes to start up:
+          #   periodSeconds: 10
+          #   failureThreshold: 60
+          #   # 5 seconds to reply:
+          #   timeoutSeconds: 5
 
-          livenessProbe:
-            exec:
-              command:
-                - mc-health
-            # 2.5 minutes (5 missed messages) before death:
-            periodSeconds: 30
-            failureThreshold: 5
-            # 5 seconds to reply:
-            timeoutSeconds: 5
+          # livenessProbe:
+          #   exec:
+          #     command:
+          #       - mc-health
+          #   # 2.5 minutes (5 missed messages) before death:
+          #   periodSeconds: 30
+          #   failureThreshold: 5
+          #   # 5 seconds to reply:
+          #   timeoutSeconds: 5
 
-          readinessProbe:
-            exec:
-              command:
-                - mc-health
-            periodSeconds: 30
-            failureThreshold: 5
-            timeoutSeconds: 5
+          # readinessProbe:
+          #   exec:
+          #     command:
+          #       - mc-health
+          #   periodSeconds: 30
+          #   failureThreshold: 5
+          #   timeoutSeconds: 5
 
           volumeMounts:
             - name: mc-i-2t6sqrjy-data
