@@ -143,9 +143,9 @@ spec:
               command:
                 - mc-health
             initialDelaySeconds: 0
-            # 5 minutes to start up:
+            # 10 minutes to start up:
             periodSeconds: 10
-            failureThreshold: 30
+            failureThreshold: 60
             # 5 seconds to reply:
             timeoutSeconds: 5
 
