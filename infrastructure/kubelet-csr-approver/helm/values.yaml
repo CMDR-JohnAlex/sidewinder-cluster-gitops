@@ -1,5 +1,5 @@
 ---
 # NOTE: These may need to be updated when we add more nodes with different IP addresses and hostnames.
-providerRegex: '^sidewinder-[0-9]+$'
-providerIpPrefixes: '192.168.7.0/24'
+providerRegex: '^(sidewinder|hauler)-[0-9]+$'
+providerIpPrefixes: '192.168.7.0/24,192.168.0.0/24'
 bypassDnsResolution: true
