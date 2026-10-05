@@ -16,6 +16,7 @@ spec:
       labels:
         app: kubeinvaders-pod
     spec:
+      serviceAccountName: kinv-sa
       containers:
         - name: kubeinvaders
           image: docker.io/luckysideburn/kubeinvaders:latest
