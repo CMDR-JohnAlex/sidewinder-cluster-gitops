@@ -280,25 +280,27 @@ roleRef:
   kind: Role
   name: kinv-pod-killer
 
-# ---
-# apiVersion: rbac.authorization.k8s.io/v1
-# kind: ClusterRole
-# metadata:
-#   name: kubedoom-global-viewer
-# rules:
-# - apiGroups: [""]
-#   resources: ["pods"]
-#   verbs: ["get", "list", "watch"]
-# ---
-# apiVersion: rbac.authorization.k8s.io/v1
-# kind: ClusterRoleBinding
-# metadata:
-#   name: kubedoom-global-viewer-binding
-# subjects:
-# - kind: ServiceAccount
-#   name: kinv-sa
-#   namespace: kubeinvaders
-# roleRef:
-#   apiGroup: rbac.authorization.k8s.io
-#   kind: ClusterRole
-#   name: kubedoom-global-viewer
+
+
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: kinv-global-viewer
+rules:
+- apiGroups: [""]
+  resources: ["pods"]
+  verbs: ["get", "list", "watch"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: kinv-global-viewer-binding
+subjects:
+- kind: ServiceAccount
+  name: kinv-sa
+  namespace: kubeinvaders
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: kinv-global-viewer
