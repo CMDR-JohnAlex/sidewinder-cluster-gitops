@@ -1,6 +1,6 @@
 ---
 # -- Number of Jellyfin replicas to start. Should be left at 1.
-replicaCount: 0
+replicaCount: 1
 
 # -- Resource requests and limits for the Jellyfin container.
 resources: {}
@@ -17,10 +17,34 @@ resources: {}
 affinity:
   nodeAffinity:
     preferredDuringSchedulingIgnoredDuringExecution:
-    - weight: 100
-      preference:
-        matchExpressions:
-        - key: kubernetes.io/hostname
-          operator: In
-          values:
-          - sidewinder-08
+      # Prefer nodes with GPU and jellyfin-transcoding labels.
+      - weight: 100
+        preference:
+          matchExpressions:
+            - key: hardware.sidewinder.lan/gpu
+              operator: In
+              values:
+                - "true"
+            - key: capability.sidewinder.lan/jellyfin-transcoding
+              operator: In
+              values:
+                - "true"
+
+      # Second, prefer jellyfin-transcoding label.
+      - weight: 90
+        preference:
+          matchExpressions:
+            - key: capability.sidewinder.lan/jellyfin-transcoding
+              operator: In
+              values:
+                - "true"
+
+      # Finally, prefer certain nodes.
+      - weight: 80
+        preference:
+          matchExpressions:
+            - key: kubernetes.io/hostname
+              operator: In
+              values:
+                - hauler-01
+                - sidewinder-08
