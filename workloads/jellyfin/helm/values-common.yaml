@@ -205,11 +205,10 @@ livenessProbe:
     port: http
   initialDelaySeconds: 10
   periodSeconds: 30
-  failureThreshold: 5
-  # So if Jellyfin fails to reply to 5 requests in a row, it gets killed.
-  # That means 2.5 minutes (30s * 5s) of appearing dead before it gets restarted.
-  timeoutSeconds: 10
-  # Things are slow with this cluster and when Jellyfin is busy, things get even slower. Thus, timeout is increased.
+  failureThreshold: 10
+  # So if Jellyfin fails to reply to 10 requests in a row, it gets killed.
+  # That means 5 minutes (30s * 10) of appearing dead before it gets restarted.
+  timeoutSeconds: 15
 
 # -- Configure readiness probe for Jellyfin.
 # This probe is disabled during startup (startup probe handles initial checks).
@@ -229,6 +228,9 @@ readinessProbe:
   initialDelaySeconds: 10
   periodSeconds: 30
   failureThreshold: 5
+  # So if Jellyfin fails to reply to 5 requests in a row, it gets pulled back.
+  # That means 2.5 minutes (30s * 5) of appearing dead before it gets removed from service traffic.
+  successThreshold: 1
   timeoutSeconds: 10
 
 # -- Additional volumes to mount in the Jellyfin pod.
