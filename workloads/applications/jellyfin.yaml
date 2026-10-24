@@ -14,10 +14,10 @@ spec:
         elements:
           - env: dev
             namespace: media-dev
-            targetRevision: 3.2.0 # WARN: When updating to 3.3.0, see issue: https://github.com/jellyfin/jellyfin-helm/issues/133
+            targetRevision: 3.6.0
           - env: prod
             namespace: media-prod
-            targetRevision: 3.2.0 # WARN: When updating to 3.3.0, see issue: https://github.com/jellyfin/jellyfin-helm/issues/133
+            targetRevision: 3.6.0
 
   template:
     metadata:
