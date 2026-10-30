@@ -6,13 +6,13 @@ resources:
   - ../../base
 
   - wireguard-secret.yaml
-  - vpa.yaml
 
 patches:
   - path: deployment-patch.yaml
   - path: pvc-patch.yaml
   # - path: svc-patch.yaml
   - path: gateway-patch.yaml
+  - path: vpa-patch.yaml
 
 labels:
   - pairs:

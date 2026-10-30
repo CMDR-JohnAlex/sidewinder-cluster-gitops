@@ -7,3 +7,4 @@ resources:
   - deployment.yaml
   - svc.yaml
   - gateway.yaml
+  - vpa.yaml

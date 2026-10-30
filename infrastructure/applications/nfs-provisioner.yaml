@@ -41,9 +41,9 @@ spec:
           ref: values
 
         # Kustomize
-        # - repoURL: https://github.com/CMDR-JohnAlex/sidewinder-cluster-gitops.git
-        #   targetRevision: main
-        #   path: '{{path}}/kustomize'
+        - repoURL: https://github.com/CMDR-JohnAlex/sidewinder-cluster-gitops.git
+          targetRevision: main
+          path: '{{path}}/kustomize'
 
       destination:
         server: https://kubernetes.default.svc

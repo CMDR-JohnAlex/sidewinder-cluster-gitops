@@ -809,7 +809,7 @@ controller:
   ## Ref: https://kubernetes.io/docs/concepts/workloads/autoscaling/#scaling-workloads-vertically/
   vpa:
     # -- Deploy a [VerticalPodAutoscaler](https://kubernetes.io/docs/concepts/workloads/autoscaling/#scaling-workloads-vertically/) for the application controller
-    enabled: false
+    enabled: true
     # -- Labels to be added to application controller vpa
     labels: {}
     # -- Annotations to be added to application controller vpa
@@ -817,7 +817,7 @@ controller:
     # -- One of the VPA operation modes
     ## Ref: https://kubernetes.io/docs/concepts/workloads/autoscaling/#scaling-workloads-vertically
     ## Note: Recreate update mode requires more than one replica unless the min-replicas VPA controller flag is overridden
-    updateMode: Initial
+    updateMode: Off # Default: Initial
     # -- Controls how VPA computes the recommended resources for application controller container
     ## Ref: https://github.com/kubernetes/autoscaler/blob/master/vertical-pod-autoscaler/examples/hamster.yaml
     containerPolicy: {}
@@ -1206,7 +1206,7 @@ dex:
   ## Ref: https://kubernetes.io/docs/concepts/workloads/autoscaling/#scaling-workloads-vertically/
   vpa:
     # -- Deploy a [VerticalPodAutoscaler](https://kubernetes.io/docs/concepts/workloads/autoscaling/#scaling-workloads-vertically/) for the Dex server
-    enabled: false
+    enabled: true
     # -- Labels to be added to Dex server vpa
     labels: {}
     # -- Annotations to be added to Dex server vpa
@@ -1214,7 +1214,7 @@ dex:
     # -- One of the VPA operation modes
     ## Ref: https://kubernetes.io/docs/concepts/workloads/autoscaling/#scaling-workloads-vertically
     ## Note: Recreate update mode requires more than one replica unless the min-replicas VPA controller flag is overridden
-    updateMode: Initial
+    updateMode: Off # Default: Initial
     # -- Controls how VPA computes the recommended resources for Dex server container
     ## Ref: https://github.com/kubernetes/autoscaler/blob/master/vertical-pod-autoscaler/examples/hamster.yaml
     containerPolicy: {}
@@ -1527,7 +1527,7 @@ redis:
   ## Ref: https://kubernetes.io/docs/concepts/workloads/autoscaling/#scaling-workloads-vertically/
   vpa:
     # -- Deploy a [VerticalPodAutoscaler](https://kubernetes.io/docs/concepts/workloads/autoscaling/#scaling-workloads-vertically/) for the Redis
-    enabled: false
+    enabled: true
     # -- Labels to be added to Redis vpa
     labels: {}
     # -- Annotations to be added to Redis vpa
@@ -1535,7 +1535,7 @@ redis:
     # -- One of the VPA operation modes
     ## Ref: https://kubernetes.io/docs/concepts/workloads/autoscaling/#scaling-workloads-vertically
     ## Note: Recreate update mode requires more than one replica unless the min-replicas VPA controller flag is overridden
-    updateMode: Initial
+    updateMode: Off # Default: Initial
     # -- Controls how VPA computes the recommended resources for Redis container
     ## Ref: https://github.com/kubernetes/autoscaler/blob/master/vertical-pod-autoscaler/examples/hamster.yaml
     containerPolicy: {}
@@ -2099,7 +2099,7 @@ server:
   ## Ref: https://kubernetes.io/docs/concepts/workloads/autoscaling/#scaling-workloads-vertically/
   vpa:
     # -- Deploy a [VerticalPodAutoscaler](https://kubernetes.io/docs/concepts/workloads/autoscaling/#scaling-workloads-vertically/) for the Argo CD server
-    enabled: false
+    enabled: true
     # -- Labels to be added to Argo CD server vpa
     labels: {}
     # -- Annotations to be added to Argo CD server vpa
@@ -2107,7 +2107,7 @@ server:
     # -- One of the VPA operation modes
     ## Ref: https://kubernetes.io/docs/concepts/workloads/autoscaling/#scaling-workloads-vertically
     ## Note: Recreate update mode requires more than one replica unless the min-replicas VPA controller flag is overridden
-    updateMode: Initial
+    updateMode: Off # Default: Initial
     # -- Controls how VPA computes the recommended resources for Argo CD server container
     ## Ref: https://github.com/kubernetes/autoscaler/blob/master/vertical-pod-autoscaler/examples/hamster.yaml
     containerPolicy: {}
@@ -2990,7 +2990,7 @@ repoServer:
   ## Ref: https://kubernetes.io/docs/concepts/workloads/autoscaling/#scaling-workloads-vertically/
   vpa:
     # -- Deploy a [VerticalPodAutoscaler](https://kubernetes.io/docs/concepts/workloads/autoscaling/#scaling-workloads-vertically/) for the repo server
-    enabled: false
+    enabled: true
     # -- Labels to be added to repo server vpa
     labels: {}
     # -- Annotations to be added to repo server vpa
@@ -2998,7 +2998,7 @@ repoServer:
     # -- One of the VPA operation modes
     ## Ref: https://kubernetes.io/docs/concepts/workloads/autoscaling/#scaling-workloads-vertically
     ## Note: Recreate update mode requires more than one replica unless the min-replicas VPA controller flag is overridden
-    updateMode: Initial
+    updateMode: Off # Default: Initial
     # -- Controls how VPA computes the recommended resources for repo server container
     ## Ref: https://github.com/kubernetes/autoscaler/blob/master/vertical-pod-autoscaler/examples/hamster.yaml
     containerPolicy: {}
@@ -3428,7 +3428,7 @@ applicationSet:
   ## Ref: https://kubernetes.io/docs/concepts/workloads/autoscaling/#scaling-workloads-vertically/
   vpa:
     # -- Deploy a [VerticalPodAutoscaler](https://kubernetes.io/docs/concepts/workloads/autoscaling/#scaling-workloads-vertically/) for the ApplicationSet controller
-    enabled: false
+    enabled: true
     # -- Labels to be added to ApplicationSet controller vpa
     labels: {}
     # -- Annotations to be added to ApplicationSet controller vpa
@@ -3436,7 +3436,7 @@ applicationSet:
     # -- One of the VPA operation modes
     ## Ref: https://kubernetes.io/docs/concepts/workloads/autoscaling/#scaling-workloads-vertically
     ## Note: Recreate update mode requires more than one replica unless the min-replicas VPA controller flag is overridden
-    updateMode: Initial
+    updateMode: Off
     # -- Controls how VPA computes the recommended resources for ApplicationSet controller container
     ## Ref: https://github.com/kubernetes/autoscaler/blob/master/vertical-pod-autoscaler/examples/hamster.yaml
     containerPolicy: {}
@@ -3946,7 +3946,7 @@ notifications:
   ## Ref: https://kubernetes.io/docs/concepts/workloads/autoscaling/#scaling-workloads-vertically/
   vpa:
     # -- Deploy a [VerticalPodAutoscaler](https://kubernetes.io/docs/concepts/workloads/autoscaling/#scaling-workloads-vertically/) for the notifications controller
-    enabled: false
+    enabled: true
     # -- Labels to be added to notifications controller vpa
     labels: {}
     # -- Annotations to be added to notifications controller vpa
@@ -3954,7 +3954,7 @@ notifications:
     # -- One of the VPA operation modes
     ## Ref: https://kubernetes.io/docs/concepts/workloads/autoscaling/#scaling-workloads-vertically
     ## Note: Recreate update mode requires more than one replica unless the min-replicas VPA controller flag is overridden
-    updateMode: Initial
+    updateMode: Off # Default: Initial
     # -- Controls how VPA computes the recommended resources for notifications controller container
     ## Ref: https://github.com/kubernetes/autoscaler/blob/master/vertical-pod-autoscaler/examples/hamster.yaml
     containerPolicy: {}
@@ -4742,7 +4742,7 @@ commitServer:
   ## Ref: https://kubernetes.io/docs/concepts/workloads/autoscaling/#scaling-workloads-vertically/
   vpa:
     # -- Deploy a [VerticalPodAutoscaler](https://kubernetes.io/docs/concepts/workloads/autoscaling/#scaling-workloads-vertically/) for the commit server
-    enabled: false
+    enabled: true
     # -- Labels to be added to commit server vpa
     labels: {}
     # -- Annotations to be added to commit server vpa
@@ -4750,7 +4750,7 @@ commitServer:
     # -- One of the VPA operation modes
     ## Ref: https://kubernetes.io/docs/concepts/workloads/autoscaling/#scaling-workloads-vertically
     ## Note: Recreate update mode requires more than one replica unless the min-replicas VPA controller flag is overridden
-    updateMode: Initial
+    updateMode: Off # Default: Initial
     # -- Controls how VPA computes the recommended resources for commit server container
     ## Ref: https://github.com/kubernetes/autoscaler/blob/master/vertical-pod-autoscaler/examples/hamster.yaml
     containerPolicy: {}

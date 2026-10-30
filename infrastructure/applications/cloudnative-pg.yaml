@@ -26,9 +26,9 @@ spec:
       ref: values
 
     # Resources
-    # - repoURL: https://github.com/CMDR-JohnAlex/sidewinder-cluster-gitops.git
-    #   targetRevision: main
-    #   path: infrastructure/cloudnative-pg/kustomize
+    - repoURL: https://github.com/CMDR-JohnAlex/sidewinder-cluster-gitops.git
+      targetRevision: main
+      path: infrastructure/cloudnative-pg/kustomize
 
   destination:
     server: https://kubernetes.default.svc

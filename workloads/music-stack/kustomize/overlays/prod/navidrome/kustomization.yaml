@@ -12,6 +12,7 @@ patches:
   - path: deployment-patch.yaml
   # - path: pvc-patch.yaml
   - path: gateway-patch.yaml
+  - path: vpa-patch.yaml
 
 configMapGenerator:
     - name: navidrome-toml

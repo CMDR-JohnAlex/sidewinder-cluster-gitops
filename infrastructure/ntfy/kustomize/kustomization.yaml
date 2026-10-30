@@ -7,6 +7,7 @@ resources:
   - ntfy-svc.yaml # service connecting pods to cluster network
   - ntfy-pvc.yaml # pvc used to store cache and attachment
   - ntfy-gateway.yaml
+  - vpa.yaml
 
   - ntfy-sealedsecret.yaml # Contains secrets that are not present in the config map.
 
